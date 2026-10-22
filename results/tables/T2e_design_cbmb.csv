@@ -1,0 +1,5 @@
+Concept,Low / high threshold (CBM-B),Caliper,Pairs train / val / test,Melanoma pairs (train),Testable,Target SMD (CBM-B),Max |SMD| other six (CBM-B),Target SMD (CBM-A),Max |SMD| other six (CBM-A)
+PN,0.169 / 0.570,0.5,154 / 34 / 28,0,True,2.307,0.14,1.644,0.775
+VS,0.013 / 0.500,0.5,190 / 40 / 39,7,True,2.828,0.066,1.774,0.249
+Pig,0.015 / 0.500,0.5,109 / 9 / 13,5,True,2.99,0.063,1.856,0.636
+Reg,0.003 / 0.500,1.0,37 / 5 / 8,4,False,5.737,0.2,3.207,0.655

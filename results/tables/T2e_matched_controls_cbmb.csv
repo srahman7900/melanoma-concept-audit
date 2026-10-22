@@ -1,0 +1,17 @@
+Control,Concept,Architecture,Seed,Trained,Training images,Own-label test AUC,Bases passed (of 4),Pass,"Target Δlogit, realistic bases",Observational largest,Note
+ctrl_bpn_resnet50_s1,PN,ResNet-50,1,True,308.0,0.955,4,True,4.469,PN,
+ctrl_bpn_resnet50_s2,PN,ResNet-50,2,True,308.0,0.98,4,True,4.747,PN,
+ctrl_bpn_resnet50_s3,PN,ResNet-50,3,True,308.0,0.949,4,True,4.355,PN,
+ctrl_bpn_vitb16_s1,PN,ViT-B/16,1,True,308.0,0.969,4,True,6.256,PN,
+ctrl_bvs_resnet50_s1,VS,ResNet-50,1,True,380.0,1.0,4,True,5.123,VS,
+ctrl_bvs_resnet50_s2,VS,ResNet-50,2,True,380.0,0.997,4,True,4.372,VS,
+ctrl_bvs_resnet50_s3,VS,ResNet-50,3,True,380.0,0.995,4,True,4.605,VS,
+ctrl_bvs_vitb16_s1,VS,ViT-B/16,1,True,380.0,1.0,4,True,8.5,VS,
+ctrl_bpig_resnet50_s1,Pig,ResNet-50,1,True,218.0,0.899,4,True,0.302,Pig,
+ctrl_bpig_resnet50_s2,Pig,ResNet-50,2,True,218.0,0.935,4,True,0.873,Pig,
+ctrl_bpig_resnet50_s3,Pig,ResNet-50,3,True,218.0,0.917,4,True,0.343,Pig,
+ctrl_bpig_vitb16_s1,Pig,ViT-B/16,1,True,218.0,0.959,4,True,3.319,Pig,
+ctrl_breg_resnet50_s1,Reg,ResNet-50,1,False,,,0,False,,,not trained or not scored
+ctrl_breg_resnet50_s2,Reg,ResNet-50,2,False,,,0,False,,,not trained or not scored
+ctrl_breg_resnet50_s3,Reg,ResNet-50,3,False,,,0,False,,,not trained or not scored
+ctrl_breg_vitb16_s1,Reg,ViT-B/16,1,False,,,0,False,,,not trained or not scored

@@ -1,0 +1,11 @@
+Evaluator output,Knob,Real benign case,Real melanoma case,Benign prototype,Melanoma prototype,Bases where the knob is largest
+CBM-B: PN,PN,+1.72 (largest),+1.69 (largest),+1.88 (largest),+1.01 (largest),4/4
+CBM-B: BWV,BWV,+0.77 (largest: Pig +6.45),+3.74 (largest: Pig +7.90),+1.35 (largest: Pig +3.85),+6.00 (largest: Pig +14.50),0/4
+CBM-B: VS,VS,+1.57 (largest),+1.88 (largest),+1.17 (largest),+1.44 (largest),4/4
+CBM-B: Pig,Pig,+3.49 (largest),+2.88 (largest),+3.64 (largest),+2.07 (largest),4/4
+CBM-B: Str,Str,+1.60 (largest: Pig +3.31),+1.55 (largest: Pig +3.17),+2.04 (largest: Pig +3.17),+0.81 (largest: Pig +2.88),0/4
+CBM-B: D/G,D/G,+0.52 (largest: Reg +1.11),+0.75 (largest: PN +0.87),+0.65 (largest: PN +1.25),+0.75 (largest),1/4
+CBM-B: Reg,Reg,+3.62 (largest),+3.72 (largest),+3.25 (largest),+2.52 (largest),4/4
+ISIC18: PN (ISIC 2018),PN,+1.03 (largest),+0.92 (largest),+1.13 (largest),+0.57 (largest),4/4
+ISIC18: Streaks (ISIC 2018),Str,+1.26 (largest: Pig +3.42),+1.44 (largest: Pig +3.30),+2.64 (largest: Pig +3.96),+0.70 (largest: Pig +3.30),0/4
+ISIC18: Globules (ISIC 2018),D/G,+0.05 (largest: Str +0.57),-0.01 (largest: Str +0.43),+0.13 (largest: Str +0.87),+0.31 (largest),1/4

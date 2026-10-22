@@ -1,0 +1,3212 @@
+{
+ "isic2020_images": {
+  "value": 33126,
+  "source": "phase2_analysis_inputs.zip: phase2/pseudo_labels_slim.csv",
+  "note": ""
+ },
+ "isic2020_melanoma": {
+  "value": 584,
+  "source": "same",
+  "note": ""
+ },
+ "cls_images": {
+  "value": 6424,
+  "source": "phase2d_outputs.zip: audit/results/cls_data.json",
+  "note": ""
+ },
+ "cls_melanoma": {
+  "value": 584,
+  "source": "same",
+  "note": ""
+ },
+ "cls_split_train_val_test": {
+  "value": {
+   "train": 4518,
+   "val": 937,
+   "test": 969
+  },
+  "source": "same",
+  "note": ""
+ },
+ "cls_split_melanoma": {
+  "value": {
+   "train": 418,
+   "val": 81,
+   "test": 85
+  },
+  "source": "same",
+  "note": ""
+ },
+ "cls_split_by": {
+  "value": "patient",
+  "source": "same",
+  "note": ""
+ },
+ "isic2020_association_std_coef": {
+  "value": {
+   "PN": 0.194,
+   "BWV": 0.131,
+   "VS": 0.449,
+   "Pig": 0.439,
+   "Str": 0.165,
+   "D/G": 0.621,
+   "Reg": 0.313
+  },
+  "source": "same",
+  "note": "balanced logistic regression of melanoma on standardised pseudo-labels, all ISIC 2020 images"
+ },
+ "tcav_targets": {
+  "value": {
+   "melanoma": 166,
+   "benign": 166
+  },
+  "source": "phase2d_outputs.zip: results/plan.json",
+  "note": ""
+ },
+ "derm7pt_images_tcav": {
+  "value": 1009,
+  "source": "same",
+  "note": ""
+ },
+ "pseudo_label_distribution": {
+  "value": [
+   {
+    "Concept": "PN",
+    "Mean": 0.4135,
+    "Median": 0.3966,
+    "P75": 0.6303,
+    "P90": 0.7766,
+    "P99": 0.9156,
+    "n >= 0.5": 12885,
+    "Melanoma P95": 0.8916
+   },
+   {
+    "Concept": "BWV",
+    "Mean": 0.0026,
+    "Median": 0.0004,
+    "P75": 0.0009,
+    "P90": 0.0021,
+    "P99": 0.0172,
+    "n >= 0.5": 41,
+    "Melanoma P95": 0.0632
+   },
+   {
+    "Concept": "VS",
+    "Mean": 0.2928,
+    "Median": 0.0719,
+    "P75": 0.5824,
+    "P90": 0.9539,
+    "P99": 0.9976,
+    "n >= 0.5": 9096,
+    "Melanoma P95": 0.9969
+   },
+   {
+    "Concept": "Pig",
+    "Mean": 0.1674,
+    "Median": 0.0535,
+    "P75": 0.2073,
+    "P90": 0.5622,
+    "P99": 0.9421,
+    "n >= 0.5": 3908,
+    "Melanoma P95": 0.9616
+   },
+   {
+    "Concept": "Str",
+    "Mean": 0.0622,
+    "Median": 0.0103,
+    "P75": 0.0398,
+    "P90": 0.1621,
+    "P99": 0.8019,
+    "n >= 0.5": 1081,
+    "Melanoma P95": 0.7939
+   },
+   {
+    "Concept": "D/G",
+    "Mean": 0.5045,
+    "Median": 0.5095,
+    "P75": 0.7202,
+    "P90": 0.8542,
+    "P99": 0.9582,
+    "n >= 0.5": 16914,
+    "Melanoma P95": 0.9537
+   },
+   {
+    "Concept": "Reg",
+    "Mean": 0.0492,
+    "Median": 0.0008,
+    "P75": 0.0034,
+    "P90": 0.0518,
+    "P99": 0.9731,
+    "n >= 0.5": 1430,
+    "Melanoma P95": 0.9784
+   }
+  ],
+  "source": "computed from pseudo_labels_slim.csv (tables/T_pseudo_label_distribution.csv)",
+  "note": ""
+ },
+ "bwv_prototype_value": {
+  "value": 0.7781,
+  "source": "common.py MEL_VEC_LIST (melanoma prototype vector)",
+  "note": ""
+ },
+ "bwv_share_below_prototype": {
+  "value": 0.99912,
+  "source": "computed from pseudo_labels_slim.csv",
+  "note": ""
+ },
+ "bwv_n_at_or_above_prototype": {
+  "value": 29,
+  "source": "same",
+  "note": ""
+ },
+ "original_controls_group_smd": {
+  "value": {
+   "bwv": {
+    "n": 2260,
+    "mean_target_high": 0.0165,
+    "mean_target_low": 0.0002,
+    "smd": {
+     "PN": -1.12,
+     "BWV": 0.33,
+     "VS": 1.22,
+     "Pig": 0.51,
+     "Str": 0.24,
+     "D/G": -0.52,
+     "Reg": 0.79
+    }
+   },
+   "pig": {
+    "n": 2260,
+    "mean_target_high": 0.566,
+    "mean_target_low": 0.0072,
+    "smd": {
+     "PN": -0.84,
+     "BWV": 0.19,
+     "VS": 0.1,
+     "Pig": 2.2,
+     "Str": 0.26,
+     "D/G": -0.57,
+     "Reg": -0.21
+    }
+   }
+  },
+  "source": "computed from cls_labels.npz (training split; quartile groups as in Phase 2)",
+  "note": ""
+ },
+ "evaluator_auc_128": {
+  "value": [
+   {
+    "Concept": "pigment_network",
+    "CBM-A 128": 0.809,
+    "CBM-B 128": 0.841,
+    "ISIC18 128 (attr)": "0.786 (pigment_network)"
+   },
+   {
+    "Concept": "blue_whitish_veil",
+    "CBM-A 128": 0.89,
+    "CBM-B 128": 0.912,
+    "ISIC18 128 (attr)": NaN
+   },
+   {
+    "Concept": "vascular_structures",
+    "CBM-A 128": 0.776,
+    "CBM-B 128": 0.89,
+    "ISIC18 128 (attr)": NaN
+   },
+   {
+    "Concept": "pigmentation",
+    "CBM-A 128": 0.768,
+    "CBM-B 128": 0.84,
+    "ISIC18 128 (attr)": NaN
+   },
+   {
+    "Concept": "streaks",
+    "CBM-A 128": 0.773,
+    "CBM-B 128": 0.835,
+    "ISIC18 128 (attr)": "0.847 (streaks)"
+   },
+   {
+    "Concept": "dots_and_globules",
+    "CBM-A 128": 0.76,
+    "CBM-B 128": 0.804,
+    "ISIC18 128 (attr)": "0.807 (globules)"
+   },
+   {
+    "Concept": "regression_structures",
+    "CBM-A 128": 0.776,
+    "CBM-B 128": 0.823,
+    "ISIC18 128 (attr)": NaN
+   },
+   {
+    "Concept": "mean",
+    "CBM-A 128": 0.793,
+    "CBM-B 128": 0.849,
+    "ISIC18 128 (attr)": NaN
+   }
+  ],
+  "source": "phase1d_outputs.zip: tables/T1_evaluator_validity.csv (copied from Phase 1b)",
+  "note": ""
+ },
+ "cbma_derm7pt_native": {
+  "value": {
+   "mean_concept_auc": 0.8224,
+   "diagnosis_auc": 0.5425
+  },
+  "source": "phase1_report.md section 1 (Phase 1b)",
+  "note": ""
+ },
+ "reproduction": {
+  "value": {
+   "wilcoxon_p": 0.0009194,
+   "r_rb": 0.254,
+   "max_abs_delta_pearson_r": 0.0
+  },
+  "source": "phase1_report.md section 2 (Phase 1b)",
+  "note": ""
+ },
+ "isic18_overlap_with_isic2020": {
+  "value": 0,
+  "source": "phase1_report.md section 1 (Phase 1b)",
+  "note": ""
+ },
+ "colour_outliers_V0": {
+  "value": {
+   "real_mel": 2.4,
+   "real_ben": 0.6,
+   "main_mel": 77.8,
+   "main_ben": 83.7,
+   "base_mel": 78.5,
+   "base_ben": 80.7
+  },
+  "source": "Phase 1b phase1_report.md section 9",
+  "note": "% of images outside the 99% colour region of real images"
+ },
+ "noise_mean_to_colour_cv_r2": {
+  "value": 0.9,
+  "source": "phase1c_report.md Part A",
+  "note": ""
+ },
+ "colour_outliers_V1": {
+  "value": [
+   74.2,
+   80.9,
+   75.0,
+   75.8
+  ],
+  "source": "phase1c_report.md Part B (main mel, main ben, base mel, base ben)",
+  "note": ""
+ },
+ "colour_outliers_V2_phase1c": {
+  "value": [
+   6.6,
+   7.4,
+   13.3,
+   7.0
+  ],
+  "source": "same",
+  "note": ""
+ },
+ "colour_outliers_V2_eval_sets": {
+  "value": {
+   "eval_main_mel": 2.3,
+   "eval_main_ben": 5.0,
+   "eval_base_mel": 8.5,
+   "eval_base_ben": 4.2,
+   "eval_realc_mel": 8.9,
+   "eval_realc_ben": 5.2
+  },
+  "source": "phase1d_outputs.zip: tables/TD1_colour_fidelity_all_sets.csv",
+  "note": ""
+ },
+ "colour_targeting_r2_range": {
+  "value": {
+   "R": [
+    0.2,
+    0.75
+   ],
+   "G": [
+    0.85,
+    0.9
+   ],
+   "B": [
+    0.85,
+    0.91
+   ]
+  },
+  "source": "tables/TD2_colour_targeting.csv (Phase 1d)",
+  "note": ""
+ },
+ "cfg_sweep_mel_outliers": {
+  "value": {
+   "0": 35.9,
+   "1": 31.2,
+   "1.5": 28.1,
+   "2": 21.1,
+   "2.5": 13.3,
+   "3": 4.7,
+   "3.5": 1.6,
+   "4.5": 2.3,
+   "6": 4.7
+  },
+  "source": "TD1 (Phase 1d)",
+  "note": ""
+ },
+ "gate1_V2": {
+  "value": "PASS",
+  "source": "phase1d_full_analysis_report.md",
+  "note": ""
+ },
+ "dose_mel_base": {
+  "value": {
+   "CBM-B Pig": {
+    "delta_sd": "1.62 [1.22, 1.96]",
+    "rising": "100%",
+    "p_bh": "<0.001"
+   },
+   "CBM-B PN": {
+    "delta_sd": "0.92 [0.73, 1.15]",
+    "rising": "100%",
+    "p_bh": "<0.001"
+   },
+   "Darkness Pig": {
+    "delta_sd": "0.64 [0.48, 0.79]",
+    "rising": "94%",
+    "p_bh": "<0.001"
+   },
+   "ISIC18 PN": {
+    "delta_sd": "0.55 [0.41, 0.69]",
+    "rising": "88%",
+    "p_bh": "<0.001"
+   }
+  },
+  "source": "tables/T3_dose_response_mel_base.csv (Phase 1d)",
+  "note": ""
+ },
+ "dose_ben_base": {
+  "value": {
+   "CBM-B PN": {
+    "delta_sd": "1.73 [1.45, 2.00]",
+    "rising": "100%",
+    "p_bh": "<0.001"
+   },
+   "ISIC18 PN": {
+    "delta_sd": "1.09 [0.86, 1.33]",
+    "rising": "97%",
+    "p_bh": "<0.001"
+   },
+   "CBM-B Pig": {
+    "delta_sd": "2.84 [2.63, 3.03]",
+    "rising": "100%",
+    "p_bh": "<0.001"
+   },
+   "CBM-B BWV": {
+    "delta_sd": "0.68 [0.13, 1.42]",
+    "rising": "69%",
+    "p_bh": "<0.001"
+   },
+   "CBM-A BWV": {
+    "delta_sd": "-0.06 [-0.51, 0.26]",
+    "rising": "56%",
+    "p_bh": "0.129"
+   },
+   "CBM-B VS": {
+    "delta_sd": "0.98 [0.68, 1.30]",
+    "rising": "94%",
+    "p_bh": "<0.001"
+   },
+   "CBM-B Reg": {
+    "delta_sd": "2.38 [1.84, 2.94]",
+    "rising": "100%",
+    "p_bh": "<0.001"
+   }
+  },
+  "source": "tables/T3_dose_response_ben_base.csv (Phase 1d)",
+  "note": ""
+ },
+ "distribution_distances_V2": {
+  "value": [
+   {
+    "Feature space": "Inception",
+    "Split": "all",
+    "Images": "ClinDiffXAI",
+    "n gen/ref": "2000/1168",
+    "FID": 90.5,
+    "KID x1e3 (mean \u00b1 sd)": "49.69 \u00b1 3.45",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "Inception",
+    "Split": "all",
+    "Images": "Baseline",
+    "n gen/ref": "2000/1168",
+    "FID": 59.1,
+    "KID x1e3 (mean \u00b1 sd)": "23.57 \u00b1 1.33",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "Inception",
+    "Split": "all",
+    "Images": "Real vs real (floor)",
+    "n gen/ref": "584/584",
+    "FID": 38.1,
+    "KID x1e3 (mean \u00b1 sd)": "0.19 \u00b1 0.15",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "Inception",
+    "Split": "mel",
+    "Images": "ClinDiffXAI",
+    "n gen/ref": "1000/584",
+    "FID": 182.0,
+    "KID x1e3 (mean \u00b1 sd)": "139.68 \u00b1 2.01",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "Inception",
+    "Split": "mel",
+    "Images": "Baseline",
+    "n gen/ref": "1000/584",
+    "FID": 84.5,
+    "KID x1e3 (mean \u00b1 sd)": "35.19 \u00b1 1.37",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "Inception",
+    "Split": "mel",
+    "Images": "Real vs real (floor)",
+    "n gen/ref": "292/292",
+    "FID": 60.8,
+    "KID x1e3 (mean \u00b1 sd)": "0.38 \u00b1 0.00",
+    "KID subset": 292
+   },
+   {
+    "Feature space": "Inception",
+    "Split": "ben",
+    "Images": "ClinDiffXAI",
+    "n gen/ref": "1000/2000",
+    "FID": 51.5,
+    "KID x1e3 (mean \u00b1 sd)": "20.41 \u00b1 1.08",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "Inception",
+    "Split": "ben",
+    "Images": "Baseline",
+    "n gen/ref": "1000/2000",
+    "FID": 57.8,
+    "KID x1e3 (mean \u00b1 sd)": "22.81 \u00b1 1.39",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "Inception",
+    "Split": "ben",
+    "Images": "Real vs real (floor)",
+    "n gen/ref": "1000/1000",
+    "FID": 23.1,
+    "KID x1e3 (mean \u00b1 sd)": "0.04 \u00b1 0.21",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "Inception",
+    "Split": "all",
+    "Images": "ClinDiffXAI, real vectors",
+    "n gen/ref": "2000/1168",
+    "FID": 63.2,
+    "KID x1e3 (mean \u00b1 sd)": "24.81 \u00b1 1.64",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "Inception",
+    "Split": "mel",
+    "Images": "ClinDiffXAI, real vectors",
+    "n gen/ref": "1000/584",
+    "FID": 85.2,
+    "KID x1e3 (mean \u00b1 sd)": "27.30 \u00b1 1.45",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "Inception",
+    "Split": "ben",
+    "Images": "ClinDiffXAI, real vectors",
+    "n gen/ref": "1000/2000",
+    "FID": 63.0,
+    "KID x1e3 (mean \u00b1 sd)": "28.36 \u00b1 1.62",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-A (MedFID)",
+    "Split": "all",
+    "Images": "ClinDiffXAI",
+    "n gen/ref": "2000/1168",
+    "FID": 57.0,
+    "KID x1e3 (mean \u00b1 sd)": "320.59 \u00b1 24.48",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-A (MedFID)",
+    "Split": "all",
+    "Images": "Baseline",
+    "n gen/ref": "2000/1168",
+    "FID": 24.8,
+    "KID x1e3 (mean \u00b1 sd)": "112.48 \u00b1 13.56",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-A (MedFID)",
+    "Split": "all",
+    "Images": "Real vs real (floor)",
+    "n gen/ref": "584/584",
+    "FID": 11.5,
+    "KID x1e3 (mean \u00b1 sd)": "1.98 \u00b1 0.91",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-A (MedFID)",
+    "Split": "mel",
+    "Images": "ClinDiffXAI",
+    "n gen/ref": "1000/584",
+    "FID": 143.9,
+    "KID x1e3 (mean \u00b1 sd)": "933.23 \u00b1 15.20",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-A (MedFID)",
+    "Split": "mel",
+    "Images": "Baseline",
+    "n gen/ref": "1000/584",
+    "FID": 41.7,
+    "KID x1e3 (mean \u00b1 sd)": "210.16 \u00b1 14.45",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-A (MedFID)",
+    "Split": "mel",
+    "Images": "Real vs real (floor)",
+    "n gen/ref": "292/292",
+    "FID": 22.6,
+    "KID x1e3 (mean \u00b1 sd)": "8.79 \u00b1 0.00",
+    "KID subset": 292
+   },
+   {
+    "Feature space": "CBM-A (MedFID)",
+    "Split": "ben",
+    "Images": "ClinDiffXAI",
+    "n gen/ref": "1000/2000",
+    "FID": 20.1,
+    "KID x1e3 (mean \u00b1 sd)": "67.56 \u00b1 7.64",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-A (MedFID)",
+    "Split": "ben",
+    "Images": "Baseline",
+    "n gen/ref": "1000/2000",
+    "FID": 20.2,
+    "KID x1e3 (mean \u00b1 sd)": "64.47 \u00b1 6.82",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-A (MedFID)",
+    "Split": "ben",
+    "Images": "Real vs real (floor)",
+    "n gen/ref": "1000/1000",
+    "FID": 6.2,
+    "KID x1e3 (mean \u00b1 sd)": "0.39 \u00b1 1.59",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-A (MedFID)",
+    "Split": "all",
+    "Images": "ClinDiffXAI, real vectors",
+    "n gen/ref": "2000/1168",
+    "FID": 22.4,
+    "KID x1e3 (mean \u00b1 sd)": "81.66 \u00b1 10.86",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-A (MedFID)",
+    "Split": "mel",
+    "Images": "ClinDiffXAI, real vectors",
+    "n gen/ref": "1000/584",
+    "FID": 27.6,
+    "KID x1e3 (mean \u00b1 sd)": "76.53 \u00b1 6.63",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-A (MedFID)",
+    "Split": "ben",
+    "Images": "ClinDiffXAI, real vectors",
+    "n gen/ref": "1000/2000",
+    "FID": 26.1,
+    "KID x1e3 (mean \u00b1 sd)": "100.81 \u00b1 10.85",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-B",
+    "Split": "all",
+    "Images": "ClinDiffXAI",
+    "n gen/ref": "2000/1168",
+    "FID": 273.5,
+    "KID x1e3 (mean \u00b1 sd)": "741.45 \u00b1 62.99",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-B",
+    "Split": "all",
+    "Images": "Baseline",
+    "n gen/ref": "2000/1168",
+    "FID": 87.3,
+    "KID x1e3 (mean \u00b1 sd)": "227.34 \u00b1 22.63",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-B",
+    "Split": "all",
+    "Images": "Real vs real (floor)",
+    "n gen/ref": "584/584",
+    "FID": 44.0,
+    "KID x1e3 (mean \u00b1 sd)": "5.04 \u00b1 2.42",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-B",
+    "Split": "mel",
+    "Images": "ClinDiffXAI",
+    "n gen/ref": "1000/584",
+    "FID": 634.6,
+    "KID x1e3 (mean \u00b1 sd)": "2315.54 \u00b1 38.63",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-B",
+    "Split": "mel",
+    "Images": "Baseline",
+    "n gen/ref": "1000/584",
+    "FID": 146.4,
+    "KID x1e3 (mean \u00b1 sd)": "360.65 \u00b1 19.81",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-B",
+    "Split": "mel",
+    "Images": "Real vs real (floor)",
+    "n gen/ref": "292/292",
+    "FID": 81.7,
+    "KID x1e3 (mean \u00b1 sd)": "8.25 \u00b1 0.00",
+    "KID subset": 292
+   },
+   {
+    "Feature space": "CBM-B",
+    "Split": "ben",
+    "Images": "ClinDiffXAI",
+    "n gen/ref": "1000/2000",
+    "FID": 61.0,
+    "KID x1e3 (mean \u00b1 sd)": "172.17 \u00b1 16.19",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-B",
+    "Split": "ben",
+    "Images": "Baseline",
+    "n gen/ref": "1000/2000",
+    "FID": 69.1,
+    "KID x1e3 (mean \u00b1 sd)": "198.82 \u00b1 15.71",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-B",
+    "Split": "ben",
+    "Images": "Real vs real (floor)",
+    "n gen/ref": "1000/1000",
+    "FID": 20.6,
+    "KID x1e3 (mean \u00b1 sd)": "-1.44 \u00b1 1.78",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-B",
+    "Split": "all",
+    "Images": "ClinDiffXAI, real vectors",
+    "n gen/ref": "2000/1168",
+    "FID": 90.5,
+    "KID x1e3 (mean \u00b1 sd)": "250.78 \u00b1 23.06",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-B",
+    "Split": "mel",
+    "Images": "ClinDiffXAI, real vectors",
+    "n gen/ref": "1000/584",
+    "FID": 121.0,
+    "KID x1e3 (mean \u00b1 sd)": "237.03 \u00b1 13.94",
+    "KID subset": 500
+   },
+   {
+    "Feature space": "CBM-B",
+    "Split": "ben",
+    "Images": "ClinDiffXAI, real vectors",
+    "n gen/ref": "1000/2000",
+    "FID": 96.0,
+    "KID x1e3 (mean \u00b1 sd)": "349.30 \u00b1 28.65",
+    "KID subset": 500
+   }
+  ],
+  "source": "tables/T2d_distribution_distances.csv (Phase 1d)",
+  "note": ""
+ },
+ "class_signal_colour_control": {
+  "value": [
+   {
+    "Evaluator": "CBM-B",
+    "Images": "Real (5-fold CV)",
+    "n mel/ben": "584/2000",
+    "AUC [95% CI]": "0.811 [0.792, 0.829]"
+   },
+   {
+    "Evaluator": "CBM-B",
+    "Images": "ClinDiffXAI, prototype, class-specific colour targets",
+    "n mel/ben": "500/500",
+    "AUC [95% CI]": "0.966 [0.956, 0.976]"
+   },
+   {
+    "Evaluator": "CBM-B",
+    "Images": "ClinDiffXAI, prototype, class-agnostic colour targets",
+    "n mel/ben": "500/500",
+    "AUC [95% CI]": "0.947 [0.933, 0.959]"
+   },
+   {
+    "Evaluator": "CBM-B",
+    "Images": "Baseline, class-specific colour targets",
+    "n mel/ben": "500/500",
+    "AUC [95% CI]": "0.878 [0.856, 0.898]"
+   },
+   {
+    "Evaluator": "CBM-B",
+    "Images": "Baseline, class-agnostic colour targets",
+    "n mel/ben": "500/500",
+    "AUC [95% CI]": "0.847 [0.823, 0.875]"
+   },
+   {
+    "Evaluator": "CBM-B",
+    "Images": "ClinDiffXAI, real vectors, class-specific colour targets",
+    "n mel/ben": "500/500",
+    "AUC [95% CI]": "0.660 [0.629, 0.693]"
+   },
+   {
+    "Evaluator": "CBM-B",
+    "Images": "ClinDiffXAI, real vectors, class-agnostic colour targets",
+    "n mel/ben": "500/500",
+    "AUC [95% CI]": "0.603 [0.567, 0.637]"
+   },
+   {
+    "Evaluator": "CBM-A",
+    "Images": "Real (5-fold CV)",
+    "n mel/ben": "584/2000",
+    "AUC [95% CI]": "0.753 [0.732, 0.775]"
+   },
+   {
+    "Evaluator": "CBM-A",
+    "Images": "ClinDiffXAI, prototype, class-specific colour targets",
+    "n mel/ben": "500/500",
+    "AUC [95% CI]": "0.967 [0.955, 0.977]"
+   },
+   {
+    "Evaluator": "CBM-A",
+    "Images": "ClinDiffXAI, prototype, class-agnostic colour targets",
+    "n mel/ben": "500/500",
+    "AUC [95% CI]": "0.965 [0.953, 0.975]"
+   },
+   {
+    "Evaluator": "CBM-A",
+    "Images": "Baseline, class-specific colour targets",
+    "n mel/ben": "500/500",
+    "AUC [95% CI]": "0.833 [0.807, 0.858]"
+   },
+   {
+    "Evaluator": "CBM-A",
+    "Images": "Baseline, class-agnostic colour targets",
+    "n mel/ben": "500/500",
+    "AUC [95% CI]": "0.818 [0.791, 0.841]"
+   },
+   {
+    "Evaluator": "CBM-A",
+    "Images": "ClinDiffXAI, real vectors, class-specific colour targets",
+    "n mel/ben": "500/500",
+    "AUC [95% CI]": "0.633 [0.599, 0.668]"
+   },
+   {
+    "Evaluator": "CBM-A",
+    "Images": "ClinDiffXAI, real vectors, class-agnostic colour targets",
+    "n mel/ben": "500/500",
+    "AUC [95% CI]": "0.641 [0.605, 0.673]"
+   },
+   {
+    "Evaluator": "Colour only (L*, a*, b*)",
+    "Images": "Real (5-fold CV)",
+    "n mel/ben": "584/2000",
+    "AUC [95% CI]": "0.751 [0.731, 0.771]"
+   },
+   {
+    "Evaluator": "Colour only (L*, a*, b*)",
+    "Images": "ClinDiffXAI, prototype, class-specific colour targets",
+    "n mel/ben": "500/500",
+    "AUC [95% CI]": "0.867 [0.844, 0.889]"
+   },
+   {
+    "Evaluator": "Colour only (L*, a*, b*)",
+    "Images": "ClinDiffXAI, prototype, class-agnostic colour targets",
+    "n mel/ben": "500/500",
+    "AUC [95% CI]": "0.758 [0.727, 0.787]"
+   },
+   {
+    "Evaluator": "Colour only (L*, a*, b*)",
+    "Images": "Baseline, class-specific colour targets",
+    "n mel/ben": "500/500",
+    "AUC [95% CI]": "0.682 [0.648, 0.714]"
+   },
+   {
+    "Evaluator": "Colour only (L*, a*, b*)",
+    "Images": "Baseline, class-agnostic colour targets",
+    "n mel/ben": "500/500",
+    "AUC [95% CI]": "0.545 [0.509, 0.580]"
+   },
+   {
+    "Evaluator": "Colour only (L*, a*, b*)",
+    "Images": "ClinDiffXAI, real vectors, class-specific colour targets",
+    "n mel/ben": "500/500",
+    "AUC [95% CI]": "0.653 [0.620, 0.687]"
+   },
+   {
+    "Evaluator": "Colour only (L*, a*, b*)",
+    "Images": "ClinDiffXAI, real vectors, class-agnostic colour targets",
+    "n mel/ben": "500/500",
+    "AUC [95% CI]": "0.531 [0.490, 0.567]"
+   }
+  ],
+  "source": "tables/TD3_class_signal_colour_control.csv (Phase 1d)",
+  "note": ""
+ },
+ "diversity_V2": {
+  "value": [
+   {
+    "Set": "real_mel",
+    "n": 584,
+    "Diversity, Inception (1 - mean cosine)": 0.38,
+    "Diversity, CBM-A feature": 0.467,
+    "Diversity, CBM-B feature": 0.583
+   },
+   {
+    "Set": "real_ben",
+    "n": 2000,
+    "Diversity, Inception (1 - mean cosine)": 0.358,
+    "Diversity, CBM-A feature": 0.412,
+    "Diversity, CBM-B feature": 0.41
+   },
+   {
+    "Set": "eval_main_mel",
+    "n": 1000,
+    "Diversity, Inception (1 - mean cosine)": 0.318,
+    "Diversity, CBM-A feature": 0.226,
+    "Diversity, CBM-B feature": 0.61
+   },
+   {
+    "Set": "eval_main_ben",
+    "n": 1000,
+    "Diversity, Inception (1 - mean cosine)": 0.366,
+    "Diversity, CBM-A feature": 0.436,
+    "Diversity, CBM-B feature": 0.436
+   },
+   {
+    "Set": "eval_base_mel",
+    "n": 1000,
+    "Diversity, Inception (1 - mean cosine)": 0.379,
+    "Diversity, CBM-A feature": 0.379,
+    "Diversity, CBM-B feature": 0.719
+   },
+   {
+    "Set": "eval_base_ben",
+    "n": 1000,
+    "Diversity, Inception (1 - mean cosine)": 0.38,
+    "Diversity, CBM-A feature": 0.439,
+    "Diversity, CBM-B feature": 0.428
+   },
+   {
+    "Set": "eval_realc_mel",
+    "n": 1000,
+    "Diversity, Inception (1 - mean cosine)": 0.425,
+    "Diversity, CBM-A feature": 0.46,
+    "Diversity, CBM-B feature": 0.728
+   },
+   {
+    "Set": "eval_realc_ben",
+    "n": 1000,
+    "Diversity, Inception (1 - mean cosine)": 0.4,
+    "Diversity, CBM-A feature": 0.468,
+    "Diversity, CBM-B feature": 0.577
+   },
+   {
+    "Set": "pool_main_mel",
+    "n": 500,
+    "Diversity, Inception (1 - mean cosine)": 0.317,
+    "Diversity, CBM-A feature": 0.225,
+    "Diversity, CBM-B feature": 0.617
+   },
+   {
+    "Set": "pool_main_ben",
+    "n": 500,
+    "Diversity, Inception (1 - mean cosine)": 0.379,
+    "Diversity, CBM-A feature": 0.421,
+    "Diversity, CBM-B feature": 0.451
+   },
+   {
+    "Set": "pool_base_mel",
+    "n": 500,
+    "Diversity, Inception (1 - mean cosine)": 0.373,
+    "Diversity, CBM-A feature": 0.387,
+    "Diversity, CBM-B feature": 0.71
+   },
+   {
+    "Set": "pool_base_ben",
+    "n": 500,
+    "Diversity, Inception (1 - mean cosine)": 0.396,
+    "Diversity, CBM-A feature": 0.431,
+    "Diversity, CBM-B feature": 0.451
+   },
+   {
+    "Set": "pool_realc_mel",
+    "n": 500,
+    "Diversity, Inception (1 - mean cosine)": 0.423,
+    "Diversity, CBM-A feature": 0.475,
+    "Diversity, CBM-B feature": 0.712
+   },
+   {
+    "Set": "pool_realc_ben",
+    "n": 500,
+    "Diversity, Inception (1 - mean cosine)": 0.41,
+    "Diversity, CBM-A feature": 0.453,
+    "Diversity, CBM-B feature": 0.588
+   }
+  ],
+  "source": "tables/TD4_diversity.csv (Phase 1d)",
+  "note": ""
+ },
+ "memorization_screen": {
+  "value": {
+   "Real melanoma (leave-one-out)": {
+    "Images": "Real melanoma (leave-one-out)",
+    "n": 584,
+    "median NN cosine": "0.8378",
+    "95th pct": "0.8989",
+    "max": "1.0000",
+    "% above real 99th pct": "1.0 (by definition)",
+    "% above real max": ""
+   },
+   "ClinDiffXAI": {
+    "Images": "ClinDiffXAI",
+    "n": 1000,
+    "median NN cosine": "0.7452",
+    "95th pct": "0.8089",
+    "max": "0.8637",
+    "% above real 99th pct": "0.0",
+    "% above real max": "0.0"
+   },
+   "Baseline": {
+    "Images": "Baseline",
+    "n": 1000,
+    "median NN cosine": "0.7966",
+    "95th pct": "0.8608",
+    "max": "0.8877",
+    "% above real 99th pct": "0.0",
+    "% above real max": "0.0"
+   },
+   "ClinDiffXAI, real vectors": {
+    "Images": "ClinDiffXAI, real vectors",
+    "n": 1000,
+    "median NN cosine": "0.7926",
+    "95th pct": "0.8627",
+    "max": "0.9147",
+    "% above real 99th pct": "0.0",
+    "% above real max": "0.0"
+   }
+  },
+  "source": "phase1d_outputs.zip: results/phase1_results.json (memo)",
+  "note": ""
+ },
+ "knob_specificity": {
+  "value": [
+   {
+    "Evaluator output": "CBM-B: PN",
+    "Bases where the knob is largest": "4/4"
+   },
+   {
+    "Evaluator output": "CBM-B: BWV",
+    "Bases where the knob is largest": "0/4"
+   },
+   {
+    "Evaluator output": "CBM-B: VS",
+    "Bases where the knob is largest": "4/4"
+   },
+   {
+    "Evaluator output": "CBM-B: Pig",
+    "Bases where the knob is largest": "4/4"
+   },
+   {
+    "Evaluator output": "CBM-B: Str",
+    "Bases where the knob is largest": "0/4"
+   },
+   {
+    "Evaluator output": "CBM-B: D/G",
+    "Bases where the knob is largest": "1/4"
+   },
+   {
+    "Evaluator output": "CBM-B: Reg",
+    "Bases where the knob is largest": "4/4"
+   },
+   {
+    "Evaluator output": "ISIC18: PN (ISIC 2018)",
+    "Bases where the knob is largest": "4/4"
+   },
+   {
+    "Evaluator output": "ISIC18: Streaks (ISIC 2018)",
+    "Bases where the knob is largest": "0/4"
+   },
+   {
+    "Evaluator output": "ISIC18: Globules (ISIC 2018)",
+    "Bases where the knob is largest": "1/4"
+   }
+  ],
+  "source": "computed from phase2_analysis_inputs.zip (B_*.npz, sets_meta) -> tables/T_knob_specificity.csv",
+  "note": "mean change level 1 minus 0, in SD of real test images"
+ },
+ "crosstalk_realistic": {
+  "value": "tables/T_crosstalk_realistic_bases.csv",
+  "source": "computed from phase2_analysis_inputs.zip",
+  "note": ""
+ },
+ "classifiers": {
+  "value": [
+   {
+    "Classifier": "ResNet-50 s1",
+    "Architecture": "ResNet-50",
+    "Label": "mel",
+    "Data": "isic2020",
+    "n train (positive)": "4518 (418)",
+    "Best val AUC": 0.906,
+    "Test AUC, melanoma [95% CI]": "0.889 [0.858, 0.918]",
+    "Sens / spec at tau90": "0.88 / 0.73",
+    "AUC on V2 images (prototype)": 0.938,
+    "AUC on V2 images (baseline)": 0.924,
+    "AUC on V2 images (real vectors)": 0.629,
+    "AUC own label (test)": NaN,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "ResNet-50 s2",
+    "Architecture": "ResNet-50",
+    "Label": "mel",
+    "Data": "isic2020",
+    "n train (positive)": "4518 (418)",
+    "Best val AUC": 0.903,
+    "Test AUC, melanoma [95% CI]": "0.876 [0.836, 0.916]",
+    "Sens / spec at tau90": "0.86 / 0.74",
+    "AUC on V2 images (prototype)": 0.978,
+    "AUC on V2 images (baseline)": 0.939,
+    "AUC on V2 images (real vectors)": 0.639,
+    "AUC own label (test)": NaN,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "EfficientNet-B0 s1",
+    "Architecture": "EfficientNet-B0",
+    "Label": "mel",
+    "Data": "isic2020",
+    "n train (positive)": "4518 (418)",
+    "Best val AUC": 0.907,
+    "Test AUC, melanoma [95% CI]": "0.884 [0.849, 0.914]",
+    "Sens / spec at tau90": "0.79 / 0.77",
+    "AUC on V2 images (prototype)": 0.986,
+    "AUC on V2 images (baseline)": 0.929,
+    "AUC on V2 images (real vectors)": 0.659,
+    "AUC own label (test)": NaN,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "EfficientNet-B0 s2",
+    "Architecture": "EfficientNet-B0",
+    "Label": "mel",
+    "Data": "isic2020",
+    "n train (positive)": "4518 (418)",
+    "Best val AUC": 0.908,
+    "Test AUC, melanoma [95% CI]": "0.870 [0.835, 0.902]",
+    "Sens / spec at tau90": "0.84 / 0.73",
+    "AUC on V2 images (prototype)": 0.985,
+    "AUC on V2 images (baseline)": 0.901,
+    "AUC on V2 images (real vectors)": 0.654,
+    "AUC own label (test)": NaN,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "ViT-B/16 s1",
+    "Architecture": "ViT-B/16",
+    "Label": "mel",
+    "Data": "isic2020",
+    "n train (positive)": "4518 (418)",
+    "Best val AUC": 0.916,
+    "Test AUC, melanoma [95% CI]": "0.913 [0.885, 0.936]",
+    "Sens / spec at tau90": "0.87 / 0.80",
+    "AUC on V2 images (prototype)": 0.987,
+    "AUC on V2 images (baseline)": 0.968,
+    "AUC on V2 images (real vectors)": 0.673,
+    "AUC own label (test)": NaN,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "ViT-B/16 s2",
+    "Architecture": "ViT-B/16",
+    "Label": "mel",
+    "Data": "isic2020",
+    "n train (positive)": "4518 (418)",
+    "Best val AUC": 0.921,
+    "Test AUC, melanoma [95% CI]": "0.903 [0.874, 0.931]",
+    "Sens / spec at tau90": "0.88 / 0.75",
+    "AUC on V2 images (prototype)": 0.98,
+    "AUC on V2 images (baseline)": 0.969,
+    "AUC on V2 images (real vectors)": 0.677,
+    "AUC own label (test)": NaN,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "Control+: pigmentation",
+    "Architecture": "ResNet-50",
+    "Label": "pig",
+    "Data": "isic2020",
+    "n train (positive)": "2260 (1130)",
+    "Best val AUC": 0.954,
+    "Test AUC, melanoma [95% CI]": "0.599 [0.527, 0.664]",
+    "Sens / spec at tau90": "0.82 / 0.22",
+    "AUC on V2 images (prototype)": 0.884,
+    "AUC on V2 images (baseline)": 0.696,
+    "AUC on V2 images (real vectors)": 0.582,
+    "AUC own label (test)": 0.955,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "Control+: blue-whitish veil",
+    "Architecture": "ResNet-50",
+    "Label": "bwv",
+    "Data": "isic2020",
+    "n train (positive)": "2260 (1130)",
+    "Best val AUC": 0.959,
+    "Test AUC, melanoma [95% CI]": "0.605 [0.541, 0.671]",
+    "Sens / spec at tau90": "0.88 / 0.19",
+    "AUC on V2 images (prototype)": 0.815,
+    "AUC on V2 images (baseline)": 0.62,
+    "AUC on V2 images (real vectors)": 0.582,
+    "AUC own label (test)": 0.935,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "Control-: permuted labels",
+    "Architecture": "ResNet-50",
+    "Label": "perm",
+    "Data": "isic2020",
+    "n train (positive)": "4518 (418)",
+    "Best val AUC": 0.53,
+    "Test AUC, melanoma [95% CI]": "0.425 [0.366, 0.489]",
+    "Sens / spec at tau90": "0.84 / 0.08",
+    "AUC on V2 images (prototype)": 0.72,
+    "AUC on V2 images (baseline)": 0.525,
+    "AUC on V2 images (real vectors)": 0.506,
+    "AUC own label (test)": NaN,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "ResNet-50 s1 (Derm7pt)",
+    "Architecture": "ResNet-50",
+    "Label": "mel",
+    "Data": "derm7pt",
+    "n train (positive)": "412 (90)",
+    "Best val AUC": 0.812,
+    "Test AUC, melanoma [95% CI]": "0.673 [0.613, 0.729]",
+    "Sens / spec at tau90": "0.87 / 0.28",
+    "AUC on V2 images (prototype)": 0.998,
+    "AUC on V2 images (baseline)": 0.823,
+    "AUC on V2 images (real vectors)": 0.656,
+    "AUC own label (test)": NaN,
+    "AUC Derm7pt test": 0.833
+   },
+   {
+    "Classifier": "Control+ matched: pigmentation",
+    "Architecture": "ResNet-50",
+    "Label": "mpig",
+    "Data": "isic2020",
+    "n train (positive)": "954 (477)",
+    "Best val AUC": 0.948,
+    "Test AUC, melanoma [95% CI]": "0.619 [0.553, 0.678]",
+    "Sens / spec at tau90": "0.86 / 0.18",
+    "AUC on V2 images (prototype)": 0.906,
+    "AUC on V2 images (baseline)": 0.773,
+    "AUC on V2 images (real vectors)": 0.612,
+    "AUC own label (test)": 0.909,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "Control+ matched: pigment network",
+    "Architecture": "ResNet-50",
+    "Label": "mpn",
+    "Data": "isic2020",
+    "n train (positive)": "548 (274)",
+    "Best val AUC": 0.978,
+    "Test AUC, melanoma [95% CI]": "0.685 [0.634, 0.734]",
+    "Sens / spec at tau90": "0.88 / 0.39",
+    "AUC on V2 images (prototype)": 0.504,
+    "AUC on V2 images (baseline)": 0.637,
+    "AUC on V2 images (real vectors)": 0.495,
+    "AUC own label (test)": 0.95,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "Control+ matched: vascular structures",
+    "Architecture": "ResNet-50",
+    "Label": "mvs",
+    "Data": "isic2020",
+    "n train (positive)": "678 (339)",
+    "Best val AUC": 0.98,
+    "Test AUC, melanoma [95% CI]": "0.599 [0.532, 0.670]",
+    "Sens / spec at tau90": "0.89 / 0.10",
+    "AUC on V2 images (prototype)": 0.502,
+    "AUC on V2 images (baseline)": 0.549,
+    "AUC on V2 images (real vectors)": 0.537,
+    "AUC own label (test)": 0.963,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "Control+ matched: pigment network (ResNet-50 s2)",
+    "Architecture": "ResNet-50",
+    "Label": "mpn",
+    "Data": "isic2020",
+    "n train (positive)": "548 (274)",
+    "Best val AUC": 0.967,
+    "Test AUC, melanoma [95% CI]": "0.680 [0.622, 0.733]",
+    "Sens / spec at tau90": "0.93 / 0.33",
+    "AUC on V2 images (prototype)": 0.503,
+    "AUC on V2 images (baseline)": 0.643,
+    "AUC on V2 images (real vectors)": 0.503,
+    "AUC own label (test)": 0.947,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "Control+ matched: pigment network (ResNet-50 s3)",
+    "Architecture": "ResNet-50",
+    "Label": "mpn",
+    "Data": "isic2020",
+    "n train (positive)": "548 (274)",
+    "Best val AUC": 0.964,
+    "Test AUC, melanoma [95% CI]": "0.694 [0.644, 0.745]",
+    "Sens / spec at tau90": "0.88 / 0.43",
+    "AUC on V2 images (prototype)": 0.479,
+    "AUC on V2 images (baseline)": 0.645,
+    "AUC on V2 images (real vectors)": 0.497,
+    "AUC own label (test)": 0.944,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "Control+ matched: pigment network (ViT-B/16 s1)",
+    "Architecture": "ViT-B/16",
+    "Label": "mpn",
+    "Data": "isic2020",
+    "n train (positive)": "548 (274)",
+    "Best val AUC": 0.924,
+    "Test AUC, melanoma [95% CI]": "0.693 [0.650, 0.739]",
+    "Sens / spec at tau90": "0.88 / 0.43",
+    "AUC on V2 images (prototype)": 0.499,
+    "AUC on V2 images (baseline)": 0.606,
+    "AUC on V2 images (real vectors)": 0.484,
+    "AUC own label (test)": 0.936,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "Control+ matched: vascular structures (ResNet-50 s2)",
+    "Architecture": "ResNet-50",
+    "Label": "mvs",
+    "Data": "isic2020",
+    "n train (positive)": "678 (339)",
+    "Best val AUC": 0.985,
+    "Test AUC, melanoma [95% CI]": "0.587 [0.519, 0.655]",
+    "Sens / spec at tau90": "0.89 / 0.17",
+    "AUC on V2 images (prototype)": 0.583,
+    "AUC on V2 images (baseline)": 0.609,
+    "AUC on V2 images (real vectors)": 0.556,
+    "AUC own label (test)": 0.97,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "Control+ matched: vascular structures (ResNet-50 s3)",
+    "Architecture": "ResNet-50",
+    "Label": "mvs",
+    "Data": "isic2020",
+    "n train (positive)": "678 (339)",
+    "Best val AUC": 0.977,
+    "Test AUC, melanoma [95% CI]": "0.575 [0.512, 0.639]",
+    "Sens / spec at tau90": "0.93 / 0.09",
+    "AUC on V2 images (prototype)": 0.587,
+    "AUC on V2 images (baseline)": 0.584,
+    "AUC on V2 images (real vectors)": 0.559,
+    "AUC own label (test)": 0.975,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "Control+ matched: vascular structures (ViT-B/16 s1)",
+    "Architecture": "ViT-B/16",
+    "Label": "mvs",
+    "Data": "isic2020",
+    "n train (positive)": "678 (339)",
+    "Best val AUC": 0.99,
+    "Test AUC, melanoma [95% CI]": "0.545 [0.481, 0.609]",
+    "Sens / spec at tau90": "0.92 / 0.14",
+    "AUC on V2 images (prototype)": 0.633,
+    "AUC on V2 images (baseline)": 0.592,
+    "AUC on V2 images (real vectors)": 0.528,
+    "AUC own label (test)": 0.972,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "Control+ matched: pigmentation (ResNet-50 s2)",
+    "Architecture": "ResNet-50",
+    "Label": "mpig",
+    "Data": "isic2020",
+    "n train (positive)": "954 (477)",
+    "Best val AUC": 0.958,
+    "Test AUC, melanoma [95% CI]": "0.612 [0.541, 0.678]",
+    "Sens / spec at tau90": "0.85 / 0.13",
+    "AUC on V2 images (prototype)": 0.742,
+    "AUC on V2 images (baseline)": 0.684,
+    "AUC on V2 images (real vectors)": 0.575,
+    "AUC own label (test)": 0.916,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "Control+ matched: pigmentation (ResNet-50 s3)",
+    "Architecture": "ResNet-50",
+    "Label": "mpig",
+    "Data": "isic2020",
+    "n train (positive)": "954 (477)",
+    "Best val AUC": 0.962,
+    "Test AUC, melanoma [95% CI]": "0.614 [0.554, 0.678]",
+    "Sens / spec at tau90": "0.85 / 0.22",
+    "AUC on V2 images (prototype)": 0.837,
+    "AUC on V2 images (baseline)": 0.709,
+    "AUC on V2 images (real vectors)": 0.568,
+    "AUC own label (test)": 0.938,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "Control+ matched: pigmentation (ViT-B/16 s1)",
+    "Architecture": "ViT-B/16",
+    "Label": "mpig",
+    "Data": "isic2020",
+    "n train (positive)": "954 (477)",
+    "Best val AUC": 0.945,
+    "Test AUC, melanoma [95% CI]": "0.644 [0.579, 0.706]",
+    "Sens / spec at tau90": "0.86 / 0.22",
+    "AUC on V2 images (prototype)": 0.911,
+    "AUC on V2 images (baseline)": 0.832,
+    "AUC on V2 images (real vectors)": 0.604,
+    "AUC own label (test)": 0.923,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "Control+ matched: regression",
+    "Architecture": "ResNet-50",
+    "Label": "mreg",
+    "Data": "isic2020",
+    "n train (positive)": "320 (160)",
+    "Best val AUC": 0.986,
+    "Test AUC, melanoma [95% CI]": "0.612 [0.546, 0.676]",
+    "Sens / spec at tau90": "0.86 / 0.10",
+    "AUC on V2 images (prototype)": 0.939,
+    "AUC on V2 images (baseline)": 0.756,
+    "AUC on V2 images (real vectors)": 0.621,
+    "AUC own label (test)": 0.998,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "Control+ matched: regression (ResNet-50 s2)",
+    "Architecture": "ResNet-50",
+    "Label": "mreg",
+    "Data": "isic2020",
+    "n train (positive)": "320 (160)",
+    "Best val AUC": 0.978,
+    "Test AUC, melanoma [95% CI]": "0.624 [0.556, 0.690]",
+    "Sens / spec at tau90": "0.95 / 0.05",
+    "AUC on V2 images (prototype)": 0.91,
+    "AUC on V2 images (baseline)": 0.709,
+    "AUC on V2 images (real vectors)": 0.604,
+    "AUC own label (test)": 0.981,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "Control+ matched: regression (ResNet-50 s3)",
+    "Architecture": "ResNet-50",
+    "Label": "mreg",
+    "Data": "isic2020",
+    "n train (positive)": "320 (160)",
+    "Best val AUC": 0.977,
+    "Test AUC, melanoma [95% CI]": "0.611 [0.541, 0.671]",
+    "Sens / spec at tau90": "0.88 / 0.13",
+    "AUC on V2 images (prototype)": 0.935,
+    "AUC on V2 images (baseline)": 0.744,
+    "AUC on V2 images (real vectors)": 0.625,
+    "AUC own label (test)": 0.996,
+    "AUC Derm7pt test": NaN
+   },
+   {
+    "Classifier": "Control+ matched: regression (ViT-B/16 s1)",
+    "Architecture": "ViT-B/16",
+    "Label": "mreg",
+    "Data": "isic2020",
+    "n train (positive)": "320 (160)",
+    "Best val AUC": 0.988,
+    "Test AUC, melanoma [95% CI]": "0.669 [0.621, 0.719]",
+    "Sens / spec at tau90": "0.91 / 0.30",
+    "AUC on V2 images (prototype)": 0.883,
+    "AUC on V2 images (baseline)": 0.684,
+    "AUC on V2 images (real vectors)": 0.626,
+    "AUC own label (test)": 0.995,
+    "AUC Derm7pt test": NaN
+   }
+  ],
+  "source": "phase2d_outputs.zip: audit/tables/TP1_classifiers.csv",
+  "note": ""
+ },
+ "melanoma_test_auc_range": {
+  "value": [
+   0.87,
+   0.913
+  ],
+  "source": "TP1 (ISIC 2020 melanoma classifiers)",
+  "note": ""
+ },
+ "numerical_check": {
+  "value": [
+   {
+    "classifier": "ctrl_bwv_resnet50",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.03,
+    "min logit": -12.7,
+    "max logit": 15.4
+   },
+   {
+    "classifier": "ctrl_bwv_resnet50",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -12.3,
+    "max logit": 14.3
+   },
+   {
+    "classifier": "ctrl_mpig_resnet50",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -7.6,
+    "max logit": 12.6
+   },
+   {
+    "classifier": "ctrl_mpig_resnet50",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -12.0,
+    "max logit": 10.3
+   },
+   {
+    "classifier": "ctrl_mpig_resnet50_s2",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.03,
+    "min logit": -17.9,
+    "max logit": 12.1
+   },
+   {
+    "classifier": "ctrl_mpig_resnet50_s2",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.05,
+    "min logit": -16.8,
+    "max logit": 12.0
+   },
+   {
+    "classifier": "ctrl_mpig_resnet50_s3",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -14.5,
+    "max logit": 13.7
+   },
+   {
+    "classifier": "ctrl_mpig_resnet50_s3",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -12.5,
+    "max logit": 13.1
+   },
+   {
+    "classifier": "ctrl_mpig_vitb16_s1",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -5.3,
+    "max logit": 6.3
+   },
+   {
+    "classifier": "ctrl_mpig_vitb16_s1",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -5.5,
+    "max logit": 6.1
+   },
+   {
+    "classifier": "ctrl_mpn_resnet50",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -12.1,
+    "max logit": 10.2
+   },
+   {
+    "classifier": "ctrl_mpn_resnet50",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -14.4,
+    "max logit": 10.2
+   },
+   {
+    "classifier": "ctrl_mpn_resnet50_s2",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -12.1,
+    "max logit": 9.0
+   },
+   {
+    "classifier": "ctrl_mpn_resnet50_s2",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -12.3,
+    "max logit": 9.4
+   },
+   {
+    "classifier": "ctrl_mpn_resnet50_s3",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.03,
+    "min logit": -20.6,
+    "max logit": 10.9
+   },
+   {
+    "classifier": "ctrl_mpn_resnet50_s3",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.1,
+    "min logit": -17.4,
+    "max logit": 12.9
+   },
+   {
+    "classifier": "ctrl_mpn_vitb16_s1",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -7.1,
+    "max logit": 7.5
+   },
+   {
+    "classifier": "ctrl_mpn_vitb16_s1",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -7.2,
+    "max logit": 7.1
+   },
+   {
+    "classifier": "ctrl_mreg_resnet50",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -10.4,
+    "max logit": 8.7
+   },
+   {
+    "classifier": "ctrl_mreg_resnet50",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -11.0,
+    "max logit": 7.3
+   },
+   {
+    "classifier": "ctrl_mreg_resnet50_s2",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -10.2,
+    "max logit": 6.4
+   },
+   {
+    "classifier": "ctrl_mreg_resnet50_s2",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -10.4,
+    "max logit": 4.9
+   },
+   {
+    "classifier": "ctrl_mreg_resnet50_s3",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -12.5,
+    "max logit": 6.8
+   },
+   {
+    "classifier": "ctrl_mreg_resnet50_s3",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -10.6,
+    "max logit": 5.5
+   },
+   {
+    "classifier": "ctrl_mreg_vitb16_s1",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -5.1,
+    "max logit": 5.5
+   },
+   {
+    "classifier": "ctrl_mreg_vitb16_s1",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -5.1,
+    "max logit": 5.0
+   },
+   {
+    "classifier": "ctrl_mvs_resnet50",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.01,
+    "min logit": -15.2,
+    "max logit": 12.2
+   },
+   {
+    "classifier": "ctrl_mvs_resnet50",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -13.7,
+    "max logit": 13.0
+   },
+   {
+    "classifier": "ctrl_mvs_resnet50_s2",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -13.7,
+    "max logit": 12.4
+   },
+   {
+    "classifier": "ctrl_mvs_resnet50_s2",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.1,
+    "min logit": -17.9,
+    "max logit": 14.7
+   },
+   {
+    "classifier": "ctrl_mvs_resnet50_s3",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -12.2,
+    "max logit": 13.2
+   },
+   {
+    "classifier": "ctrl_mvs_resnet50_s3",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -11.1,
+    "max logit": 11.9
+   },
+   {
+    "classifier": "ctrl_mvs_vitb16_s1",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -6.4,
+    "max logit": 5.3
+   },
+   {
+    "classifier": "ctrl_mvs_vitb16_s1",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -6.5,
+    "max logit": 5.3
+   },
+   {
+    "classifier": "ctrl_perm_resnet50",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -0.5,
+    "max logit": 0.5
+   },
+   {
+    "classifier": "ctrl_perm_resnet50",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -0.5,
+    "max logit": 0.5
+   },
+   {
+    "classifier": "ctrl_pig_resnet50",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.01,
+    "min logit": -12.5,
+    "max logit": 15.2
+   },
+   {
+    "classifier": "ctrl_pig_resnet50",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -12.2,
+    "max logit": 11.7
+   },
+   {
+    "classifier": "mel_effb0_s1",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.45,
+    "min logit": -1547.4,
+    "max logit": 8.1
+   },
+   {
+    "classifier": "mel_effb0_s1",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -7.4,
+    "max logit": 5.3
+   },
+   {
+    "classifier": "mel_effb0_s2",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 4.38,
+    "min logit": -6524.9,
+    "max logit": 15.0
+   },
+   {
+    "classifier": "mel_effb0_s2",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -10.1,
+    "max logit": 8.6
+   },
+   {
+    "classifier": "mel_resnet50_derm7pt",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -4.0,
+    "max logit": 6.4
+   },
+   {
+    "classifier": "mel_resnet50_derm7pt",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -4.3,
+    "max logit": 5.7
+   },
+   {
+    "classifier": "mel_resnet50_s1",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.02,
+    "min logit": -15.1,
+    "max logit": 15.8
+   },
+   {
+    "classifier": "mel_resnet50_s1",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.05,
+    "min logit": -15.2,
+    "max logit": 9.3
+   },
+   {
+    "classifier": "mel_resnet50_s2",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.04,
+    "min logit": -16.9,
+    "max logit": 14.5
+   },
+   {
+    "classifier": "mel_resnet50_s2",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.1,
+    "min logit": -19.0,
+    "max logit": 8.1
+   },
+   {
+    "classifier": "mel_vitb16_s1",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -3.3,
+    "max logit": 4.5
+   },
+   {
+    "classifier": "mel_vitb16_s1",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -3.7,
+    "max logit": 4.3
+   },
+   {
+    "classifier": "mel_vitb16_s2",
+    "group": "generated images",
+    "images": 19304,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -5.7,
+    "max logit": 5.3
+   },
+   {
+    "classifier": "mel_vitb16_s2",
+    "group": "real images",
+    "images": 1906,
+    "non-finite": 0,
+    "% |logit| > 15": 0.0,
+    "min logit": -5.9,
+    "max logit": 4.7
+   }
+  ],
+  "source": "phase2d_outputs.zip: audit/tables/TP0_numerical_check.csv",
+  "note": ""
+ },
+ "melanoma_effects_realistic": {
+  "value": [
+   {
+    "Concept": "PN",
+    "Real benign: mean dlogit": 0.33,
+    "Real melanoma: mean dlogit": -0.16,
+    "Without EfficientNet (benign / melanoma)": "+0.18 / -0.02",
+    "Per-classifier mean over the two bases: min / max": "-0.52 / +0.48",
+    "Mean dp(melanoma)": 0.012,
+    "Significant tests": "2/14"
+   },
+   {
+    "Concept": "BWV",
+    "Real benign: mean dlogit": 1.65,
+    "Real melanoma: mean dlogit": 1.53,
+    "Without EfficientNet (benign / melanoma)": "+1.63 / +1.58",
+    "Per-classifier mean over the two bases: min / max": "+1.14 / +2.14",
+    "Mean dp(melanoma)": 0.206,
+    "Significant tests": "14/14"
+   },
+   {
+    "Concept": "VS",
+    "Real benign: mean dlogit": 0.23,
+    "Real melanoma: mean dlogit": 0.43,
+    "Without EfficientNet (benign / melanoma)": "-0.01 / +0.26",
+    "Per-classifier mean over the two bases: min / max": "-0.10 / +1.24",
+    "Mean dp(melanoma)": 0.051,
+    "Significant tests": "5/14"
+   },
+   {
+    "Concept": "Pig",
+    "Real benign: mean dlogit": 2.55,
+    "Real melanoma: mean dlogit": 2.55,
+    "Without EfficientNet (benign / melanoma)": "+2.71 / +2.58",
+    "Per-classifier mean over the two bases: min / max": "+1.26 / +4.16",
+    "Mean dp(melanoma)": 0.332,
+    "Significant tests": "14/14"
+   },
+   {
+    "Concept": "Str",
+    "Real benign: mean dlogit": -0.85,
+    "Real melanoma: mean dlogit": -0.53,
+    "Without EfficientNet (benign / melanoma)": "+0.03 / +0.03",
+    "Per-classifier mean over the two bases: min / max": "-3.91 / +0.39",
+    "Mean dp(melanoma)": -0.031,
+    "Significant tests": "1/14"
+   },
+   {
+    "Concept": "D/G",
+    "Real benign: mean dlogit": 0.8,
+    "Real melanoma: mean dlogit": 0.66,
+    "Without EfficientNet (benign / melanoma)": "+0.79 / +0.60",
+    "Per-classifier mean over the two bases: min / max": "+0.18 / +1.05",
+    "Mean dp(melanoma)": 0.088,
+    "Significant tests": "14/14"
+   },
+   {
+    "Concept": "Reg",
+    "Real benign: mean dlogit": 1.97,
+    "Real melanoma: mean dlogit": 2.1,
+    "Without EfficientNet (benign / melanoma)": "+1.83 / +1.94",
+    "Per-classifier mean over the two bases: min / max": "+0.90 / +3.54",
+    "Mean dp(melanoma)": 0.24,
+    "Significant tests": "14/14"
+   }
+  ],
+  "source": "computed from audit/tables/TP2_counterfactual_effects_all.csv (Phase 2d) -> tables/T_melanoma_effects_realistic.csv",
+  "note": ""
+ },
+ "audit_reliability": {
+  "value": {
+   "different classifier": 0.717,
+   "same architecture, other seed": 0.883
+  },
+  "source": "audit/tables/TP8_reliability.csv (Phase 2d)",
+  "note": ""
+ },
+ "colour_sensitivity_melanoma": {
+  "value": {
+   "mean_abs_dlogit_colour": [
+    0.84,
+    2.49
+   ],
+   "logit_per_10_Lstar": [
+    -0.6,
+    -0.23
+   ]
+  },
+  "source": "audit/tables/TP7_colour_sensitivity.csv (Phase 2d)",
+  "note": ""
+ },
+ "decomposition_r2_melanoma": {
+  "value": [
+   0.088,
+   0.292
+  ],
+  "source": "audit/tables/TP4_decomposition_concept_colour.csv",
+  "note": ""
+ },
+ "flips_base_rate_resnet_benign": {
+  "value": {
+   "min": 0.5,
+   "max": 0.734
+  },
+  "source": "audit/tables/TP3_decision_flips.csv",
+  "note": "share of starting images already called melanoma at tau90"
+ },
+ "profile_agreement": {
+  "value": {
+   "Counterfactual, benign prototype": {
+    "\u03c1 with 7-point checklist weight": -0.041,
+    "\u03c1 with ISIC 2020 association (pseudo-labels)": -0.199,
+    "\u03c1 with observational": -0.271
+   },
+   "Counterfactual, melanoma prototype": {
+    "\u03c1 with 7-point checklist weight": -0.247,
+    "\u03c1 with ISIC 2020 association (pseudo-labels)": 0.301,
+    "\u03c1 with observational": 0.138
+   },
+   "Counterfactual, real benign case": {
+    "\u03c1 with 7-point checklist weight": -0.247,
+    "\u03c1 with ISIC 2020 association (pseudo-labels)": -0.072,
+    "\u03c1 with observational": -0.199
+   },
+   "Counterfactual, real melanoma case": {
+    "\u03c1 with 7-point checklist weight": -0.289,
+    "\u03c1 with ISIC 2020 association (pseudo-labels)": 0.087,
+    "\u03c1 with observational": -0.122
+   },
+   "Decomposition (CBM-B part)": {
+    "\u03c1 with 7-point checklist weight": -0.186,
+    "\u03c1 with ISIC 2020 association (pseudo-labels)": 0.602,
+    "\u03c1 with observational": 0.485
+   },
+   "Observational (real test)": {
+    "\u03c1 with 7-point checklist weight": 0.186,
+    "\u03c1 with ISIC 2020 association (pseudo-labels)": 0.663,
+    "\u03c1 with observational": NaN
+   }
+  },
+  "source": "audit/tables/TP6_profile_agreement.csv",
+  "note": ""
+ },
+ "original_rule_verdict": {
+  "value": {
+   "rule": "VALID if each positive control (pigmentation, blue-whitish veil) has its target concept as the largest effect, positive and significant (two-sided Wilcoxon signed-rank test on per-trajectory slopes, BH-corrected p < 0.05, median slope > 0), in at least 3 of 4 bases (the same share of the available bases), and the largest |effect| of the permuted-label control is below 0.25 x the median largest |effect| of the melanoma classifiers. NOT VALID otherwise.",
+   "positive_pig": {
+    "bases_with_target_largest_and_significant": 4,
+    "needed": 3
+   },
+   "positive_bwv": {
+    "bases_with_target_largest_and_significant": 0,
+    "needed": 3
+   },
+   "negative": {
+    "max_abs_dlogit": 0.09057479747571051,
+    "median_max_abs_dlogit_melanoma_classifiers": 3.9910033440683037,
+    "ok": true
+   },
+   "verdict": "NOT VALID"
+  },
+  "source": "phase2d_outputs.zip: audit/results/audit_validity.json (identical to Phase 2)",
+  "note": ""
+ },
+ "matched_concepts": {
+  "value": {
+   "pigment_network": {
+    "controls": 4,
+    "passed": 4,
+    "needed": 3,
+    "valid": true,
+    "mean_rho_between_controls": 0.9405218025907681
+   },
+   "vascular_structures": {
+    "controls": 4,
+    "passed": 4,
+    "needed": 3,
+    "valid": true,
+    "mean_rho_between_controls": 0.9426199598613391
+   },
+   "pigmentation": {
+    "controls": 4,
+    "passed": 4,
+    "needed": 3,
+    "valid": true,
+    "mean_rho_between_controls": 0.9341361065498996
+   },
+   "regression_structures": {
+    "controls": 4,
+    "passed": 4,
+    "needed": 3,
+    "valid": true,
+    "mean_rho_between_controls": 0.9591315453384418
+   }
+  },
+  "source": "audit/results/matched_controls.json",
+  "note": ""
+ },
+ "matched_balance": {
+  "value": {
+   "Concept": [
+    "pigment_network",
+    "vascular_structures",
+    "pigmentation",
+    "regression_structures"
+   ],
+   "Low / high threshold": [
+    "0.180 / 0.636",
+    "0.012 / 0.603",
+    "0.016 / 0.232",
+    "0.000 / 0.500"
+   ],
+   "Caliper": [
+    0.5,
+    0.5,
+    0.5,
+    1.0
+   ],
+   "Pairs train / val / test": [
+    "274 / 54 / 61",
+    "339 / 63 / 76",
+    "477 / 75 / 73",
+    "160 / 31 / 24"
+   ],
+   "Melanoma pairs (train)": [
+    8,
+    11,
+    26,
+    27
+   ],
+   "Target SMD": [
+    2.5,
+    2.33,
+    2.14,
+    4.17
+   ],
+   "Max |SMD| other six": [
+    0.074,
+    0.07,
+    0.04,
+    0.158
+   ],
+   "SMD PN": [
+    2.5,
+    -0.07,
+    -0.04,
+    0.09
+   ],
+   "SMD BWV": [
+    -0.01,
+    0.01,
+    0.0,
+    0.06
+   ],
+   "SMD VS": [
+    -0.04,
+    2.33,
+    -0.03,
+    0.16
+   ],
+   "SMD Pig": [
+    -0.04,
+    -0.03,
+    2.14,
+    -0.03
+   ],
+   "SMD Str": [
+    -0.02,
+    -0.07,
+    -0.01,
+    0.0
+   ],
+   "SMD D/G": [
+    0.07,
+    -0.02,
+    -0.04,
+    0.05
+   ],
+   "SMD Reg": [
+    0.01,
+    0.03,
+    -0.0,
+    4.17
+   ]
+  },
+  "source": "same",
+  "note": ""
+ },
+ "matched_controls_audit": {
+  "value": {
+   "ctrl_mpig_resnet50": {
+    "label": "mpig",
+    "arch": "resnet50",
+    "seed": 1,
+    "bases_passed": 4,
+    "pass": true,
+    "observational_largest": "Pig",
+    "decomposition_largest": "Pig"
+   },
+   "ctrl_mpn_resnet50": {
+    "label": "mpn",
+    "arch": "resnet50",
+    "seed": 1,
+    "bases_passed": 4,
+    "pass": true,
+    "observational_largest": "PN",
+    "decomposition_largest": "PN"
+   },
+   "ctrl_mvs_resnet50": {
+    "label": "mvs",
+    "arch": "resnet50",
+    "seed": 1,
+    "bases_passed": 4,
+    "pass": true,
+    "observational_largest": "VS",
+    "decomposition_largest": "VS"
+   },
+   "ctrl_mpn_resnet50_s2": {
+    "label": "mpn",
+    "arch": "resnet50",
+    "seed": 2,
+    "bases_passed": 4,
+    "pass": true,
+    "observational_largest": "PN",
+    "decomposition_largest": "PN"
+   },
+   "ctrl_mpn_resnet50_s3": {
+    "label": "mpn",
+    "arch": "resnet50",
+    "seed": 3,
+    "bases_passed": 4,
+    "pass": true,
+    "observational_largest": "PN",
+    "decomposition_largest": "PN"
+   },
+   "ctrl_mpn_vitb16_s1": {
+    "label": "mpn",
+    "arch": "vitb16",
+    "seed": 1,
+    "bases_passed": 4,
+    "pass": true,
+    "observational_largest": "PN",
+    "decomposition_largest": "PN"
+   },
+   "ctrl_mvs_resnet50_s2": {
+    "label": "mvs",
+    "arch": "resnet50",
+    "seed": 2,
+    "bases_passed": 4,
+    "pass": true,
+    "observational_largest": "VS",
+    "decomposition_largest": "VS"
+   },
+   "ctrl_mvs_resnet50_s3": {
+    "label": "mvs",
+    "arch": "resnet50",
+    "seed": 3,
+    "bases_passed": 4,
+    "pass": true,
+    "observational_largest": "VS",
+    "decomposition_largest": "VS"
+   },
+   "ctrl_mvs_vitb16_s1": {
+    "label": "mvs",
+    "arch": "vitb16",
+    "seed": 1,
+    "bases_passed": 4,
+    "pass": true,
+    "observational_largest": "VS",
+    "decomposition_largest": "VS"
+   },
+   "ctrl_mpig_resnet50_s2": {
+    "label": "mpig",
+    "arch": "resnet50",
+    "seed": 2,
+    "bases_passed": 4,
+    "pass": true,
+    "observational_largest": "Pig",
+    "decomposition_largest": "Pig"
+   },
+   "ctrl_mpig_resnet50_s3": {
+    "label": "mpig",
+    "arch": "resnet50",
+    "seed": 3,
+    "bases_passed": 4,
+    "pass": true,
+    "observational_largest": "Pig",
+    "decomposition_largest": "Pig"
+   },
+   "ctrl_mpig_vitb16_s1": {
+    "label": "mpig",
+    "arch": "vitb16",
+    "seed": 1,
+    "bases_passed": 4,
+    "pass": true,
+    "observational_largest": "Pig",
+    "decomposition_largest": "Pig"
+   },
+   "ctrl_mreg_resnet50": {
+    "label": "mreg",
+    "arch": "resnet50",
+    "seed": 1,
+    "bases_passed": 3,
+    "pass": true,
+    "observational_largest": "Reg",
+    "decomposition_largest": "VS"
+   },
+   "ctrl_mreg_resnet50_s2": {
+    "label": "mreg",
+    "arch": "resnet50",
+    "seed": 2,
+    "bases_passed": 4,
+    "pass": true,
+    "observational_largest": "Reg",
+    "decomposition_largest": "VS"
+   },
+   "ctrl_mreg_resnet50_s3": {
+    "label": "mreg",
+    "arch": "resnet50",
+    "seed": 3,
+    "bases_passed": 3,
+    "pass": true,
+    "observational_largest": "Reg",
+    "decomposition_largest": "Reg"
+   },
+   "ctrl_mreg_vitb16_s1": {
+    "label": "mreg",
+    "arch": "vitb16",
+    "seed": 1,
+    "bases_passed": 3,
+    "pass": true,
+    "observational_largest": "Reg",
+    "decomposition_largest": "VS"
+   }
+  },
+  "source": "same",
+  "note": ""
+ },
+ "matched_target_effects_realistic": {
+  "value": [
+   {
+    "Concept": "PN",
+    "Architecture": "resnet50",
+    "Target dlogit min": 3.57,
+    "Target dlogit max": 4.91
+   },
+   {
+    "Concept": "PN",
+    "Architecture": "vitb16",
+    "Target dlogit min": 5.93,
+    "Target dlogit max": 6.95
+   },
+   {
+    "Concept": "VS",
+    "Architecture": "resnet50",
+    "Target dlogit min": 5.8,
+    "Target dlogit max": 6.56
+   },
+   {
+    "Concept": "VS",
+    "Architecture": "vitb16",
+    "Target dlogit min": 4.94,
+    "Target dlogit max": 4.95
+   },
+   {
+    "Concept": "Pig",
+    "Architecture": "resnet50",
+    "Target dlogit min": 5.27,
+    "Target dlogit max": 9.33
+   },
+   {
+    "Concept": "Pig",
+    "Architecture": "vitb16",
+    "Target dlogit min": 5.37,
+    "Target dlogit max": 6.46
+   },
+   {
+    "Concept": "Reg",
+    "Architecture": "resnet50",
+    "Target dlogit min": 3.17,
+    "Target dlogit max": 4.3
+   },
+   {
+    "Concept": "Reg",
+    "Architecture": "vitb16",
+    "Target dlogit min": 2.8,
+    "Target dlogit max": 3.36
+   }
+  ],
+  "source": "computed from TP2 (Phase 2d)",
+  "note": ""
+ },
+ "matched_training": {
+  "value": {
+   "ctrl_mpig_resnet50_s2": {
+    "n_train": 954,
+    "own_test_auc": 0.916
+   },
+   "ctrl_mpig_resnet50_s3": {
+    "n_train": 954,
+    "own_test_auc": 0.938
+   },
+   "ctrl_mpig_vitb16_s1": {
+    "n_train": 954,
+    "own_test_auc": 0.923
+   },
+   "ctrl_mpn_resnet50_s2": {
+    "n_train": 548,
+    "own_test_auc": 0.947
+   },
+   "ctrl_mpn_resnet50_s3": {
+    "n_train": 548,
+    "own_test_auc": 0.944
+   },
+   "ctrl_mpn_vitb16_s1": {
+    "n_train": 548,
+    "own_test_auc": 0.936
+   },
+   "ctrl_mreg_resnet50": {
+    "n_train": 320,
+    "own_test_auc": 0.998
+   },
+   "ctrl_mreg_resnet50_s2": {
+    "n_train": 320,
+    "own_test_auc": 0.981
+   },
+   "ctrl_mreg_resnet50_s3": {
+    "n_train": 320,
+    "own_test_auc": 0.996
+   },
+   "ctrl_mreg_vitb16_s1": {
+    "n_train": 320,
+    "own_test_auc": 0.995
+   },
+   "ctrl_mvs_resnet50_s2": {
+    "n_train": 678,
+    "own_test_auc": 0.97
+   },
+   "ctrl_mvs_resnet50_s3": {
+    "n_train": 678,
+    "own_test_auc": 0.975
+   },
+   "ctrl_mvs_vitb16_s1": {
+    "n_train": 678,
+    "own_test_auc": 0.972
+   },
+   "ctrl_mpig_resnet50": {
+    "n_train": 954,
+    "own_test_auc": 0.909
+   },
+   "ctrl_mpn_resnet50": {
+    "n_train": 548,
+    "own_test_auc": 0.95
+   },
+   "ctrl_mvs_resnet50": {
+    "n_train": 678,
+    "own_test_auc": 0.963
+   }
+  },
+  "source": "results/train_ctrl_m*.json (Phase 2c and 2d)",
+  "note": ""
+ },
+ "tcav_rule_verdict": {
+  "value": {
+   "positive_pig": {
+    "settings_passed": 6,
+    "needed": 6,
+    "settings": 8
+   },
+   "positive_bwv": {
+    "settings_passed": 6,
+    "needed": 6,
+    "settings": 8
+   },
+   "negative": {
+    "mean_max_abs_effect": 0.3416792168674698,
+    "median_mean_max_abs_effect_melanoma_classifiers": 0.4094503012048193,
+    "ok": false
+   },
+   "verdict": "NOT VALID",
+   "rule": "VALID if (a) each positive control (pigmentation, blue-whitish veil) has its target concept with the highest mean TCAV score of the 7 concepts (ties broken by the mean cosine of gradient and CAV), significantly different from random CAVs (Welch t-test, BH-corrected within the 7 concepts, p < 0.05) and above the random mean, in at least 6 of the 8 settings (2 layers x 2 ISIC concept-set variants x 2 input sets; the same share of the available settings), and (b) the largest |TCAV effect| of the permuted-label control (mean over the settings) is below 0.25 x the median of that value over the melanoma classifiers. NOT VALID otherwise. Same structure as the Phase 2 rule; fixed before the Phase 2b run."
+  },
+  "source": "phase2d_outputs.zip: tcav/results/tcav_validity.json (identical to Phase 2b)",
+  "note": ""
+ },
+ "tcav_matched": {
+  "value": {
+   "ctrl_mpig_resnet50": [
+    4,
+    false
+   ],
+   "ctrl_mpig_resnet50_s2": [
+    6,
+    true
+   ],
+   "ctrl_mpig_resnet50_s3": [
+    8,
+    true
+   ],
+   "ctrl_mpig_vitb16_s1": [
+    2,
+    false
+   ],
+   "ctrl_mpn_resnet50": [
+    8,
+    true
+   ],
+   "ctrl_mpn_resnet50_s2": [
+    8,
+    true
+   ],
+   "ctrl_mpn_resnet50_s3": [
+    6,
+    true
+   ],
+   "ctrl_mpn_vitb16_s1": [
+    3,
+    false
+   ],
+   "ctrl_mvs_resnet50": [
+    8,
+    true
+   ],
+   "ctrl_mvs_resnet50_s2": [
+    8,
+    true
+   ],
+   "ctrl_mvs_resnet50_s3": [
+    6,
+    true
+   ],
+   "ctrl_mvs_vitb16_s1": [
+    4,
+    false
+   ],
+   "ctrl_mreg_resnet50": [
+    8,
+    true
+   ],
+   "ctrl_mreg_resnet50_s2": [
+    8,
+    true
+   ],
+   "ctrl_mreg_resnet50_s3": [
+    8,
+    true
+   ],
+   "ctrl_mreg_vitb16_s1": [
+    2,
+    false
+   ]
+  },
+  "source": "tcav/results/matched_controls_tcav.json",
+  "note": ""
+ },
+ "tcav_matched_concepts": {
+  "value": {
+   "concept:pigment_network": {
+    "controls": 4,
+    "passed": 3,
+    "needed": 3,
+    "valid": true
+   },
+   "concept:vascular_structures": {
+    "controls": 4,
+    "passed": 3,
+    "needed": 3,
+    "valid": true
+   },
+   "concept:pigmentation": {
+    "controls": 4,
+    "passed": 2,
+    "needed": 3,
+    "valid": false
+   },
+   "concept:regression_structures": {
+    "controls": 4,
+    "passed": 3,
+    "needed": 3,
+    "valid": true
+   }
+  },
+  "source": "same",
+  "note": ""
+ },
+ "tcav_reliability": {
+  "value": {
+   "different classifier": 0.072,
+   "same architecture, other seed": 0.318
+  },
+  "source": "tcav/tables/TT6_reliability.csv",
+  "note": ""
+ },
+ "captum": {
+  "value": {
+   "verdict": "NOT VALID",
+   "negative": {
+    "mean_max_abs_effect": 0.4,
+    "median_mean_max_abs_effect_melanoma_classifiers": 0.44999999999999996,
+    "ok": false
+   },
+   "positive_pig": {
+    "settings_passed": 2,
+    "needed": 3,
+    "settings": 4
+   },
+   "positive_bwv": {
+    "settings_passed": 2,
+    "needed": 3,
+    "settings": 4
+   },
+   "matched": {
+    "ctrl_mpig_resnet50": [
+     0,
+     false
+    ],
+    "ctrl_mpn_resnet50": [
+     2,
+     false
+    ],
+    "ctrl_mvs_resnet50": [
+     0,
+     false
+    ]
+   },
+   "rho_seeds": 0.209,
+   "rho_cross": 0.252,
+   "agreement_with_our_tcav": {
+    "mel_resnet50_s1": 0.53,
+    "mel_resnet50_s2": -0.5,
+    "mel_effb0_s1": 0.68,
+    "mel_effb0_s2": 0.24,
+    "mel_vitb16_s1": -0.76,
+    "mel_vitb16_s2": 0.04,
+    "mel_resnet50_derm7pt": 0.77,
+    "ctrl_pig_resnet50": 0.52,
+    "ctrl_bwv_resnet50": 0.95,
+    "ctrl_perm_resnet50": 0.65,
+    "ctrl_mpig_resnet50": 0.5,
+    "ctrl_mpn_resnet50": 0.81,
+    "ctrl_mvs_resnet50": 0.83
+   }
+  },
+  "source": "tcav/results/captum_results.json",
+  "note": ""
+ },
+ "captum_share_scores_0_or_1": {
+  "value": 0.958,
+  "source": "results/captum_runs.csv",
+  "note": ""
+ },
+ "tcav_reproduction": {
+  "value": {
+   "runs_compared": 12480,
+   "max_abs_diff_tcav_mel": 0.0
+  },
+  "source": "results/tcav_runs.csv of Phase 2d versus Phase 2c",
+  "note": ""
+ },
+ "tcav_cav_accuracy": {
+  "value": {
+   "concept_mean": 0.666,
+   "random_mean": 0.504
+  },
+  "source": "results/tcav_runs.csv (Phase 2d)",
+  "note": ""
+ },
+ "observational_negative_ratio": {
+  "value": 0.025,
+  "source": "computed from TP5 (Phase 2d)",
+  "note": ""
+ },
+ "observational_reliability": {
+  "value": {
+   "same architecture, other seed": 0.976,
+   "different classifier": 0.647
+  },
+  "source": "computed from TP5 (Phase 2d)",
+  "note": ""
+ },
+ "calibration_ratios": {
+  "value": {
+   "median": {
+    "PN": 2.03,
+    "VS": 2.4,
+    "Pig": 4.52,
+    "Reg": 2.83
+   },
+   "per_control": {
+    "PN": [
+     1.8,
+     2.03,
+     2.03,
+     3.03
+    ],
+    "VS": [
+     2.1,
+     2.24,
+     2.57,
+     3.04
+    ],
+    "Pig": [
+     6.05,
+     4.61,
+     4.43,
+     4.33
+    ],
+    "Reg": [
+     2.62,
+     2.86,
+     2.79,
+     3.31
+    ]
+   }
+  },
+  "source": "computed from TP2 and TP5 (Phase 2d); exploratory",
+  "note": ""
+ },
+ "calibrated_comparison": {
+  "value": "tables/T_calibrated_obs_vs_intervention.csv",
+  "source": "computed; exploratory (defined after Phase 2d)",
+  "note": ""
+ },
+ "method_comparison": {
+  "value": [
+   {
+    "Method": "Counterfactual audit",
+    "Matched controls passed": "16/16",
+    "Per-concept rule (PN, VS, Pig, Reg)": "valid, valid, valid, valid",
+    "Negative control ratio (limit 0.25)": 0.023,
+    "rho other seed": 0.883,
+    "rho other classifier": 0.717
+   },
+   {
+    "Method": "TCAV, our implementation",
+    "Matched controls passed": "11/16",
+    "Per-concept rule (PN, VS, Pig, Reg)": "valid, valid, not valid, valid",
+    "Negative control ratio (limit 0.25)": 0.834,
+    "rho other seed": 0.318,
+    "rho other classifier": 0.072
+   },
+   {
+    "Method": "TCAV, Captum",
+    "Matched controls passed": "0/3",
+    "Per-concept rule (PN, VS, Pig, Reg)": "not tested (ResNet-50 seed-1 controls only)",
+    "Negative control ratio (limit 0.25)": 0.889,
+    "rho other seed": 0.209,
+    "rho other classifier": 0.252
+   },
+   {
+    "Method": "Observational (ridge on CBM-B outputs, real images)",
+    "Matched controls passed": "16/16 (largest coefficient)",
+    "Per-concept rule (PN, VS, Pig, Reg)": "one setting only",
+    "Negative control ratio (limit 0.25)": 0.025,
+    "rho other seed": 0.976,
+    "rho other classifier": 0.647
+   }
+  ],
+  "source": "computed -> tables/T_method_comparison_final.csv",
+  "note": ""
+ },
+ "melanoma_effects_isic6": {
+  "value": [
+   {
+    "Concept": "PN",
+    "Knob specific": true,
+    "Real benign base": 0.33,
+    "Real melanoma base": -0.22,
+    "Both bases": 0.05,
+    "Without EfficientNet-B0": 0.03,
+    "Per-classifier min": -0.52,
+    "Per-classifier max": 0.48,
+    "Mean change in p(melanoma)": 0.005,
+    "Positive and significant (of 12)": 1
+   },
+   {
+    "Concept": "BWV",
+    "Knob specific": false,
+    "Real benign base": 1.75,
+    "Real melanoma base": 1.59,
+    "Both bases": 1.67,
+    "Without EfficientNet-B0": 1.72,
+    "Per-classifier min": 1.2,
+    "Per-classifier max": 2.14,
+    "Mean change in p(melanoma)": 0.205,
+    "Positive and significant (of 12)": 12
+   },
+   {
+    "Concept": "VS",
+    "Knob specific": true,
+    "Real benign base": 0.16,
+    "Real melanoma base": 0.42,
+    "Both bases": 0.29,
+    "Without EfficientNet-B0": 0.01,
+    "Per-classifier min": -0.1,
+    "Per-classifier max": 1.24,
+    "Mean change in p(melanoma)": 0.04,
+    "Positive and significant (of 12)": 3
+   },
+   {
+    "Concept": "Pig",
+    "Knob specific": true,
+    "Real benign base": 2.77,
+    "Real melanoma base": 2.76,
+    "Both bases": 2.77,
+    "Without EfficientNet-B0": 3.0,
+    "Per-classifier min": 1.9,
+    "Per-classifier max": 4.16,
+    "Mean change in p(melanoma)": 0.349,
+    "Positive and significant (of 12)": 12
+   },
+   {
+    "Concept": "Str",
+    "Knob specific": false,
+    "Real benign base": -0.91,
+    "Real melanoma base": -0.57,
+    "Both bases": -0.74,
+    "Without EfficientNet-B0": 0.14,
+    "Per-classifier min": -3.91,
+    "Per-classifier max": 0.39,
+    "Mean change in p(melanoma)": -0.024,
+    "Positive and significant (of 12)": 1
+   },
+   {
+    "Concept": "D/G",
+    "Knob specific": false,
+    "Real benign base": 0.91,
+    "Real melanoma base": 0.74,
+    "Both bases": 0.82,
+    "Without EfficientNet-B0": 0.83,
+    "Per-classifier min": 0.62,
+    "Per-classifier max": 1.05,
+    "Mean change in p(melanoma)": 0.096,
+    "Positive and significant (of 12)": 12
+   },
+   {
+    "Concept": "Reg",
+    "Knob specific": true,
+    "Real benign base": 2.09,
+    "Real melanoma base": 2.25,
+    "Both bases": 2.17,
+    "Without EfficientNet-B0": 2.06,
+    "Per-classifier min": 0.9,
+    "Per-classifier max": 3.54,
+    "Mean change in p(melanoma)": 0.24,
+    "Positive and significant (of 12)": 12
+   }
+  ],
+  "source": "computed from TP2 (Phase 2d) -> tables/T_melanoma_effects_isic6.csv",
+  "note": "six ISIC 2020 classifiers, two realistic bases; 12 tests = 6 classifiers x 2 bases"
+ },
+ "derm7pt_classifier_effects": {
+  "value": {
+   "BWV": 1.14,
+   "D/G": 0.18,
+   "PN": 0.26,
+   "Pig": 1.26,
+   "Reg": 1.2,
+   "Str": -0.42,
+   "VS": 0.59
+  },
+  "source": "computed from TP2 (Phase 2d)",
+  "note": "mean of the two realistic bases"
+ },
+ "observational_coef_isic6": {
+  "value": {
+   "PN": [
+    0.23,
+    0.64
+   ],
+   "BWV": [
+    -0.09,
+    0.06
+   ],
+   "VS": [
+    0.66,
+    0.99
+   ],
+   "Pig": [
+    0.25,
+    0.68
+   ],
+   "Str": [
+    -0.08,
+    0.07
+   ],
+   "D/G": [
+    0.35,
+    0.55
+   ],
+   "Reg": [
+    -0.51,
+    -0.07
+   ]
+  },
+  "source": "audit/tables/TP5_observational_attribution.csv (Phase 2d)",
+  "note": "min and max over the six ISIC 2020 classifiers, logit per SD"
+ },
+ "observational_top_concept_isic6": {
+  "value": {
+   "ResNet-50 s1": "VS",
+   "ResNet-50 s2": "VS",
+   "EfficientNet-B0 s1": "VS",
+   "EfficientNet-B0 s2": "VS",
+   "ViT-B/16 s1": "VS",
+   "ViT-B/16 s2": "VS"
+  },
+  "source": "same",
+  "note": ""
+ },
+ "auc_generated_real_vectors_isic6": {
+  "value": [
+   0.629,
+   0.677
+  ],
+  "source": "audit/tables/TP1_classifiers.csv",
+  "note": ""
+ },
+ "melanoma_call_at_level0_real_benign_isic6": {
+  "value": [
+   0.281,
+   0.781
+  ],
+  "source": "audit/tables/TP3_decision_flips.csv",
+  "note": "share of real-benign-base images above the 90%-sensitivity threshold at knob level 0, over classifiers and knobs"
+ },
+ "matched_target_effect_mean_two_bases": {
+  "value": {
+   "PN": [
+    4.09,
+    6.44
+   ],
+   "VS": [
+    4.94,
+    6.34
+   ],
+   "Pig": [
+    5.75,
+    8.82
+   ],
+   "Reg": [
+    3.08,
+    4.16
+   ]
+  },
+  "source": "computed from TP2 (Phase 2d)",
+  "note": "target knob, mean of the two realistic bases, min and max over the 4 controls (Fig. 2b)"
+ },
+ "captum_cav_accuracy_reported": {
+  "value": {
+   "mean": 0.5,
+   "min": 0.35,
+   "max": 0.67,
+   "n": 2080
+  },
+  "source": "results/captum_runs.csv (Phase 2d)",
+  "note": ""
+ },
+ "captum_classifiers": {
+  "value": 13,
+  "source": "results/captum_runs.csv (Phase 2d)",
+  "note": ""
+ },
+ "logit_clipping_max_share": {
+  "value": [
+   {
+    "classifier": "mel_effb0_s2",
+    "group": "generated images",
+    "% |logit| > 15": 4.38,
+    "min logit": -6524.9
+   },
+   {
+    "classifier": "mel_effb0_s1",
+    "group": "generated images",
+    "% |logit| > 15": 0.45,
+    "min logit": -1547.4
+   },
+   {
+    "classifier": "ctrl_mpn_resnet50_s3",
+    "group": "real images",
+    "% |logit| > 15": 0.1,
+    "min logit": -17.4
+   }
+  ],
+  "source": "audit/tables/TP0_numerical_check.csv",
+  "note": ""
+ },
+ "isic6_top_specific_knob": {
+  "value": {
+   "mel_resnet50_s1": "pigmentation",
+   "mel_resnet50_s2": "pigmentation",
+   "mel_effb0_s1": "pigmentation",
+   "mel_effb0_s2": "regression_structures",
+   "mel_vitb16_s1": "pigmentation",
+   "mel_vitb16_s2": "pigmentation"
+  },
+  "source": "computed from TP2 (Phase 2d)",
+  "note": ""
+ },
+ "colour_outliers_phase1c_paired": {
+  "value": [
+   {
+    "Generator": "ClinDiffXAI, prototype",
+    "Class": "mel",
+    "Variant": "V0 original sampling",
+    "n": 256,
+    "Colour outliers %": 78.5,
+    "KID x1e3 (Inception)": 164.8
+   },
+   {
+    "Generator": "ClinDiffXAI, prototype",
+    "Class": "ben",
+    "Variant": "V0 original sampling",
+    "n": 256,
+    "Colour outliers %": 84.8,
+    "KID x1e3 (Inception)": 49.45
+   },
+   {
+    "Generator": "ClinDiffXAI, prototype",
+    "Class": "mel",
+    "Variant": "V1 trailing start",
+    "n": 256,
+    "Colour outliers %": 74.2,
+    "KID x1e3 (Inception)": 166.86
+   },
+   {
+    "Generator": "ClinDiffXAI, prototype",
+    "Class": "ben",
+    "Variant": "V1 trailing start",
+    "n": 256,
+    "Colour outliers %": 80.9,
+    "KID x1e3 (Inception)": 45.09
+   },
+   {
+    "Generator": "ClinDiffXAI, prototype",
+    "Class": "mel",
+    "Variant": "V2 colour-calibrated noise",
+    "n": 256,
+    "Colour outliers %": 6.6,
+    "KID x1e3 (Inception)": 138.52
+   },
+   {
+    "Generator": "ClinDiffXAI, prototype",
+    "Class": "ben",
+    "Variant": "V2 colour-calibrated noise",
+    "n": 256,
+    "Colour outliers %": 7.4,
+    "KID x1e3 (Inception)": 22.34
+   },
+   {
+    "Generator": "Baseline",
+    "Class": "mel",
+    "Variant": "V0 original sampling",
+    "n": 256,
+    "Colour outliers %": 80.5,
+    "KID x1e3 (Inception)": 50.74
+   },
+   {
+    "Generator": "Baseline",
+    "Class": "ben",
+    "Variant": "V0 original sampling",
+    "n": 256,
+    "Colour outliers %": 80.9,
+    "KID x1e3 (Inception)": 47.85
+   },
+   {
+    "Generator": "Baseline",
+    "Class": "mel",
+    "Variant": "V1 trailing start",
+    "n": 256,
+    "Colour outliers %": 75.0,
+    "KID x1e3 (Inception)": 49.43
+   },
+   {
+    "Generator": "Baseline",
+    "Class": "ben",
+    "Variant": "V1 trailing start",
+    "n": 256,
+    "Colour outliers %": 75.8,
+    "KID x1e3 (Inception)": 42.7
+   },
+   {
+    "Generator": "Baseline",
+    "Class": "mel",
+    "Variant": "V2 colour-calibrated noise",
+    "n": 256,
+    "Colour outliers %": 13.3,
+    "KID x1e3 (Inception)": 36.61
+   },
+   {
+    "Generator": "Baseline",
+    "Class": "ben",
+    "Variant": "V2 colour-calibrated noise",
+    "n": 256,
+    "Colour outliers %": 7.0,
+    "KID x1e3 (Inception)": 25.82
+   },
+   {
+    "Generator": "ClinDiffXAI, real vectors",
+    "Class": "mel",
+    "Variant": "V0 original sampling",
+    "n": 256,
+    "Colour outliers %": 77.7,
+    "KID x1e3 (Inception)": 46.31
+   },
+   {
+    "Generator": "ClinDiffXAI, real vectors",
+    "Class": "ben",
+    "Variant": "V0 original sampling",
+    "n": 256,
+    "Colour outliers %": 82.0,
+    "KID x1e3 (Inception)": 59.9
+   },
+   {
+    "Generator": "ClinDiffXAI, real vectors",
+    "Class": "mel",
+    "Variant": "V1 trailing start",
+    "n": 256,
+    "Colour outliers %": 73.4,
+    "KID x1e3 (Inception)": 45.56
+   },
+   {
+    "Generator": "ClinDiffXAI, real vectors",
+    "Class": "ben",
+    "Variant": "V1 trailing start",
+    "n": 256,
+    "Colour outliers %": 78.1,
+    "KID x1e3 (Inception)": 59.69
+   },
+   {
+    "Generator": "ClinDiffXAI, real vectors",
+    "Class": "mel",
+    "Variant": "V2 colour-calibrated noise",
+    "n": 256,
+    "Colour outliers %": 12.9,
+    "KID x1e3 (Inception)": 29.03
+   },
+   {
+    "Generator": "ClinDiffXAI, real vectors",
+    "Class": "ben",
+    "Variant": "V2 colour-calibrated noise",
+    "n": 256,
+    "Colour outliers %": 5.9,
+    "KID x1e3 (Inception)": 33.83
+   }
+  ],
+  "source": "phase1c_outputs: tables/TC2_variants_colour_realism.csv",
+  "note": "same start noises for V0, V1 and V2; source of Fig. 1b"
+ }
+}

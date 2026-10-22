@@ -1,0 +1,5 @@
+Method,Matched controls passed,"Per-concept rule (PN, VS, Pig, Reg)",Negative control ratio (limit 0.25),rho other seed,rho other classifier
+Counterfactual audit,16/16,"valid, valid, valid, valid",0.023,0.883,0.717
+"TCAV, our implementation",11/16,"valid, valid, not valid, valid",0.834,0.318,0.072
+"TCAV, Captum",0/3,not tested (ResNet-50 seed-1 controls only),0.889,0.209,0.252
+"Observational (ridge on CBM-B outputs, real images)",16/16 (largest coefficient),one setting only,0.025,0.976,0.647

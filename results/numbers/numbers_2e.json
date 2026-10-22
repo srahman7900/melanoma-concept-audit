@@ -1,0 +1,608 @@
+{
+ "p2e_rule_sha256": {
+  "value": "919a511cf55ae6f5b249ba11c465ea25a460529fb775e49913c4d5a360ccf880",
+  "source": "phase2e_outputs.zip: results/rule_2e.txt",
+  "note": "equal to the fingerprint of the delivered cell"
+ },
+ "p2e_rule_printed_utc": {
+  "value": "2026-10-19T10:38:58.870553+00:00",
+  "source": "phase2e_outputs.zip: results/rule_2e.txt",
+  "note": ""
+ },
+ "p2e_design": {
+  "value": {
+   "Concept": [
+    "PN",
+    "VS",
+    "Pig",
+    "Reg"
+   ],
+   "Low / high threshold (CBM-B)": [
+    "0.169 / 0.570",
+    "0.013 / 0.500",
+    "0.015 / 0.500",
+    "0.003 / 0.500"
+   ],
+   "Caliper": [
+    0.5,
+    0.5,
+    0.5,
+    1.0
+   ],
+   "Pairs train / val / test": [
+    "154 / 34 / 28",
+    "190 / 40 / 39",
+    "109 / 9 / 13",
+    "37 / 5 / 8"
+   ],
+   "Melanoma pairs (train)": [
+    0,
+    7,
+    5,
+    4
+   ],
+   "Testable": [
+    true,
+    true,
+    true,
+    false
+   ],
+   "Target SMD (CBM-B)": [
+    2.307,
+    2.828,
+    2.99,
+    5.737
+   ],
+   "Max |SMD| other six (CBM-B)": [
+    0.14,
+    0.066,
+    0.063,
+    0.2
+   ],
+   "Target SMD (CBM-A)": [
+    1.644,
+    1.774,
+    1.856,
+    3.207
+   ],
+   "Max |SMD| other six (CBM-A)": [
+    0.775,
+    0.249,
+    0.636,
+    0.655
+   ]
+  },
+  "source": "phase2e_outputs.zip: results/design_cbmb.json",
+  "note": ""
+ },
+ "p2e_verdict": {
+  "value": "GO for pigment_network, vascular_structures, pigmentation; NO-GO for regression_structures",
+  "source": "phase2e_outputs.zip: audit/results/matched_controls_cbmb.json",
+  "note": ""
+ },
+ "p2e_go_no_go": {
+  "value": {
+   "Concept": [
+    "PN",
+    "VS",
+    "Pig",
+    "Reg"
+   ],
+   "Testable": [
+    true,
+    true,
+    true,
+    false
+   ],
+   "Controls trained": [
+    4,
+    4,
+    4,
+    0
+   ],
+   "Controls passed": [
+    4,
+    4,
+    4,
+    0
+   ],
+   "Needed": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "Decision": [
+    "GO",
+    "GO",
+    "GO",
+    "NO-GO"
+   ],
+   "Mean \u03c1 between controls": [
+    0.888,
+    0.972,
+    0.886,
+    NaN
+   ]
+  },
+  "source": "same",
+  "note": ""
+ },
+ "p2e_controls": {
+  "value": {
+   "Control": [
+    "ctrl_bpn_resnet50_s1",
+    "ctrl_bpn_resnet50_s2",
+    "ctrl_bpn_resnet50_s3",
+    "ctrl_bpn_vitb16_s1",
+    "ctrl_bvs_resnet50_s1",
+    "ctrl_bvs_resnet50_s2",
+    "ctrl_bvs_resnet50_s3",
+    "ctrl_bvs_vitb16_s1",
+    "ctrl_bpig_resnet50_s1",
+    "ctrl_bpig_resnet50_s2",
+    "ctrl_bpig_resnet50_s3",
+    "ctrl_bpig_vitb16_s1",
+    "ctrl_breg_resnet50_s1",
+    "ctrl_breg_resnet50_s2",
+    "ctrl_breg_resnet50_s3",
+    "ctrl_breg_vitb16_s1"
+   ],
+   "Concept": [
+    "PN",
+    "PN",
+    "PN",
+    "PN",
+    "VS",
+    "VS",
+    "VS",
+    "VS",
+    "Pig",
+    "Pig",
+    "Pig",
+    "Pig",
+    "Reg",
+    "Reg",
+    "Reg",
+    "Reg"
+   ],
+   "Architecture": [
+    "ResNet-50",
+    "ResNet-50",
+    "ResNet-50",
+    "ViT-B/16",
+    "ResNet-50",
+    "ResNet-50",
+    "ResNet-50",
+    "ViT-B/16",
+    "ResNet-50",
+    "ResNet-50",
+    "ResNet-50",
+    "ViT-B/16",
+    "ResNet-50",
+    "ResNet-50",
+    "ResNet-50",
+    "ViT-B/16"
+   ],
+   "Seed": [
+    1,
+    2,
+    3,
+    1,
+    1,
+    2,
+    3,
+    1,
+    1,
+    2,
+    3,
+    1,
+    1,
+    2,
+    3,
+    1
+   ],
+   "Trained": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false
+   ],
+   "Training images": [
+    308.0,
+    308.0,
+    308.0,
+    308.0,
+    380.0,
+    380.0,
+    380.0,
+    380.0,
+    218.0,
+    218.0,
+    218.0,
+    218.0,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "Own-label test AUC": [
+    0.955,
+    0.98,
+    0.949,
+    0.969,
+    1.0,
+    0.997,
+    0.995,
+    1.0,
+    0.899,
+    0.935,
+    0.917,
+    0.959,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "Bases passed (of 4)": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    0,
+    0,
+    0,
+    0
+   ],
+   "Pass": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false
+   ],
+   "Target \u0394logit, realistic bases": [
+    4.469,
+    4.747,
+    4.355,
+    6.256,
+    5.123,
+    4.372,
+    4.605,
+    8.5,
+    0.302,
+    0.873,
+    0.343,
+    3.319,
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "Observational largest": [
+    "PN",
+    "PN",
+    "PN",
+    "PN",
+    "VS",
+    "VS",
+    "VS",
+    "VS",
+    "Pig",
+    "Pig",
+    "Pig",
+    "Pig",
+    NaN,
+    NaN,
+    NaN,
+    NaN
+   ],
+   "Note": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "not trained or not scored",
+    "not trained or not scored",
+    "not trained or not scored",
+    "not trained or not scored"
+   ]
+  },
+  "source": "phase2e_outputs.zip: matched_controls_cbmb.json, TP2_counterfactual_effects_all.csv, results/train_*.json",
+  "note": ""
+ },
+ "p2e_own_auc_range": {
+  "value": [
+   0.899,
+   1.0
+  ],
+  "source": "same",
+  "note": ""
+ },
+ "p2e_target_dlogit_range": {
+  "value": [
+   0.302,
+   8.5
+  ],
+  "source": "same",
+  "note": ""
+ },
+ "p2e_n_pass": {
+  "value": 12,
+  "source": "same",
+  "note": "of 16 planned controls (12 trained)"
+ },
+ "p2e_repro_vs_2d": {
+  "value": {
+   "classifiers": 10,
+   "effects": 280,
+   "max_abs_dlogit_diff": 0.0,
+   "max_abs_p_bh_diff": 0.0
+  },
+  "source": "phase2e_outputs.zip and phase2d_outputs.zip: TP2_counterfactual_effects_all.csv",
+  "note": ""
+ },
+ "p2e_cbmb_label_means": {
+  "value": [
+   0.378,
+   0.009,
+   0.172,
+   0.156,
+   0.115,
+   0.399,
+   0.047
+  ],
+  "source": "phase2e_outputs.zip: results/cbmb_labels.npz",
+  "note": ""
+ },
+ "p2e_cbma_cbmb_spearman": {
+  "value": [
+   0.673,
+   0.475,
+   0.668,
+   0.643,
+   0.507,
+   0.544,
+   0.649
+  ],
+  "source": "same, with phase2_analysis_inputs.zip: phase2/cls/cls_labels.npz",
+  "note": "per concept, all 6,424 classifier images"
+ },
+ "p2e_cross_label_balance": {
+  "value": {
+   "Design": [
+    "Quartile groups (CBM-A)",
+    "Quartile groups (CBM-A)",
+    "Quartile groups (CBM-A)",
+    "Quartile groups (CBM-A)",
+    "Matched pairs (CBM-A)",
+    "Matched pairs (CBM-A)",
+    "Matched pairs (CBM-A)",
+    "Matched pairs (CBM-A)",
+    "Matched pairs (CBM-A)",
+    "Matched pairs (CBM-A)",
+    "Matched pairs (CBM-A)",
+    "Matched pairs (CBM-A)",
+    "Matched pairs (CBM-B)",
+    "Matched pairs (CBM-B)",
+    "Matched pairs (CBM-B)",
+    "Matched pairs (CBM-B)",
+    "Matched pairs (CBM-B)",
+    "Matched pairs (CBM-B)",
+    "Matched pairs (CBM-B)",
+    "Matched pairs (CBM-B)"
+   ],
+   "Concept": [
+    "Pig",
+    "Pig",
+    "BWV",
+    "BWV",
+    "PN",
+    "PN",
+    "VS",
+    "VS",
+    "Pig",
+    "Pig",
+    "Reg",
+    "Reg",
+    "PN",
+    "PN",
+    "VS",
+    "VS",
+    "Pig",
+    "Pig",
+    "Reg",
+    "Reg"
+   ],
+   "Read with": [
+    "CBM-A",
+    "CBM-B",
+    "CBM-A",
+    "CBM-B",
+    "CBM-A",
+    "CBM-B",
+    "CBM-A",
+    "CBM-B",
+    "CBM-A",
+    "CBM-B",
+    "CBM-A",
+    "CBM-B",
+    "CBM-A",
+    "CBM-B",
+    "CBM-A",
+    "CBM-B",
+    "CBM-A",
+    "CBM-B",
+    "CBM-A",
+    "CBM-B"
+   ],
+   "Target SMD": [
+    2.201,
+    1.506,
+    0.334,
+    0.469,
+    2.497,
+    1.504,
+    2.334,
+    1.485,
+    2.138,
+    1.283,
+    4.168,
+    2.684,
+    1.644,
+    2.307,
+    1.774,
+    2.828,
+    1.856,
+    2.99,
+    3.207,
+    5.737
+   ],
+   "Max |SMD| other six": [
+    0.837,
+    0.882,
+    1.217,
+    0.738,
+    0.074,
+    0.904,
+    0.07,
+    0.454,
+    0.04,
+    0.664,
+    0.158,
+    0.898,
+    0.775,
+    0.14,
+    0.249,
+    0.066,
+    0.636,
+    0.063,
+    0.655,
+    0.2
+   ],
+   "Worst other concept": [
+    "PN",
+    "Str",
+    "VS",
+    "PN",
+    "D/G",
+    "D/G",
+    "Str",
+    "PN",
+    "PN",
+    "Str",
+    "VS",
+    "D/G",
+    "VS",
+    "D/G",
+    "Str",
+    "PN",
+    "D/G",
+    "Str",
+    "D/G",
+    "D/G"
+   ]
+  },
+  "source": "phase2e_outputs.zip: results/cbmb_labels.npz; pairs rebuilt offline (pairs_cbma.py), identical to the run",
+  "note": ""
+ },
+ "p2e_obs_repro_vs_2d": {
+  "value": 0.0,
+  "source": "TP5_observational_attribution.csv of Phase 2d and 2e",
+  "note": "10 classifiers in both"
+ },
+ "p2e_calibration_cbmb": {
+  "value": {
+   "summary": {
+    "PN": {
+     "median_ratio": 1.744,
+     "over_predicted": 5,
+     "under_predicted": 1,
+     "expected_range": [
+      0.401,
+      1.113
+     ]
+    },
+    "VS": {
+     "median_ratio": 1.743,
+     "over_predicted": 6,
+     "under_predicted": 0,
+     "expected_range": [
+      1.147,
+      1.722
+     ]
+    },
+    "Pig": {
+     "median_ratio": 5.567,
+     "over_predicted": 2,
+     "under_predicted": 4,
+     "expected_range": [
+      1.397,
+      3.758
+     ]
+    }
+   },
+   "per_control_ratios": {
+    "PN": [
+     1.716,
+     1.829,
+     1.642,
+     1.772
+    ],
+    "VS": [
+     1.653,
+     1.743,
+     1.744,
+     2.311
+    ],
+    "Pig": [
+     6.172,
+     4.961,
+     7.977,
+     4.515
+    ]
+   }
+  },
+  "source": "computed from TP2 and TP5 (Phase 2e); exploratory check of the CBM-A calibration",
+  "note": ""
+ }
+}

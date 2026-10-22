@@ -1,0 +1,7 @@
+Classifier,PN expected (CBM-B ratio),PN measured,VS expected (CBM-B ratio),VS measured,Pig expected (CBM-B ratio),Pig measured
+ResNet-50 s1,1.113,0.41,1.194,0.091,3.696,2.542
+ResNet-50 s2,0.637,-0.523,1.494,-0.055,3.758,4.158
+EfficientNet-B0 s1,0.516,0.035,1.147,0.447,1.937,1.904
+EfficientNet-B0 s2,0.494,0.145,1.722,1.245,2.288,2.703
+ViT-B/16 s1,0.401,0.48,1.191,-0.104,1.397,2.167
+ViT-B/16 s2,0.569,-0.228,1.651,0.095,1.542,3.119
