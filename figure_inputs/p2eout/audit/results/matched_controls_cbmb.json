@@ -1,0 +1,336 @@
+{
+  "rule_2e": "Phase 2e rule (fixed before this run). Matched positive controls whose labels come from CBM-B, an evaluator trained on Derm7pt expert labels and independent of the CBM-A pseudo-labels that condition the generator. For each concept (pigment network, vascular structures, pigmentation, regression structures): the low group is the bottom quartile and the high group the top quartile of the CBM-B output on the training split (if the top-quartile threshold is below 0.5, the high group is CBM-B output >= 0.5); 1:1 greedy nearest-neighbour matching without replacement on the other six standardised CBM-B outputs, Euclidean caliper 0.5 (1.0 if the training split has fewer than 100 pairs), exact on the melanoma label, within each split, random order with seed 3029 plus the concept index. A concept with fewer than 50 training pairs is not testable and its controls count as not passed. Four controls per concept: ResNet-50 seeds 1, 2, 3 and ViT-B/16 seed 1, with the Phase 2 training recipe. A control passes if its target knob has the largest effect, positive and significant (two-sided Wilcoxon signed-rank test on per-trajectory slopes, BH-corrected p < 0.05, median slope > 0), in at least 3 of 4 bases. GO for a concept if at least 3 of its 4 controls pass. The paper keeps the claim that the audit is validated only for concepts that are GO. Earlier verdicts are not changed.",
+  "controls": {
+    "ctrl_bpn_resnet50_s1": {
+      "label": "bpn",
+      "arch": "resnet50",
+      "seed": 1,
+      "concept": "pigment_network",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "own_label_test_auc": 0.9553571428571428,
+      "n_train": 308,
+      "decomposition_largest": "PN",
+      "observational_largest": "PN"
+    },
+    "ctrl_bpn_resnet50_s2": {
+      "label": "bpn",
+      "arch": "resnet50",
+      "seed": 2,
+      "concept": "pigment_network",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "own_label_test_auc": 0.9795918367346939,
+      "n_train": 308,
+      "decomposition_largest": "PN",
+      "observational_largest": "PN"
+    },
+    "ctrl_bpn_resnet50_s3": {
+      "label": "bpn",
+      "arch": "resnet50",
+      "seed": 3,
+      "concept": "pigment_network",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "own_label_test_auc": 0.9489795918367346,
+      "n_train": 308,
+      "decomposition_largest": "PN",
+      "observational_largest": "PN"
+    },
+    "ctrl_bpn_vitb16_s1": {
+      "label": "bpn",
+      "arch": "vitb16",
+      "seed": 1,
+      "concept": "pigment_network",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "own_label_test_auc": 0.9693877551020408,
+      "n_train": 308,
+      "decomposition_largest": "PN",
+      "observational_largest": "PN"
+    },
+    "ctrl_bvs_resnet50_s1": {
+      "label": "bvs",
+      "arch": "resnet50",
+      "seed": 1,
+      "concept": "vascular_structures",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "own_label_test_auc": 1.0,
+      "n_train": 380,
+      "decomposition_largest": "VS",
+      "observational_largest": "VS"
+    },
+    "ctrl_bvs_resnet50_s2": {
+      "label": "bvs",
+      "arch": "resnet50",
+      "seed": 2,
+      "concept": "vascular_structures",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "own_label_test_auc": 0.9967126890203813,
+      "n_train": 380,
+      "decomposition_largest": "VS",
+      "observational_largest": "VS"
+    },
+    "ctrl_bvs_resnet50_s3": {
+      "label": "bvs",
+      "arch": "resnet50",
+      "seed": 3,
+      "concept": "vascular_structures",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "own_label_test_auc": 0.9953977646285339,
+      "n_train": 380,
+      "decomposition_largest": "VS",
+      "observational_largest": "VS"
+    },
+    "ctrl_bvs_vitb16_s1": {
+      "label": "bvs",
+      "arch": "vitb16",
+      "seed": 1,
+      "concept": "vascular_structures",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "own_label_test_auc": 1.0,
+      "n_train": 380,
+      "decomposition_largest": "VS",
+      "observational_largest": "VS"
+    },
+    "ctrl_bpig_resnet50_s1": {
+      "label": "bpig",
+      "arch": "resnet50",
+      "seed": 1,
+      "concept": "pigmentation",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "own_label_test_auc": 0.8994082840236686,
+      "n_train": 218,
+      "decomposition_largest": "Pig",
+      "observational_largest": "Pig"
+    },
+    "ctrl_bpig_resnet50_s2": {
+      "label": "bpig",
+      "arch": "resnet50",
+      "seed": 2,
+      "concept": "pigmentation",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "own_label_test_auc": 0.9349112426035503,
+      "n_train": 218,
+      "decomposition_largest": "Pig",
+      "observational_largest": "Pig"
+    },
+    "ctrl_bpig_resnet50_s3": {
+      "label": "bpig",
+      "arch": "resnet50",
+      "seed": 3,
+      "concept": "pigmentation",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "own_label_test_auc": 0.9171597633136095,
+      "n_train": 218,
+      "decomposition_largest": "Pig",
+      "observational_largest": "Pig"
+    },
+    "ctrl_bpig_vitb16_s1": {
+      "label": "bpig",
+      "arch": "vitb16",
+      "seed": 1,
+      "concept": "pigmentation",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "own_label_test_auc": 0.9585798816568047,
+      "n_train": 218,
+      "decomposition_largest": "Pig",
+      "observational_largest": "Pig"
+    },
+    "ctrl_breg_resnet50_s1": {
+      "label": "breg",
+      "arch": "resnet50",
+      "seed": 1,
+      "concept": "regression_structures",
+      "bases_passed": 0,
+      "needed": 3,
+      "pass": false,
+      "note": "not trained or not scored"
+    },
+    "ctrl_breg_resnet50_s2": {
+      "label": "breg",
+      "arch": "resnet50",
+      "seed": 2,
+      "concept": "regression_structures",
+      "bases_passed": 0,
+      "needed": 3,
+      "pass": false,
+      "note": "not trained or not scored"
+    },
+    "ctrl_breg_resnet50_s3": {
+      "label": "breg",
+      "arch": "resnet50",
+      "seed": 3,
+      "concept": "regression_structures",
+      "bases_passed": 0,
+      "needed": 3,
+      "pass": false,
+      "note": "not trained or not scored"
+    },
+    "ctrl_breg_vitb16_s1": {
+      "label": "breg",
+      "arch": "vitb16",
+      "seed": 1,
+      "concept": "regression_structures",
+      "bases_passed": 0,
+      "needed": 3,
+      "pass": false,
+      "note": "not trained or not scored"
+    }
+  },
+  "concepts": {
+    "pigment_network": {
+      "controls": 4,
+      "passed": 4,
+      "needed": 3,
+      "go": true,
+      "mean_rho_between_controls": 0.8884327677431125
+    },
+    "vascular_structures": {
+      "controls": 4,
+      "passed": 4,
+      "needed": 3,
+      "go": true,
+      "mean_rho_between_controls": 0.9721766101076446
+    },
+    "pigmentation": {
+      "controls": 4,
+      "passed": 4,
+      "needed": 3,
+      "go": true,
+      "mean_rho_between_controls": 0.8858784893267652
+    },
+    "regression_structures": {
+      "controls": 4,
+      "passed": 0,
+      "needed": 3,
+      "go": false,
+      "mean_rho_between_controls": null
+    }
+  },
+  "verdict": "GO for pigment_network, vascular_structures, pigmentation; NO-GO for regression_structures",
+  "balance": {
+    "Concept": [
+      "pigment_network",
+      "vascular_structures",
+      "pigmentation",
+      "regression_structures"
+    ],
+    "Low / high threshold (CBM-B)": [
+      "0.169 / 0.570",
+      "0.013 / 0.500",
+      "0.015 / 0.500",
+      "0.003 / 0.500"
+    ],
+    "Caliper": [
+      0.5,
+      0.5,
+      0.5,
+      1.0
+    ],
+    "Pairs train / val / test": [
+      "154 / 34 / 28",
+      "190 / 40 / 39",
+      "109 / 9 / 13",
+      "37 / 5 / 8"
+    ],
+    "Melanoma pairs (train)": [
+      0,
+      7,
+      5,
+      4
+    ],
+    "Target SMD (CBM-B)": [
+      2.31,
+      2.83,
+      2.99,
+      5.74
+    ],
+    "Max |SMD| other six (CBM-B)": [
+      0.14,
+      0.066,
+      0.063,
+      0.2
+    ],
+    "Target SMD (CBM-A)": [
+      1.64,
+      1.77,
+      1.86,
+      3.21
+    ],
+    "Max |SMD| other six (CBM-A)": [
+      0.775,
+      0.249,
+      0.636,
+      0.655
+    ],
+    "Testable": [
+      true,
+      true,
+      true,
+      false
+    ],
+    "SMD PN (CBM-B)": [
+      2.31,
+      -0.07,
+      -0.03,
+      0.0
+    ],
+    "SMD BWV (CBM-B)": [
+      -0.04,
+      0.0,
+      -0.02,
+      0.18
+    ],
+    "SMD VS (CBM-B)": [
+      -0.06,
+      2.83,
+      0.0,
+      0.18
+    ],
+    "SMD Pig (CBM-B)": [
+      -0.05,
+      -0.03,
+      2.99,
+      -0.1
+    ],
+    "SMD Str (CBM-B)": [
+      0.03,
+      -0.04,
+      0.06,
+      0.07
+    ],
+    "SMD D/G (CBM-B)": [
+      0.14,
+      0.01,
+      -0.0,
+      0.2
+    ],
+    "SMD Reg (CBM-B)": [
+      -0.03,
+      0.06,
+      -0.04,
+      5.74
+    ]
+  }
+}

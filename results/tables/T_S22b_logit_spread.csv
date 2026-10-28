@@ -1,0 +1,11 @@
+Classifier,SD of test logits (clipped at 15),IQR/1.349 of test logits,SD of realistic-sweep logits,Lowest test logit,Highest test logit,Largest absolute audit effect (logits)
+ResNet-50 s1,3.346,3.655,3.644,-14.34,7.75,4.821
+ResNet-50 s2,3.391,3.02,4.621,-18.96,8.12,5.52
+EfficientNet-B0 s1,2.136,2.234,2.186,-7.24,5.32,3.276
+EfficientNet-B0 s2,2.809,2.64,3.796,-10.11,7.76,6.002
+ViT-B/16 s1,2.165,2.977,1.726,-3.63,4.11,3.074
+ViT-B/16 s2,2.524,2.695,2.503,-5.93,4.64,3.991
+Control-: permuted labels,0.123,0.118,0.112,-0.41,0.38,0.091
+Control+: pigmentation,3.468,3.384,4.67,-9.86,11.6,9.155
+Control+: blue-whitish veil,4.34,4.898,4.768,-12.29,14.26,5.527
+ResNet-50 s1 (Derm7pt),0.946,0.99,1.159,-4.05,3.23,1.945

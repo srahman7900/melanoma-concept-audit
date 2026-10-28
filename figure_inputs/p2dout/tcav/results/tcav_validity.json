@@ -1,0 +1,19 @@
+{
+  "positive_pig": {
+    "settings_passed": 6,
+    "needed": 6,
+    "settings": 8
+  },
+  "positive_bwv": {
+    "settings_passed": 6,
+    "needed": 6,
+    "settings": 8
+  },
+  "negative": {
+    "mean_max_abs_effect": 0.3416792168674698,
+    "median_mean_max_abs_effect_melanoma_classifiers": 0.4094503012048193,
+    "ok": false
+  },
+  "verdict": "NOT VALID",
+  "rule": "VALID if (a) each positive control (pigmentation, blue-whitish veil) has its target concept with the highest mean TCAV score of the 7 concepts (ties broken by the mean cosine of gradient and CAV), significantly different from random CAVs (Welch t-test, BH-corrected within the 7 concepts, p < 0.05) and above the random mean, in at least 6 of the 8 settings (2 layers x 2 ISIC concept-set variants x 2 input sets; the same share of the available settings), and (b) the largest |TCAV effect| of the permuted-label control (mean over the settings) is below 0.25 x the median of that value over the melanoma classifiers. NOT VALID otherwise. Same structure as the Phase 2 rule; fixed before the Phase 2b run."
+}

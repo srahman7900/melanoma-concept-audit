@@ -1,4 +1,4 @@
-"""ClinDiffXAI main figures (one style). Reads the run outputs and the tables of numbers_sheet.py.
+"""Main figures 2 to 6 (one style). Reads the run outputs and the tables of numbers_sheet.py.
 Output: figures/Fig2..Fig6 as PDF (Fig1, the study design, comes from make_fig_design.py) (vector) and PNG (600 dpi). Width: 183 mm (double column)."""
 import os, json
 import numpy as np
@@ -11,7 +11,11 @@ from matplotlib.patches import Rectangle
 from matplotlib.lines import Line2D
 from matplotlib.colors import TwoSlopeNorm
 
-H = '/home/claude'; OUT = os.path.join(H, 'paper'); FIG = os.environ.get('FIG_DIR', os.path.join(OUT, 'figures'))
+# Input root: DATA_ROOT if set; otherwise the repository folder figure_inputs/ (next to analysis/) if it exists;
+# otherwise the authors' working folder. Output: FIG_DIR if set, otherwise <input root>/paper/figures.
+_REPO_INPUTS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'figure_inputs')
+H = os.environ.get('DATA_ROOT') or (_REPO_INPUTS if os.path.isdir(_REPO_INPUTS) else '/home/claude')
+OUT = os.path.join(H, 'paper'); FIG = os.environ.get('FIG_DIR', os.path.join(OUT, 'figures')); os.makedirs(FIG, exist_ok=True)
 AI = os.path.join(H, 'p2ainp'); P1C = os.path.join(H, 'p1cout'); P2D = os.path.join(H, 'p2dout')
 CN = ['pigment_network', 'blue_whitish_veil', 'vascular_structures', 'pigmentation', 'streaks', 'dots_and_globules', 'regression_structures']
 SH = ['PN', 'BWV', 'VS', 'Pig', 'Str', 'D/G', 'Reg']
@@ -144,7 +148,7 @@ def fig1():
         r = spec[spec['Evaluator output'] == f'CBM-B: {s_}']['Bases where the knob is largest'].values[0]
         ax.text(7.0, i, r, va='center', ha='left', fontsize=6, color='black' if s_ in VALID_KNOB else C['grey'],
                 fontweight='bold' if s_ in VALID_KNOB else 'normal')
-    ax.text(7.0, -0.95, 'Specific\n(of 4 bases)', fontsize=5.6, ha='left', va='bottom')
+    ax.text(7.0, -0.95, 'Target-dominant\n(of 4 bases)', fontsize=5.6, ha='left', va='bottom')
     cax = ax.inset_axes([0.15, -0.13, 0.7, 0.04]); cbar(fig, cax, 4, 'Change from knob level 0 to 1 (SD)', [-4, -2, 0, 2, 4])
     save(fig, 'Fig2_instrument')
 
@@ -343,11 +347,20 @@ def fig3():
            'TCAV (ours)': tv['negative']['mean_max_abs_effect'] / tv['negative']['median_mean_max_abs_effect_melanoma_classifiers'],
            'TCAV (Captum)': cap['rule']['negative']['mean_max_abs_effect'] / cap['rule']['negative']['median_mean_max_abs_effect_melanoma_classifiers'],
            'Observational': NUM['observational_negative_ratio']['value']}
+    # scale-free version (post hoc): effects divided by the SD of each classifier's logits on the real test images;
+    # TCAV scores are signs of directional derivatives and do not depend on output scale
+    sct = pd.read_csv(os.path.join(OUT, 'tables/T_negctrl_scale.csv')).set_index('scale')
+    sf = {'Counterfactual audit': float(sct.loc['sd_test', 'audit']), 'Observational': float(sct.loc['sd_test', 'observational']),
+          'TCAV (ours)': neg['TCAV (ours)'], 'TCAV (Captum)': neg['TCAV (Captum)']}
     ax = fig.add_subplot(gs[1]); letter(ax, 'b', x=-0.1)
     for i, (m, col) in enumerate(METH):
-        ax.barh(3 - i, neg[m], 0.6, color=col, lw=0); ax.text(neg[m] + 0.02, 3 - i, f'{neg[m]:.2f}', va='center', fontsize=5.8)
-    ax.axvline(0.25, color='black', lw=0.6, ls='--'); ax.text(0.26, 3.55, 'limit 0.25', fontsize=5.6, va='bottom')
-    ax.set_yticks([]); ax.spines['left'].set_visible(False); ax.set_xlim(0, 1.05); ax.set_ylim(-0.5, 4.0)
+        y = 3 - i
+        ax.barh(y + 0.18, neg[m], 0.34, color=col, lw=0); ax.text(neg[m] + 0.02, y + 0.18, f'{neg[m]:.2f}', va='center', fontsize=5.4)
+        ax.barh(y - 0.18, sf[m], 0.34, facecolor='white', edgecolor=col, hatch='//////', lw=0.6); ax.text(sf[m] + 0.02, y - 0.18, f'{sf[m]:.2f}', va='center', fontsize=5.4)
+    ax.axvline(0.25, color='black', lw=0.6, ls='--'); ax.text(0.235, 3.62, 'limit 0.25', fontsize=5.6, va='bottom', ha='right')
+    ax.legend([Rectangle((0, 0), 1, 1, color=C['grey'], lw=0), Rectangle((0, 0), 1, 1, facecolor='white', edgecolor=C['grey'], hatch='//////', lw=0.6)],
+              ['logit scale (rule 1)', 'scale-free (post hoc)'], loc='upper right', bbox_to_anchor=(1.04, 1.02), fontsize=5.2, handlelength=1.4, borderaxespad=0.1)
+    ax.set_yticks([]); ax.spines['left'].set_visible(False); ax.set_xlim(0, 1.05); ax.set_ylim(-0.6, 4.35)
     ax.set_xlabel('Permuted-label control:\nlargest effect / median of\nmelanoma classifiers')
     # (c) reliability
     rel = {'Counterfactual audit': NUM['audit_reliability']['value'], 'TCAV (ours)': NUM['tcav_reliability']['value'],
@@ -376,7 +389,7 @@ def fig4():
     ax.xaxis.tick_top()
     for t, lab in zip(ax.get_xticklabels(), SH): t.set_color('black' if lab in VALID_KNOB else C['grey'])
     ax.axhline(5.5, color='white', lw=1.6)
-    ax.text(1.0, -0.035, '† knob not specific (Fig. 2c)', transform=ax.transAxes, fontsize=5.6, color=C['grey'], ha='right', va='top')
+    ax.text(1.0, -0.035, '† knob not target-dominant (Fig. 2c)', transform=ax.transAxes, fontsize=5.6, color=C['grey'], ha='right', va='top')
     if REGM: ax.text(1.0, -0.33, '‡ audit validated with CBM-A-labelled controls only', transform=ax.transAxes, fontsize=5.6, color=C['grey'], ha='right', va='top')
     cax = ax.inset_axes([0.15, -0.12, 0.7, 0.04]); cbar(fig, cax, 4, 'Change in melanoma logit, level 0 to 1', [-4, -2, 0, 2, 4])
     # (b) valid knobs: melanoma classifiers versus classifiers trained to use the concept

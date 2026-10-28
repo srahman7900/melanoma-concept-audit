@@ -1,0 +1,298 @@
+{
+  "rule_2c": "A matched positive control passes the counterfactual audit if its target concept has the largest effect, positive and significant (two-sided Wilcoxon signed-rank test on per-trajectory slopes, BH-corrected p < 0.05, median slope > 0), in at least 3 of 4 bases. It passes TCAV if its target concept has the highest mean TCAV score (ties broken by the mean cosine of gradient and CAV), differs from random CAVs (Welch t-test, BH-corrected within the 7 concepts, p < 0.05) and is above them, in at least 6 of 8 settings (2 layers x 2 ISIC concept-set variants x 2 input sets). Fixed before the Phase 2c run.",
+  "rule_2d": "Each concept (pigment network, vascular structures, pigmentation, regression structures) has 4 matched controls: ResNet-50 seeds 1, 2, 3 and ViT-B/16 seed 1 (the seed-1 ResNet-50 controls for the first three concepts are those of Phase 2c). Regression uses high = pseudo-label >= 0.5 and caliper 1.0 because the label is sparse; the other concepts use the Phase 2c groups. A control passes as in the Phase 2c rule. The audit is valid for a concept if at least 3 of its 4 controls pass; the same count is reported for TCAV. Captum TCAV: the Phase 2b rule and the Phase 2c matched-control rule on the 4 settings available (late layer x 2 ISIC concept-set types x 2 input sets; at least 3 of 4). Fixed before the Phase 2d run; earlier verdicts are not changed.",
+  "controls": {
+    "ctrl_mpig_resnet50": {
+      "label": "mpig",
+      "arch": "resnet50",
+      "seed": 1,
+      "concept": "pigmentation",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "decomposition_largest": "Pig",
+      "observational_largest": "Pig"
+    },
+    "ctrl_mpn_resnet50": {
+      "label": "mpn",
+      "arch": "resnet50",
+      "seed": 1,
+      "concept": "pigment_network",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "decomposition_largest": "PN",
+      "observational_largest": "PN"
+    },
+    "ctrl_mvs_resnet50": {
+      "label": "mvs",
+      "arch": "resnet50",
+      "seed": 1,
+      "concept": "vascular_structures",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "decomposition_largest": "VS",
+      "observational_largest": "VS"
+    },
+    "ctrl_mpn_resnet50_s2": {
+      "label": "mpn",
+      "arch": "resnet50",
+      "seed": 2,
+      "concept": "pigment_network",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "decomposition_largest": "PN",
+      "observational_largest": "PN"
+    },
+    "ctrl_mpn_resnet50_s3": {
+      "label": "mpn",
+      "arch": "resnet50",
+      "seed": 3,
+      "concept": "pigment_network",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "decomposition_largest": "PN",
+      "observational_largest": "PN"
+    },
+    "ctrl_mpn_vitb16_s1": {
+      "label": "mpn",
+      "arch": "vitb16",
+      "seed": 1,
+      "concept": "pigment_network",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "decomposition_largest": "PN",
+      "observational_largest": "PN"
+    },
+    "ctrl_mvs_resnet50_s2": {
+      "label": "mvs",
+      "arch": "resnet50",
+      "seed": 2,
+      "concept": "vascular_structures",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "decomposition_largest": "VS",
+      "observational_largest": "VS"
+    },
+    "ctrl_mvs_resnet50_s3": {
+      "label": "mvs",
+      "arch": "resnet50",
+      "seed": 3,
+      "concept": "vascular_structures",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "decomposition_largest": "VS",
+      "observational_largest": "VS"
+    },
+    "ctrl_mvs_vitb16_s1": {
+      "label": "mvs",
+      "arch": "vitb16",
+      "seed": 1,
+      "concept": "vascular_structures",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "decomposition_largest": "VS",
+      "observational_largest": "VS"
+    },
+    "ctrl_mpig_resnet50_s2": {
+      "label": "mpig",
+      "arch": "resnet50",
+      "seed": 2,
+      "concept": "pigmentation",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "decomposition_largest": "Pig",
+      "observational_largest": "Pig"
+    },
+    "ctrl_mpig_resnet50_s3": {
+      "label": "mpig",
+      "arch": "resnet50",
+      "seed": 3,
+      "concept": "pigmentation",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "decomposition_largest": "Pig",
+      "observational_largest": "Pig"
+    },
+    "ctrl_mpig_vitb16_s1": {
+      "label": "mpig",
+      "arch": "vitb16",
+      "seed": 1,
+      "concept": "pigmentation",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "decomposition_largest": "Pig",
+      "observational_largest": "Pig"
+    },
+    "ctrl_mreg_resnet50": {
+      "label": "mreg",
+      "arch": "resnet50",
+      "seed": 1,
+      "concept": "regression_structures",
+      "bases_passed": 3,
+      "needed": 3,
+      "pass": true,
+      "decomposition_largest": "VS",
+      "observational_largest": "Reg"
+    },
+    "ctrl_mreg_resnet50_s2": {
+      "label": "mreg",
+      "arch": "resnet50",
+      "seed": 2,
+      "concept": "regression_structures",
+      "bases_passed": 4,
+      "needed": 3,
+      "pass": true,
+      "decomposition_largest": "VS",
+      "observational_largest": "Reg"
+    },
+    "ctrl_mreg_resnet50_s3": {
+      "label": "mreg",
+      "arch": "resnet50",
+      "seed": 3,
+      "concept": "regression_structures",
+      "bases_passed": 3,
+      "needed": 3,
+      "pass": true,
+      "decomposition_largest": "Reg",
+      "observational_largest": "Reg"
+    },
+    "ctrl_mreg_vitb16_s1": {
+      "label": "mreg",
+      "arch": "vitb16",
+      "seed": 1,
+      "concept": "regression_structures",
+      "bases_passed": 3,
+      "needed": 3,
+      "pass": true,
+      "decomposition_largest": "VS",
+      "observational_largest": "Reg"
+    }
+  },
+  "concepts": {
+    "pigment_network": {
+      "controls": 4,
+      "passed": 4,
+      "needed": 3,
+      "valid": true,
+      "mean_rho_between_controls": 0.9405218025907681
+    },
+    "vascular_structures": {
+      "controls": 4,
+      "passed": 4,
+      "needed": 3,
+      "valid": true,
+      "mean_rho_between_controls": 0.9426199598613391
+    },
+    "pigmentation": {
+      "controls": 4,
+      "passed": 4,
+      "needed": 3,
+      "valid": true,
+      "mean_rho_between_controls": 0.9341361065498996
+    },
+    "regression_structures": {
+      "controls": 4,
+      "passed": 4,
+      "needed": 3,
+      "valid": true,
+      "mean_rho_between_controls": 0.9591315453384418
+    }
+  },
+  "balance": {
+    "Concept": [
+      "pigment_network",
+      "vascular_structures",
+      "pigmentation",
+      "regression_structures"
+    ],
+    "Low / high threshold": [
+      "0.180 / 0.636",
+      "0.012 / 0.603",
+      "0.016 / 0.232",
+      "0.000 / 0.500"
+    ],
+    "Caliper": [
+      0.5,
+      0.5,
+      0.5,
+      1.0
+    ],
+    "Pairs train / val / test": [
+      "274 / 54 / 61",
+      "339 / 63 / 76",
+      "477 / 75 / 73",
+      "160 / 31 / 24"
+    ],
+    "Melanoma pairs (train)": [
+      8,
+      11,
+      26,
+      27
+    ],
+    "Target SMD": [
+      2.5,
+      2.33,
+      2.14,
+      4.17
+    ],
+    "Max |SMD| other six": [
+      0.074,
+      0.07,
+      0.04,
+      0.158
+    ],
+    "SMD PN": [
+      2.5,
+      -0.07,
+      -0.04,
+      0.09
+    ],
+    "SMD BWV": [
+      -0.01,
+      0.01,
+      0.0,
+      0.06
+    ],
+    "SMD VS": [
+      -0.04,
+      2.33,
+      -0.03,
+      0.16
+    ],
+    "SMD Pig": [
+      -0.04,
+      -0.03,
+      2.14,
+      -0.03
+    ],
+    "SMD Str": [
+      -0.02,
+      -0.07,
+      -0.01,
+      0.0
+    ],
+    "SMD D/G": [
+      0.07,
+      -0.02,
+      -0.04,
+      0.05
+    ],
+    "SMD Reg": [
+      0.01,
+      0.03,
+      -0.0,
+      4.17
+    ]
+  }
+}

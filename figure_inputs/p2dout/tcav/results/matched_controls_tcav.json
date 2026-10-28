@@ -1,0 +1,170 @@
+{
+  "ctrl_mpig_resnet50": {
+    "label": "mpig",
+    "concept": "pigmentation",
+    "settings_passed": 4,
+    "settings": 8,
+    "needed": 6,
+    "pass": false,
+    "derm7pt_settings_passed_exploratory": "0 of 4"
+  },
+  "ctrl_mpig_resnet50_s2": {
+    "label": "mpig",
+    "concept": "pigmentation",
+    "settings_passed": 6,
+    "settings": 8,
+    "needed": 6,
+    "pass": true,
+    "derm7pt_settings_passed_exploratory": "2 of 4"
+  },
+  "ctrl_mpig_resnet50_s3": {
+    "label": "mpig",
+    "concept": "pigmentation",
+    "settings_passed": 8,
+    "settings": 8,
+    "needed": 6,
+    "pass": true,
+    "derm7pt_settings_passed_exploratory": "0 of 4"
+  },
+  "ctrl_mpig_vitb16_s1": {
+    "label": "mpig",
+    "concept": "pigmentation",
+    "settings_passed": 2,
+    "settings": 8,
+    "needed": 6,
+    "pass": false,
+    "derm7pt_settings_passed_exploratory": "0 of 4"
+  },
+  "ctrl_mpn_resnet50": {
+    "label": "mpn",
+    "concept": "pigment_network",
+    "settings_passed": 8,
+    "settings": 8,
+    "needed": 6,
+    "pass": true,
+    "derm7pt_settings_passed_exploratory": "1 of 4"
+  },
+  "ctrl_mpn_resnet50_s2": {
+    "label": "mpn",
+    "concept": "pigment_network",
+    "settings_passed": 8,
+    "settings": 8,
+    "needed": 6,
+    "pass": true,
+    "derm7pt_settings_passed_exploratory": "2 of 4"
+  },
+  "ctrl_mpn_resnet50_s3": {
+    "label": "mpn",
+    "concept": "pigment_network",
+    "settings_passed": 6,
+    "settings": 8,
+    "needed": 6,
+    "pass": true,
+    "derm7pt_settings_passed_exploratory": "3 of 4"
+  },
+  "ctrl_mpn_vitb16_s1": {
+    "label": "mpn",
+    "concept": "pigment_network",
+    "settings_passed": 3,
+    "settings": 8,
+    "needed": 6,
+    "pass": false,
+    "derm7pt_settings_passed_exploratory": "0 of 4"
+  },
+  "ctrl_mvs_resnet50": {
+    "label": "mvs",
+    "concept": "vascular_structures",
+    "settings_passed": 8,
+    "settings": 8,
+    "needed": 6,
+    "pass": true,
+    "derm7pt_settings_passed_exploratory": "2 of 4"
+  },
+  "ctrl_mvs_resnet50_s2": {
+    "label": "mvs",
+    "concept": "vascular_structures",
+    "settings_passed": 8,
+    "settings": 8,
+    "needed": 6,
+    "pass": true,
+    "derm7pt_settings_passed_exploratory": "4 of 4"
+  },
+  "ctrl_mvs_resnet50_s3": {
+    "label": "mvs",
+    "concept": "vascular_structures",
+    "settings_passed": 6,
+    "settings": 8,
+    "needed": 6,
+    "pass": true,
+    "derm7pt_settings_passed_exploratory": "4 of 4"
+  },
+  "ctrl_mvs_vitb16_s1": {
+    "label": "mvs",
+    "concept": "vascular_structures",
+    "settings_passed": 4,
+    "settings": 8,
+    "needed": 6,
+    "pass": false,
+    "derm7pt_settings_passed_exploratory": "1 of 4"
+  },
+  "ctrl_mreg_resnet50": {
+    "label": "mreg",
+    "concept": "regression_structures",
+    "settings_passed": 8,
+    "settings": 8,
+    "needed": 6,
+    "pass": true,
+    "derm7pt_settings_passed_exploratory": "1 of 4"
+  },
+  "ctrl_mreg_resnet50_s2": {
+    "label": "mreg",
+    "concept": "regression_structures",
+    "settings_passed": 8,
+    "settings": 8,
+    "needed": 6,
+    "pass": true,
+    "derm7pt_settings_passed_exploratory": "4 of 4"
+  },
+  "ctrl_mreg_resnet50_s3": {
+    "label": "mreg",
+    "concept": "regression_structures",
+    "settings_passed": 8,
+    "settings": 8,
+    "needed": 6,
+    "pass": true,
+    "derm7pt_settings_passed_exploratory": "2 of 4"
+  },
+  "ctrl_mreg_vitb16_s1": {
+    "label": "mreg",
+    "concept": "regression_structures",
+    "settings_passed": 2,
+    "settings": 8,
+    "needed": 6,
+    "pass": false,
+    "derm7pt_settings_passed_exploratory": "0 of 4"
+  },
+  "concept:pigment_network": {
+    "controls": 4,
+    "passed": 3,
+    "needed": 3,
+    "valid": true
+  },
+  "concept:vascular_structures": {
+    "controls": 4,
+    "passed": 3,
+    "needed": 3,
+    "valid": true
+  },
+  "concept:pigmentation": {
+    "controls": 4,
+    "passed": 2,
+    "needed": 3,
+    "valid": false
+  },
+  "concept:regression_structures": {
+    "controls": 4,
+    "passed": 3,
+    "needed": 3,
+    "valid": true
+  }
+}

@@ -1,0 +1,611 @@
+# ============================================================
+# NOTEBOOK 3b — BASELINE: Class-Label-Conditioned DDPM, 128×128
+# Single-cell version. Simple local Kaggle save (no Drive).
+# Platform: Kaggle T4×2 GPU — RUN ON SECOND KAGGLE ACCOUNT, IN PARALLEL
+# WITH NB3 (main model), so both finish around the same time.
+#
+# PURPOSE: this is the external baseline a CIBM reviewer will demand —
+# "how does conditioning on the rich 7-dim Derm7pt concept vector compare
+# to simply conditioning on the binary melanoma/benign label?"
+#
+# WHAT'S IDENTICAL TO NB3 (for a fair comparison):
+#   - Architecture (ConceptConditionedUNet128) — literally the same class,
+#     just instantiated with num_concepts=2 instead of 7. The conditioning
+#     embedding dimension (cd=128) is fixed regardless of input width, so
+#     parameter count and compute cost are virtually identical.
+#   - CFG (drop=0.15, scale=3.5), EMA (decay=0.999)
+#   - Optimizer, LR schedule, gradient accumulation (batch=8×4=32 eff.)
+#   - Augmentation pipeline, balanced dataset construction (5x mel / 3x ben)
+#   - 150 epochs, same SAVE_EVERY/EVAL_EVERY cadence
+#
+# WHAT'S DIFFERENT:
+#   - Conditioning input: one-hot class label [is_benign, is_melanoma]
+#     instead of the 7-dim CBM-A-predicted concept vector
+#   - CCFS evaluation still uses the SAME 7-dim EVAL_MEL_VEC/EVAL_BEN_VEC
+#     prototypes and the SAME CBM-A model as NB3 — this isolates exactly
+#     one variable (conditioning richness) while keeping the evaluation
+#     metric identical, which is what makes the comparison meaningful
+#   - All output filenames suffixed "_baseline" so nothing collides with
+#     NB3's files if later merged onto the same machine for NB4
+#
+# ⚠ BEFORE RUNNING — upload to THIS Kaggle account:
+#   1. isic2020_pseudo_labels_v3.csv from NB2 (needed for the 'target'
+#      column — concept_* columns are NOT used here, only target)
+#   2. best_cbm_model.pth from NB1 (needed for CCFS monitoring only)
+#   3. The ISIC 2020 image dataset itself
+#
+# TO SWITCH SESSIONS: change SESSION_END / RESUME_FROM below.
+# ============================================================
+
+# ── INSTALL ────────────────────────────────────────────────────
+import subprocess, sys
+for pkg in ["diffusers==0.33.0", "accelerate==1.6.0", "timm==1.0.15"]:
+    subprocess.run([sys.executable, '-m', 'pip', 'install', pkg, '-q'], check=False)
+
+import os, time, csv, warnings
+from copy import deepcopy
+import numpy as np
+import pandas as pd
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from torch.utils.data import Dataset, DataLoader
+from torchvision import transforms
+from torchvision.utils import make_grid, save_image
+import torchvision.models as tv_models
+from diffusers import DDPMScheduler, DDIMScheduler
+from PIL import Image
+import matplotlib.pyplot as plt
+from tqdm import tqdm
+warnings.filterwarnings('ignore')
+
+device = torch.device('cuda')
+torch.backends.cudnn.benchmark = True
+print(f"GPU: {torch.cuda.get_device_name(0)} | Count: {torch.cuda.device_count()}")
+
+
+# ============================================================
+# CONFIG — verify paths, edit session plan
+# ============================================================
+
+# ⚠ VERIFY these paths — must point to files uploaded on THIS account
+PSEUDO_CSV       = "/kaggle/input/datasets/shohanurrahman7/pseudo-labels-v3/isic2020_pseudo_labels_v3.csv"
+ISIC_IMG_DIR     = "/kaggle/input/datasets/sumaiyabinteshahid/isic-challenge-dataset-2020/ISIC_2020_Dataset/train"
+CBM_A_CHECKPOINT = "/kaggle/input/datasets/shohanurrahman7/cbma-v3/best_cbm_model.pth"
+
+SESSION_END  = 40
+RESUME_FROM  = None
+
+IMAGE_SIZE     = 128
+BATCH_SIZE     = 8
+GRAD_ACCUM     = 4
+NUM_TIMESTEPS  = 1000
+NUM_WORKERS    = 6
+SAVE_EVERY     = 10
+EVAL_EVERY     = 40
+SEED           = 42
+
+CFG_DROP_PROB = 0.15
+CFG_SCALE     = 3.5
+EMA_DECAY     = 0.999
+
+LOG_CSV = 'nb3b_train_log.csv'
+
+# Concept names — needed only for CCFS evaluation against CBM-A's output,
+# NOT used as model input in this baseline (that's the whole point).
+CONCEPT_NAMES = ['pigment_network', 'blue_whitish_veil', 'vascular_structures',
+                  'pigmentation', 'streaks', 'dots_and_globules', 'regression_structures']
+NUM_CONCEPTS = len(CONCEPT_NAMES)
+
+# ── Model conditioning: one-hot class label, NOT concepts ──
+CLASS_NAMES = ['benign', 'melanoma']
+NUM_CLASSES = 2
+GEN_BEN_VEC = torch.FloatTensor([1.0, 0.0])   # what's fed to the generator
+GEN_MEL_VEC = torch.FloatTensor([0.0, 1.0])
+
+# ── Evaluation only: same 7-dim prototypes as NB3, for fair CCFS comparison ──
+EVAL_MEL_VEC = torch.FloatTensor([0.8292, 0.7781, 0.9926, 0.8918, 0.4585, 0.9256, 0.8769])
+EVAL_BEN_VEC = torch.FloatTensor([0.0800, 0.0002, 0.0047, 0.0055, 0.0018, 0.1501, 0.0003])
+
+torch.manual_seed(SEED)
+np.random.seed(SEED)
+
+print(f"\n[BASELINE] Session target: epochs {1 if RESUME_FROM is None else '?'} → {SESSION_END}")
+print(f"Resume from:   {RESUME_FROM or 'None (fresh start)'}")
+print(f"Config: IMAGE_SIZE={IMAGE_SIZE} | batch={BATCH_SIZE}×{GRAD_ACCUM}accum=eff.{BATCH_SIZE*GRAD_ACCUM} | "
+      f"CFG(p={CFG_DROP_PROB},s={CFG_SCALE}) | EMA(d={EMA_DECAY})")
+print(f"Conditioning: {NUM_CLASSES}-dim one-hot class label (NOT 7-dim concepts)")
+
+
+# ============================================================
+# DATA — same corpus/balancing as NB3, but dataset returns one-hot
+# class label instead of per-image concept vector
+# ============================================================
+
+if not os.path.exists(PSEUDO_CSV):
+    raise FileNotFoundError(f"⚠ PSEUDO_CSV not found: {PSEUDO_CSV}")
+
+pseudo_df = pd.read_csv(PSEUDO_CSV)
+print(f"\nLoaded {len(pseudo_df)} rows (only 'target' column is used in this baseline)")
+
+found = sum(1 for n in pseudo_df['image_name'].head(10)
+            if os.path.exists(os.path.join(ISIC_IMG_DIR, f"{n}.jpg")))
+print(f"Data check: {found}/10 images found at {ISIC_IMG_DIR}")
+if found == 0:
+    raise FileNotFoundError(f"⚠ Images not found at {ISIC_IMG_DIR}")
+
+
+def build_balanced(df, seed=42):
+    """Identical balancing logic to NB3 — same corpus composition for a fair comparison."""
+    mel = df[df['target'] == 1].copy()
+    ben = df[df['target'] == 0].copy()
+    mel5 = pd.concat([mel]*5, ignore_index=True)
+    ben3 = ben.sample(n=len(mel5)*3, random_state=seed)
+    out = pd.concat([mel5, ben3], ignore_index=True).sample(frac=1, random_state=seed)
+    print(f"Balanced dataset: {len(mel5)} melanoma + {len(ben3)} benign = {len(out)} total")
+    return out
+
+
+class ClassLabelDataset(Dataset):
+    """Same image pipeline as NB3's ConceptDataset, but returns a one-hot
+    class label instead of a 7-dim concept vector."""
+    def __init__(self, df, image_dir, image_size=128, augment=True):
+        self.image_size = image_size
+        tfms = ([transforms.Resize((image_size+16, image_size+16)),
+                 transforms.RandomCrop(image_size),
+                 transforms.RandomHorizontalFlip(0.5),
+                 transforms.RandomVerticalFlip(0.5)]
+                if augment else [transforms.Resize((image_size, image_size))])
+        self.tfm = transforms.Compose(
+            tfms + [transforms.ToTensor(), transforms.Normalize([0.5]*3, [0.5]*3)]
+        )
+        self.rows, self.paths = [], []
+        for _, row in df.reset_index(drop=True).iterrows():
+            p = os.path.join(image_dir, f"{row['image_name']}.jpg")
+            if os.path.exists(p):
+                self.rows.append(row.to_dict())
+                self.paths.append(p)
+        print(f"Dataset: {len(self.rows)}/{len(df)} valid images")
+
+    def __len__(self): return len(self.rows)
+
+    def __getitem__(self, idx):
+        try:
+            img = self.tfm(Image.open(self.paths[idx]).convert('RGB'))
+        except Exception:
+            img = torch.zeros(3, self.image_size, self.image_size)
+        target = int(self.rows[idx]['target'])
+        c = torch.FloatTensor([1.0, 0.0] if target == 0 else [0.0, 1.0])
+        return img, c
+
+
+balanced_df = build_balanced(pseudo_df, seed=SEED)
+full_ds = ClassLabelDataset(balanced_df, ISIC_IMG_DIR, image_size=IMAGE_SIZE, augment=True)
+n_val = max(100, len(full_ds)//10)
+n_train = len(full_ds) - n_val
+tr_ds, vl_ds = torch.utils.data.random_split(
+    full_ds, [n_train, n_val], generator=torch.Generator().manual_seed(SEED)
+)
+tr_loader = DataLoader(tr_ds, batch_size=BATCH_SIZE, shuffle=True,
+                       num_workers=NUM_WORKERS, pin_memory=True, drop_last=True,
+                       persistent_workers=True, prefetch_factor=4)
+vl_loader = DataLoader(vl_ds, batch_size=BATCH_SIZE, shuffle=False,
+                       num_workers=NUM_WORKERS, persistent_workers=True, prefetch_factor=4)
+print(f"Train: {n_train} | Val: {n_val}")
+
+t0 = time.time()
+_ = next(iter(tr_loader))
+batch_time = time.time() - t0
+bpe = n_train // BATCH_SIZE
+est_min = batch_time * bpe / 60
+print(f"~{est_min:.1f} min/epoch estimated (live, from your first batch)")
+if RESUME_FROM is None:
+    print(f"Session 1 ({SESSION_END} epochs): ~{SESSION_END*est_min/60:.1f}h estimated")
+
+
+# ============================================================
+# ARCHITECTURE — IDENTICAL to NB3 (verified copy, not re-derived).
+# Only difference at instantiation time: num_concepts=NUM_CLASSES (2).
+# ============================================================
+
+class ConceptEmbedding(nn.Module):
+    def __init__(self, n, d=256):
+        super().__init__()
+        self.net = nn.Sequential(nn.Linear(n,d),nn.SiLU(),nn.Linear(d,d),nn.SiLU())
+    def forward(self, c): return self.net(c)
+
+
+class ResBlock(nn.Module):
+    def __init__(self, ic, oc, td, cd):
+        super().__init__()
+        self.n1=nn.GroupNorm(8,ic); self.c1=nn.Conv2d(ic,oc,3,padding=1)
+        self.n2=nn.GroupNorm(8,oc); self.c2=nn.Conv2d(oc,oc,3,padding=1)
+        self.tp=nn.Linear(td,oc);   self.cp=nn.Linear(cd,oc)
+        self.sk=nn.Conv2d(ic,oc,1) if ic!=oc else nn.Identity()
+        self.a=nn.SiLU()
+    def forward(self, x, t, c):
+        h=self.c1(self.a(self.n1(x)))
+        h=h+self.tp(self.a(t))[:,:,None,None]
+        h=h+self.cp(self.a(c))[:,:,None,None]
+        return self.c2(self.a(self.n2(h)))+self.sk(x)
+
+
+class SelfAttention(nn.Module):
+    def __init__(self, ch):
+        super().__init__()
+        self.n=nn.GroupNorm(8,ch)
+        self.a=nn.MultiheadAttention(ch,num_heads=4,batch_first=True)
+    def forward(self, x):
+        B,C,H,W=x.shape
+        h=self.n(x).reshape(B,C,H*W).permute(0,2,1)
+        h,_=self.a(h,h,h)
+        return x+h.permute(0,2,1).reshape(B,C,H,W)
+
+
+class ConceptConditionedUNet128(nn.Module):
+    """Identical to NB3's class — shape-verified there. Conditioning input
+    width is generic (num_concepts param), so this baseline uses the exact
+    same network, just with a 2-dim instead of 7-dim conditioning input."""
+    def __init__(self, image_size=128, num_concepts=7, base_channels=64):
+        super().__init__()
+        self.image_size = image_size
+        C = [64, 64, 128, 256, 256]
+        td = base_channels*4; cd = base_channels*2
+        self.time_mlp = nn.Sequential(nn.Linear(base_channels,td),nn.SiLU(),nn.Linear(td,td))
+        self.concept_emb = ConceptEmbedding(num_concepts, cd)
+        self.enc_in = nn.Conv2d(3, C[0], 3, padding=1)
+
+        self.enc = nn.ModuleList([
+            nn.ModuleList([ResBlock(C[0],C[0],td,cd), ResBlock(C[0],C[0],td,cd)]),
+            nn.ModuleList([ResBlock(C[0],C[1],td,cd), ResBlock(C[1],C[1],td,cd)]),
+            nn.ModuleList([ResBlock(C[1],C[2],td,cd), ResBlock(C[2],C[2],td,cd), SelfAttention(C[2])]),
+            nn.ModuleList([ResBlock(C[2],C[3],td,cd), ResBlock(C[3],C[3],td,cd), SelfAttention(C[3])]),
+            nn.ModuleList([ResBlock(C[3],C[4],td,cd), ResBlock(C[4],C[4],td,cd), SelfAttention(C[4])]),
+        ])
+        self.down = nn.ModuleList([nn.Conv2d(C[i],C[i],3,stride=2,padding=1) for i in range(4)])
+        self.mid  = nn.ModuleList([ResBlock(C[4],C[4],td,cd), SelfAttention(C[4]), ResBlock(C[4],C[4],td,cd)])
+
+        self.dec = nn.ModuleList([
+            nn.ModuleList([ResBlock(C[4]+C[3],C[3],td,cd), ResBlock(C[3],C[3],td,cd), SelfAttention(C[3])]),
+            nn.ModuleList([ResBlock(C[3]+C[2],C[2],td,cd), ResBlock(C[2],C[2],td,cd), SelfAttention(C[2])]),
+            nn.ModuleList([ResBlock(C[2]+C[1],C[1],td,cd), ResBlock(C[1],C[1],td,cd)]),
+            nn.ModuleList([ResBlock(C[1]+C[0],C[0],td,cd), ResBlock(C[0],C[0],td,cd)]),
+        ])
+        self.up = nn.ModuleList([
+            nn.ConvTranspose2d(C[4],C[4],2,stride=2),
+            nn.ConvTranspose2d(C[3],C[3],2,stride=2),
+            nn.ConvTranspose2d(C[2],C[2],2,stride=2),
+            nn.ConvTranspose2d(C[1],C[1],2,stride=2),
+        ])
+        self.out = nn.Sequential(nn.GroupNorm(8,C[0]), nn.SiLU(), nn.Conv2d(C[0],3,3,padding=1))
+
+    def sin_emb(self, t, d):
+        half = d//2
+        f = torch.exp(-torch.arange(half,device=t.device)*(np.log(10000)/(half-1)))
+        a = t[:,None].float()*f[None]
+        return torch.cat([torch.cos(a),torch.sin(a)],dim=-1)
+
+    def forward(self, x, ts, concepts):
+        te = self.time_mlp(self.sin_emb(ts, self.time_mlp[0].in_features))
+        ce = self.concept_emb(concepts)
+        h = self.enc_in(x); sk = []
+        for i, blks in enumerate(self.enc):
+            for b in blks: h = b(h) if isinstance(b,SelfAttention) else b(h,te,ce)
+            sk.append(h)
+            if i < 4: h = self.down[i](h)
+        for b in self.mid:
+            h = b(h) if isinstance(b,SelfAttention) else b(h,te,ce)
+
+        usable_sk = sk[:-1]
+        for i, (blks, up) in enumerate(zip(self.dec, self.up)):
+            h = up(h)
+            s = usable_sk[-(i+1)]
+            if h.shape != s.shape:
+                h = F.interpolate(h, size=s.shape[-2:])
+            h = torch.cat([h, s], dim=1)
+            for b in blks: h = b(h) if isinstance(b,SelfAttention) else b(h,te,ce)
+
+        o = self.out(h)
+        if o.shape[-1] != self.image_size:
+            o = F.interpolate(o, size=(self.image_size, self.image_size))
+        return o
+
+
+# ============================================================
+# CBM-A loader — identical to NB3 (needed for CCFS monitoring only;
+# this baseline's generator never sees CBM-A's outputs as training input)
+# ============================================================
+
+def load_cbm_a(path, device):
+    class _CBM(nn.Module):
+        def __init__(self):
+            super().__init__()
+            bb = tv_models.efficientnet_v2_s(weights=None)
+            in_f = bb.classifier[1].in_features; bb.classifier = nn.Identity()
+            self.backbone = bb
+            self.concept_feature = nn.Sequential(
+                nn.Linear(in_f,512), nn.LayerNorm(512), nn.GELU(), nn.Dropout(0.3))
+            self.concept_heads = nn.ModuleList([
+                nn.Sequential(nn.Linear(512,128), nn.GELU(), nn.Dropout(0.2), nn.Linear(128,1))
+                for _ in range(7)])
+            self.diagnosis_head = nn.Sequential(
+                nn.Linear(7,64), nn.GELU(), nn.Dropout(0.3), nn.Linear(64,2))
+        def forward(self, x):
+            f = self.backbone(x)
+            if f.dim() > 2: f = f.mean([-2,-1])
+            cf = self.concept_feature(f)
+            cl = torch.cat([h(cf) for h in self.concept_heads], dim=1)
+            cp = torch.sigmoid(cl)
+            return cl, cp, self.diagnosis_head(cp)
+
+    m = _CBM()
+    ck = torch.load(path, map_location='cpu', weights_only=False)
+    m.load_state_dict(ck['model_state_dict'], strict=True)
+    print(f"✓ CBM-A loaded (epoch {ck.get('epoch','?')})")
+    return m.to(device).eval()
+
+
+def ccfs_feedback(imgs, cvec, cbm, device):
+    """Compares generated images' CBM-A-predicted concept vector against
+    the SAME 7-dim eval prototype used in NB3 — identical metric,
+    regardless of what the generator itself was conditioned on."""
+    norm = transforms.Normalize([0.485,0.456,0.406],[0.229,0.224,0.225])
+    rsz  = transforms.Resize((224,224))
+    inp  = torch.stack([norm(rsz(i)) for i in imgs]).to(device)
+    with torch.no_grad():
+        _, det, _ = cbm(inp)
+    det  = det.cpu()
+    cond = cvec.unsqueeze(0).repeat(len(imgs), 1)
+    return F.cosine_similarity(cond, det, dim=1).mean().item()
+
+
+# ============================================================
+# GENERATION — CFG DDIM sampling, identical mechanics to NB3.
+# Note: gen_cvec here is the 2-dim class label fed to the model;
+# eval_cvec (used separately below) is the 7-dim prototype CCFS compares against.
+# ============================================================
+
+@torch.no_grad()
+def generate_images(model, gen_cvec, n=8, steps=30, device='cuda', sz=128, cfg_scale=CFG_SCALE):
+    model.eval()
+    ddim = DDIMScheduler(num_train_timesteps=1000, beta_schedule='linear', clip_sample=True)
+    ddim.set_timesteps(steps)
+    imgs = torch.randn(n,3,sz,sz, device=device)
+    cv = gen_cvec.unsqueeze(0).repeat(n,1).to(device)
+    for t in ddim.timesteps:
+        ts = torch.full((n,), t, device=device, dtype=torch.long)
+        eps_cond   = model(imgs, ts, cv)
+        eps_uncond = model(imgs, ts, torch.zeros_like(cv))
+        noise_pred = eps_uncond + cfg_scale*(eps_cond - eps_uncond)
+        imgs = ddim.step(noise_pred, t, imgs).prev_sample
+    return ((imgs.clamp(-1,1)+1)/2).cpu()
+
+
+# ============================================================
+# MODEL + EMA INIT — num_concepts=NUM_CLASSES (2), everything else identical
+# ============================================================
+
+model = ConceptConditionedUNet128(image_size=IMAGE_SIZE, num_concepts=NUM_CLASSES, base_channels=64).to(device)
+print(f"\nModel params: {sum(p.numel() for p in model.parameters()):,}  "
+      f"(compare to NB3's main model — should be virtually identical)")
+
+if torch.cuda.device_count() > 1:
+    print(f"Using {torch.cuda.device_count()} GPUs via DataParallel")
+    model = nn.DataParallel(model)
+
+_base = model.module if hasattr(model,'module') else model
+ema_model = deepcopy(_base).to(device).eval()
+for p in ema_model.parameters(): p.requires_grad_(False)
+print(f"EMA model initialised (decay={EMA_DECAY})")
+
+noise_sched = DDPMScheduler(num_train_timesteps=NUM_TIMESTEPS, beta_schedule='linear',
+                            beta_start=0.0001, beta_end=0.02, clip_sample=True)
+optimizer = torch.optim.AdamW(model.parameters(), lr=2e-4, weight_decay=0.01)
+
+def lr_fn(ep, warmup=10, total=150):
+    if ep < warmup: return ep/max(warmup,1)
+    p = (ep-warmup)/(total-warmup)
+    return max(1e-6, 0.5*(1+np.cos(np.pi*p)))
+
+lr_sched = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lambda e: lr_fn(e, warmup=10, total=150))
+
+
+# ============================================================
+# RESUME LOGIC — identical pattern to NB3
+# ============================================================
+
+start_epoch = 0
+best_val = float('inf')
+history = {'train_loss':[], 'val_loss':[], 'ccfs_training':[], 'ccfs_mel':[],
+           'ccfs_ben':[], 'epoch_times':[]}
+
+if RESUME_FROM is not None:
+    if not os.path.exists(RESUME_FROM):
+        raise FileNotFoundError(f"Checkpoint not found: {RESUME_FROM}")
+    ck = torch.load(RESUME_FROM, map_location='cpu', weights_only=False)
+    raw_model = model.module if hasattr(model,'module') else model
+    raw_model.load_state_dict(ck['model_state_dict'])
+    if 'ema_state_dict' in ck:
+        ema_model.load_state_dict(ck['ema_state_dict'])
+        print("  ✓ EMA state restored")
+    else:
+        ema_model.load_state_dict(raw_model.state_dict())
+        print("  ⚠ No EMA in checkpoint — initialised from training weights")
+    optimizer.load_state_dict(ck['optimizer_state_dict'])
+    lr_sched.load_state_dict(ck['lr_scheduler_state_dict'])
+    start_epoch = ck['epoch'] + 1
+    best_val = ck.get('val_loss', float('inf'))
+    history = ck.get('history', history)
+    for k in ['ccfs_mel','ccfs_ben','epoch_times']:
+        if k not in history: history[k] = []
+    print(f"✓ Resumed | last epoch {ck['epoch']+1} | will train {start_epoch+1}→{SESSION_END} | "
+          f"best_val={best_val:.4f}")
+else:
+    print("Fresh start.")
+
+cbm_a = load_cbm_a(CBM_A_CHECKPOINT, device)
+
+log_exists = os.path.exists(LOG_CSV)
+log_file = open(LOG_CSV, 'a', newline='')
+log_writer = csv.writer(log_file)
+if not log_exists:
+    log_writer.writerow(['epoch','train_loss','val_loss','epoch_time_sec','lr','timestamp'])
+    log_file.flush()
+
+
+# ============================================================
+# TRAINING LOOP — identical mechanics to NB3
+# ============================================================
+
+@torch.no_grad()
+def update_ema(ema_model, model, decay=EMA_DECAY):
+    src = model.module if hasattr(model,'module') else model
+    for ep_, sp in zip(ema_model.parameters(), src.parameters()):
+        ep_.data.mul_(decay).add_(sp.data, alpha=1-decay)
+
+
+def run_epoch(model, loader, optim, sched, device, train=True, grad_accum=1):
+    model.train() if train else model.eval()
+    losses = []
+    ctx = torch.enable_grad() if train else torch.no_grad()
+    if train: optim.zero_grad()
+
+    with ctx:
+        for batch_idx, (imgs, cvecs) in enumerate(tqdm(loader, desc='tr' if train else 'vl', leave=False)):
+            imgs  = imgs.to(device, non_blocking=True)
+            cvecs = cvecs.to(device, non_blocking=True)
+            B = imgs.shape[0]
+            t = torch.randint(0, sched.config.num_train_timesteps, (B,), device=device).long()
+            noise = torch.randn_like(imgs)
+
+            cond_input = cvecs.clone()
+            drop_mask = torch.rand(B, device=device) < CFG_DROP_PROB
+            cond_input[drop_mask] = 0.0
+
+            pred = model(sched.add_noise(imgs, noise, t), t, cond_input)
+            loss = F.mse_loss(pred, noise)
+            if torch.isnan(loss): continue
+
+            if train:
+                (loss / grad_accum).backward()
+                if (batch_idx + 1) % grad_accum == 0:
+                    torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                    optim.step()
+                    optim.zero_grad()
+                    update_ema(ema_model, model)
+
+            losses.append(loss.item())
+
+    return float(np.mean(losses)) if losses else float('nan')
+
+
+def save_ckpt(path, epoch, model, optimizer, lr_sched, val_loss, history):
+    train_state = model.module.state_dict() if hasattr(model,'module') else model.state_dict()
+    ema_state = ema_model.state_dict()
+    tmp_path = path + '.tmp'
+    torch.save({
+        'epoch': epoch, 'model_state_dict': train_state, 'ema_state_dict': ema_state,
+        'optimizer_state_dict': optimizer.state_dict(), 'lr_scheduler_state_dict': lr_sched.state_dict(),
+        'val_loss': val_loss, 'history': history, 'image_size': IMAGE_SIZE,
+        'num_concepts': NUM_CLASSES, 'class_names': CLASS_NAMES,
+        'cfg_scale': CFG_SCALE, 'cfg_drop_prob': CFG_DROP_PROB,
+        'model_type': 'baseline_class_conditioned',
+    }, tmp_path)
+    os.replace(tmp_path, path)
+
+
+print(f"\n{'='*65}")
+print(f"[BASELINE] TRAINING  ep {start_epoch+1}→{SESSION_END}  |  {torch.cuda.get_device_name(0)}")
+print(f"CFG(p={CFG_DROP_PROB},s={CFG_SCALE}) | EMA(d={EMA_DECAY}) | 128x128, class-label conditioning")
+print(f"{'='*65}\n")
+
+ep_times = []
+for epoch in range(start_epoch, SESSION_END):
+    t0 = time.time()
+    tr = run_epoch(model, tr_loader, optimizer, noise_sched, device, train=True, grad_accum=GRAD_ACCUM)
+    vl = run_epoch(model, vl_loader, optimizer, noise_sched, device, train=False)
+    lr_sched.step()
+
+    elapsed = time.time() - t0
+    ep_times.append(elapsed)
+    eta = ((SESSION_END-(epoch+1)) * np.mean(ep_times[-5:])) / 3600
+
+    history['train_loss'].append(tr)
+    history['val_loss'].append(vl)
+    history['epoch_times'].append(elapsed)
+
+    log_writer.writerow([epoch+1, tr, vl, elapsed, optimizer.param_groups[0]['lr'], time.time()])
+    log_file.flush()
+
+    print(f"Ep {epoch+1:4d}/{SESSION_END} | tr={tr:.4f} | vl={vl:.4f} | {elapsed:.0f}s | ETA={eta:.1f}h", end='')
+
+    if (epoch+1) % EVAL_EVERY == 0:
+        # generate using 2-dim class conditioning, evaluate against 7-dim prototypes
+        mi = generate_images(ema_model, GEN_MEL_VEC, n=8, steps=30, device=device, sz=IMAGE_SIZE)
+        bi = generate_images(ema_model, GEN_BEN_VEC, n=8, steps=30, device=device, sz=IMAGE_SIZE)
+        mc = ccfs_feedback(mi, EVAL_MEL_VEC, cbm_a, device)
+        bc = ccfs_feedback(bi, EVAL_BEN_VEC, cbm_a, device)
+        mean_c = (mc+bc)/2
+        history['ccfs_training'].append(mean_c)
+        history['ccfs_mel'].append(mc); history['ccfs_ben'].append(bc)
+        print(f" | CCFS={mean_c:.4f} [mel={mc:.3f} ben={bc:.3f}]", end='')
+        grid = make_grid(torch.cat([mi[:4], bi[:4]]), nrow=4, normalize=False)
+        save_image(grid, f'gen_baseline_ep{epoch+1:04d}.png')
+        print(" [grid saved]")
+    else:
+        print()
+
+    if (epoch+1) % SAVE_EVERY == 0:
+        ckpt_name = f'checkpoint_baseline_epoch{epoch+1}.pth'
+        save_ckpt(ckpt_name, epoch, model, optimizer, lr_sched, vl, history)
+        print(f"  → {ckpt_name} saved (train + EMA weights)")
+
+    if vl < best_val:
+        best_val = vl
+        save_ckpt('best_clindiffxai_baseline.pth', epoch, model, optimizer, lr_sched, vl, history)
+        print(f"  ★ best model (vl={vl:.4f})")
+
+log_file.close()
+print(f"\nSession complete. Best val_loss={best_val:.4f}")
+
+session_num = SESSION_END // 40
+print(f"\n{'='*60}\n[BASELINE] SESSION {session_num} DONE\n{'='*60}")
+print(f"Download: checkpoint_baseline_epoch{SESSION_END}.pth + best_clindiffxai_baseline.pth + {LOG_CSV}")
+if SESSION_END < 150:
+    print(f"\nNext: SESSION_END={min(SESSION_END+40,150)}, "
+          f"RESUME_FROM='…/checkpoint_baseline_epoch{SESSION_END}.pth'")
+else:
+    print("\nAll 150 epochs complete. Proceed to NB4 for the full comparison.")
+
+
+# ============================================================
+# TRAINING CURVES (PNG + PDF)
+# ============================================================
+
+def save_fig_both(fig, name, dpi=300):
+    fig.savefig(f'{name}.png', dpi=dpi, bbox_inches='tight', facecolor='white')
+    fig.savefig(f'{name}.pdf', bbox_inches='tight', facecolor='white')
+    print(f"  Saved: {name}.png + {name}.pdf")
+
+
+fig, axes = plt.subplots(1, 2, figsize=(11,4))
+fig.suptitle(f'BASELINE (class-conditioned, 128×128) — ep 1→{len(history["train_loss"])}', fontweight='bold')
+er = range(1, len(history['train_loss'])+1)
+axes[0].plot(er, history['train_loss'], 'b-', lw=2, label='Train')
+axes[0].plot(er, history['val_loss'], 'r-', lw=2, label='Val')
+for b in [40,80,120]:
+    if b < len(history['train_loss']): axes[0].axvline(x=b, color='gray', ls='--', alpha=0.5)
+axes[0].set_title('MSE Loss'); axes[0].set_xlabel('Epoch'); axes[0].legend(); axes[0].grid(alpha=0.3)
+
+if history['ccfs_training']:
+    ep_pts = [EVAL_EVERY*(i+1) for i in range(len(history['ccfs_training']))]
+    axes[1].plot(ep_pts, history['ccfs_training'], 'g-o', lw=2, ms=8, label='Mean CCFS')
+    axes[1].plot(ep_pts, history['ccfs_mel'], 'r--s', lw=1.5, ms=6, label='Mel CCFS')
+    axes[1].plot(ep_pts, history['ccfs_ben'], 'b--^', lw=1.5, ms=6, label='Ben CCFS')
+    axes[1].axhline(0.70, color='r', ls=':', alpha=0.7, label='0.70 threshold')
+    axes[1].set_title('CCFS — baseline (class-label conditioning only)')
+    axes[1].set_xlabel('Epoch'); axes[1].legend(fontsize=8); axes[1].grid(alpha=0.3)
+
+plt.tight_layout()
+save_fig_both(fig, f'nb3b_baseline_session{session_num}_curves')
+plt.show()

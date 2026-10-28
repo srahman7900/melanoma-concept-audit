@@ -1,0 +1,5 @@
+scale,audit,observational
+raw,0.023,0.025
+sd_test,0.467,0.45
+iqr_test,0.521,0.51
+sd_rsweep,0.511,0.583

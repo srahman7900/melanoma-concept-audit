@@ -1,0 +1,5 @@
+Concept,Testable,Controls trained,Controls passed,Needed,Decision,Mean ρ between controls
+PN,True,4,4,3,GO,0.888
+VS,True,4,4,3,GO,0.972
+Pig,True,4,4,3,GO,0.886
+Reg,False,0,0,3,NO-GO,

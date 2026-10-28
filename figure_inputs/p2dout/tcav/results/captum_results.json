@@ -1,0 +1,125 @@
+{
+  "verdict": "NOT VALID",
+  "rule": {
+    "positive_pig": {
+      "settings_passed": 2,
+      "needed": 3,
+      "settings": 4
+    },
+    "positive_bwv": {
+      "settings_passed": 2,
+      "needed": 3,
+      "settings": 4
+    },
+    "negative": {
+      "mean_max_abs_effect": 0.4,
+      "median_mean_max_abs_effect_melanoma_classifiers": 0.44999999999999996,
+      "ok": false
+    },
+    "verdict": "NOT VALID"
+  },
+  "matched": {
+    "ctrl_mpig_resnet50": {
+      "label": "mpig",
+      "concept": "pigmentation",
+      "settings_passed": 0,
+      "settings": 4,
+      "needed": 3,
+      "pass": false,
+      "derm7pt_settings_passed_exploratory": "0 of 0"
+    },
+    "ctrl_mpn_resnet50": {
+      "label": "mpn",
+      "concept": "pigment_network",
+      "settings_passed": 2,
+      "settings": 4,
+      "needed": 3,
+      "pass": false,
+      "derm7pt_settings_passed_exploratory": "0 of 0"
+    },
+    "ctrl_mvs_resnet50": {
+      "label": "mvs",
+      "concept": "vascular_structures",
+      "settings_passed": 0,
+      "settings": 4,
+      "needed": 3,
+      "pass": false,
+      "derm7pt_settings_passed_exploratory": "0 of 0"
+    }
+  },
+  "rho_seeds": [
+    0.6467930635148231,
+    0.5514296788770048,
+    -0.5717424613353893
+  ],
+  "rho_cross": [
+    0.8491346945990788,
+    0.5235273885359717,
+    0.8215668580192025,
+    -0.4568994193985528,
+    0.15317176869829738,
+    0.6360128708598978,
+    0.41137762846339015,
+    0.7011528378846622,
+    -0.007711528986931943,
+    -0.17057121180189347,
+    0.763510230903931,
+    -0.2813837459856366,
+    0.283624691389607,
+    0.3428281398661465,
+    0.021602196305967502,
+    -0.0179372197309417,
+    0.11372130853165054,
+    -0.1573083013049941
+  ],
+  "agreement_with_our_tcav": {
+    "mel_resnet50_s1": 0.5337626789150749,
+    "mel_resnet50_s2": -0.4983391760081926,
+    "mel_effb0_s1": 0.6845102505694762,
+    "mel_effb0_s2": 0.24239393004578888,
+    "mel_vitb16_s1": -0.7614096632740709,
+    "mel_vitb16_s2": 0.04433497536945813,
+    "mel_resnet50_derm7pt": 0.7733638865842375,
+    "ctrl_pig_resnet50": 0.5200651812441547,
+    "ctrl_bwv_resnet50": 0.9542048346225137,
+    "ctrl_perm_resnet50": 0.647657489509791,
+    "ctrl_mpig_resnet50": 0.5027873804466124,
+    "ctrl_mpn_resnet50": 0.8099492015279384,
+    "ctrl_mvs_resnet50": 0.8311193197375215
+  },
+  "summary": {
+    "Method": [
+      "TCAV, Captum (default SGD classifier, flattened activations)"
+    ],
+    "Control+ pigmentation": [
+      "2 of 4 (need 3)"
+    ],
+    "Control+ blue-whitish veil": [
+      "2 of 4 (need 3)"
+    ],
+    "Control- (largest |effect| / median melanoma)": [
+      "0.889"
+    ],
+    "Matched pigmentation": [
+      "0 of 4 (FAIL)"
+    ],
+    "Matched pigment network": [
+      "2 of 4 (FAIL)"
+    ],
+    "Matched vascular structures": [
+      "0 of 4 (FAIL)"
+    ],
+    "\u03c1 same architecture, other seed": [
+      0.209
+    ],
+    "\u03c1 different classifier": [
+      0.252
+    ],
+    "\u03c1 with our TCAV (same settings, mean)": [
+      0.406
+    ],
+    "CAV accuracy (concept / random)": [
+      "0.500 / 0.500"
+    ]
+  }
+}

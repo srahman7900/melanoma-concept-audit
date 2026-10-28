@@ -1,0 +1,5 @@
+Scale of the effects,Counterfactual audit,Observational attribution,"TCAV, our implementation","TCAV, Captum 0.9.0"
+"Logit scale (rule 1, fixed in advance)",0.023,0.025,0.834,0.889
+Divided by SD of real test logits (post hoc),0.467,0.45,0.834,0.889
+Divided by IQR/1.349 of real test logits (post hoc),0.521,0.51,0.834,0.889
+Divided by SD of realistic-sweep logits (post hoc),0.511,0.583,0.834,0.889

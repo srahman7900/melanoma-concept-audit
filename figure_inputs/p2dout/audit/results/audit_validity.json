@@ -1,0 +1,17 @@
+{
+  "rule": "VALID if each positive control (pigmentation, blue-whitish veil) has its target concept as the largest effect, positive and significant (two-sided Wilcoxon signed-rank test on per-trajectory slopes, BH-corrected p < 0.05, median slope > 0), in at least 3 of 4 bases (the same share of the available bases), and the largest |effect| of the permuted-label control is below 0.25 x the median largest |effect| of the melanoma classifiers. NOT VALID otherwise.",
+  "positive_pig": {
+    "bases_with_target_largest_and_significant": 4,
+    "needed": 3
+  },
+  "positive_bwv": {
+    "bases_with_target_largest_and_significant": 0,
+    "needed": 3
+  },
+  "negative": {
+    "max_abs_dlogit": 0.09057479747571051,
+    "median_max_abs_dlogit_melanoma_classifiers": 3.9910033440683037,
+    "ok": true
+  },
+  "verdict": "NOT VALID"
+}
