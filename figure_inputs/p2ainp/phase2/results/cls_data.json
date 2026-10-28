@@ -1,0 +1,25 @@
+{
+  "have_patient_ids": true,
+  "n": 6424,
+  "n_mel": 584,
+  "split_counts": {
+    "train": 4518,
+    "val": 937,
+    "test": 969
+  },
+  "split_mel": {
+    "train": 418,
+    "val": 81,
+    "test": 85
+  },
+  "association_std_coef": {
+    "pigment_network": 0.19369112715231956,
+    "blue_whitish_veil": 0.13060790051827575,
+    "vascular_structures": 0.4494607617119253,
+    "pigmentation": 0.43887607038607707,
+    "streaks": 0.16530703373546474,
+    "dots_and_globules": 0.6213904829843404,
+    "regression_structures": 0.31288826124322544
+  },
+  "n_association": 33126
+}

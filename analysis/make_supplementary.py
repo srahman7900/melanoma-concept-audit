@@ -1,6 +1,6 @@
 """Supplementary files for submission:
- - Supplementary_Information.pdf: Supplementary Figures S1 to S15 with legends
- - Supplementary_Data_1.xlsx: Supplementary Tables S1 to S22, one sheet each, with an index sheet (title and source file)"""
+ - Supplementary_Information.pdf: Supplementary Figures with legends
+ - Supplementary_Data_1.xlsx: Supplementary Tables, one sheet each, with an index sheet (title and source file)"""
 import os
 import pandas as pd
 import matplotlib
@@ -28,13 +28,16 @@ FIGS = [('FigS01_evaluator_auc', 'Evaluator AUC at native and 128-pixel input.\n
         ('FigS12_decision_flips', 'Decision flips.\nShare of trajectories whose decision changes from benign to melanoma between knob level 0 and 1, at the threshold that gives 90% sensitivity on the validation set, for each knob and base.'),
         ('FigS13_tcav_heatmap', 'TCAV scores of all classifiers (our implementation).\nMean TCAV score on melanoma target images for the middle and last layers and the three concept-set types; colour, score minus the random-CAV mean; asterisk and bold, different from random CAVs (Benjamini-Hochberg p < 0.05) and above them.'),
         ('FigS14_tcav_controls', 'TCAV results for the controls.\nTCAV score per concept (mean and SD over runs) for each control at the middle and last layers, with ISIC 2020 concept sets from all training images and melanoma inputs; red, the target concept; grey band and line, random CAVs (mean and SD).'),
-        ('FigS15_captum_heatmap', 'Captum TCAV scores.\nCaptum 0.9.0 TCAV scores at the last layer for the two ISIC concept-set types; colour, score minus the random mean; asterisk and bold, different from random sets.')]
+        ('FigS15_captum_heatmap', 'Captum TCAV scores.\nCaptum 0.9.0 TCAV scores at the last layer for the two ISIC concept-set types; colour, score minus the random mean; asterisk and bold, different from random sets.'),
+        ('FigS16_observational_calibration', 'Observational prediction against the measured intervention (exploratory).\nFor each target-dominant knob, the x axis is the audit effect that the observational coefficient predicts (coefficient x median ratio of audit effect to coefficient in the four CBM-A matched controls; ratio in the panel title). The y axis is the measured audit effect (mean of the two realistic bases). Dashed line, prediction equals measurement. Defined after the results; it does not remove knob cross-talk.'),
+        ('FigS17_retraining_per_classifier', 'Sweep effects of every melanoma classifier on each realistic base.\nChange in the melanoma logit from knob level 0 to 1 with 95% bootstrap intervals over trajectories, for the six primary ISIC 2020 classifiers (orange), the nine retrained ISIC 2020 classifiers (blue, seeds 3 to 5) and the six HAM10000 classifiers (green). Squares, real benign base; circles, real melanoma base.'),
+        ('FigS18_ham_isic_near_duplicates', 'HAM10000 near-duplicate screen.\nThe 12 HAM10000 images (top) with the highest cosine similarity of ImageNet ResNet-50 features to an ISIC 2020 classifier image (bottom); similarity above each pair. No pair reached 0.98. On visual review, each pair shows different lesions; much of the similarity comes from hair and skin texture. Report only; no image was removed.')]
 TITLE = 'Testing concept-level audits of melanoma classifiers with diffusion counterfactuals and matched positive controls'
 
 with PdfPages(os.path.join(SUB, 'Supplementary_Information.pdf')) as pdf:
     fig = plt.figure(figsize=(8.27, 11.69)); fig.text(0.5, 0.62, 'Supplementary Information', ha='center', fontsize=18, weight='bold')
     fig.text(0.5, 0.56, TITLE, ha='center', fontsize=10, wrap=True)
-    fig.text(0.5, 0.50, 'Supplementary Figures S1 to S15. Supplementary Tables S1 to S22 are in Supplementary Data 1.', ha='center', fontsize=9)
+    fig.text(0.5, 0.50, f'Supplementary Figures S1 to S{len(FIGS)}. The Supplementary Tables are in Supplementary Data 1.', ha='center', fontsize=9)
     pdf.savefig(fig); plt.close(fig)
     for i, (fn, cap) in enumerate(FIGS, 1):
         im = Image.open(os.path.join(FS, fn + '.png')).convert('RGB'); im.thumbnail((2400, 2400))
@@ -74,7 +77,36 @@ TABLES = [('S1', 'Classifiers and their test performance', os.path.join(P2D, 'au
           ('S20c', 'CBM-B matched controls: decision per concept', os.path.join(T, 'T2e_go_no_go.csv')),
           ('S21', 'Calibration of observation with the CBM-B controls (exploratory)', os.path.join(T, 'T2e_calibration_cbmb.csv')),
           ('S22a', 'Negative-control ratio on the logit scale and on three scale-free scales (post hoc); TCAV scores do not depend on output scale', os.path.join(T, 'T_S22a_negative_control_scale.csv')),
-          ('S22b', 'Logit spread of the melanoma classifiers and the original controls on the real test images', os.path.join(T, 'T_S22b_logit_spread.csv'))]
+          ('S22b', 'Logit spread of the melanoma classifiers and the original controls on the real test images', os.path.join(T, 'T_S22b_logit_spread.csv')),
+          ('S23a', 'Decomposition on the realistic sweeps for every classifier and control (post hoc): CBM-B and colour coefficients with bootstrap intervals; target recovery of the controls', os.path.join(T, 'T_decomposition_all_phase3.csv')),
+          ('S23b', 'Parts of each target-dominant knob effect carried by each measured change (post hoc)', os.path.join(T, 'T_decomposition_knob_parts_phase3.csv')),
+          ('S23c', 'Sensitivity of the decomposition: ridge alpha 1 and 10, ordinary least squares, no colour terms', os.path.join(T, 'T_decomposition_sensitivity.csv')),
+          ('S24a', 'Off-target preservation filters for all melanoma classifier groups (post hoc)', os.path.join(T, 'P3_T8_preservation.csv')),
+          ('S24b', 'Off-target preservation filters and covariate-adjusted effects, six primary classifiers (post hoc)', os.path.join(T, 'T_preservation_adjusted.csv')),
+          ('S25', 'Phase 3 classifiers: test AUC on ISIC 2020 and on their own split, logit SD, training', os.path.join(T, 'P3_T1_classifiers.csv')),
+          ('S26a', 'Rule 6: retraining (15 ISIC 2020 melanoma classifiers)', os.path.join(T, 'P3_T5_retraining.csv')),
+          ('S26b', 'Sweep effects per ISIC 2020 melanoma classifier (mean of the two realistic bases)', os.path.join(T, 'P3_T5b_retraining_per_classifier.csv')),
+          ('S26c', 'Sources of variation: architectures, seeds and trajectories, in logits and scale-free units', os.path.join(T, 'P3_T5c_sources_of_variation.csv')),
+          ('S27a', 'Rule 5: null distribution of scale-free effects (18 permuted-label classifiers)', os.path.join(T, 'P3_T3_null_distribution.csv')),
+          ('S27b', 'Empirical upper-tail probabilities per melanoma classifier against the trained null and the random heads', os.path.join(T, 'P3_T3b_empirical_tail_probabilities.csv')),
+          ('S27c', 'False-positive rate of the per-classifier Wilcoxon test in null classifiers', os.path.join(T, 'P3_T4_test_false_positive_rate.csv')),
+          ('S27d', 'Share of classifiers in which each knob has the largest scale-free effect', os.path.join(T, 'P3_T6_profile.csv')),
+          ('S27e', 'Observational coefficients against the same null', os.path.join(T, 'P3_T7_observational_null.csv')),
+          ('S27f', 'The rank-based control rule applied to the 18 permuted-label classifiers (bases in which each knob was largest, positive and significant)', os.path.join(T, 'T_null_control_rule.csv')),
+          ('S27g', 'All Phase 3 audit effects (every classifier, realistic base and knob)', os.path.join(T, 'P3_T2_effects_all.csv')),
+          ('S27h', 'Architecture-matched null groups (2 ResNet-50, 2 EfficientNet-B0, 2 ViT-B/16 permuted-label classifiers; 1,350 groups sharing members) and architecture-stratified comparison (post hoc)', os.path.join(T, 'T_null_matched_groups_and_architecture.csv')),
+          ('S28a', 'Known-function controls: fixed functions of one evaluator output audited like a classifier (post hoc), summary', os.path.join(T, 'T_known_function_controls.csv')),
+          ('S28b', 'Known-function controls: all effects', os.path.join(T, 'T_known_function_controls_all.csv')),
+          ('S29a', 'Standardised target margins of the controls and of the null classifiers (post hoc)', os.path.join(T, 'T_margins_controls_vs_null.csv')),
+          ('S29b', 'Standardised target margins with paired bootstrap intervals, per control and base (post hoc)', os.path.join(T, 'T_control_margins_standardised.csv')),
+          ('S30a', 'Rule 7: HAM10000 classifiers', os.path.join(T, 'P3_T9_ham10000.csv')),
+          ('S30b', 'HAM10000 classifiers: all seven knobs', os.path.join(T, 'P3_T9b_ham10000_per_classifier.csv')),
+          ('S31a', 'Rule 8: mapping of the PH2 expert criteria to the CBM-B outputs (fixed before the analysis)', os.path.join(T, 'P3b_ph2_mapping.csv')),
+          ('S31b', 'Rule 8: CBM-B and ISIC 2018 detector against the PH2 expert criteria (AUC, 95% bootstrap interval, n positive)', os.path.join(T, 'P3b_ph2_evaluators.csv')),
+          ('S31c', 'Melanoma classifiers on PH2 (melanoma against common and atypical nevi)', os.path.join(T, 'P3b_ph2_classifiers.csv')),
+          ('S32a', 'HAM10000 data and overlap checks', os.path.join(T, 'P3b_ham_overlap_checks.csv')),
+          ('S32b', 'HAM10000 near-duplicate screen: 50 closest HAM10000-ISIC 2020 pairs (report only)', os.path.join(T, 'P3b_ham_near_duplicates_isic_top50.csv')),
+          ('S32c', 'HAM10000 near-duplicate screen: 50 closest HAM10000 pairs from different lesions in different splits (each pair listed from both sides; report only)', os.path.join(T, 'P3b_ham_near_duplicates_within_top50.csv'))]
 xl = os.path.join(SUB, 'Supplementary_Data_1.xlsx')
 # internal run names are replaced by the names used in the paper
 RENAME_VALUES = {'V0 original (Phase 1b)': 'Original start noise',

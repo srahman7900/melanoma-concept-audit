@@ -1,0 +1,15 @@
+\begin{table}
+\caption{Share of classifier x base x knob cells in which the per-classifier test of the paper (two-sided Wilcoxon signed-rank test of per-trajectory slopes, BH within the 7 knobs) is significant with a rising median slope. For null classifiers this is a false-positive rate of the per-model test, which treats trajectories, not models, as the unit.}
+\label{tab:T4_test_false_positive_rate}
+\begin{tabular}{lrrrr}
+\toprule
+group & cells (model x base x knob) & BH p < 0.05 and rising & fraction & fraction, all 7 knobs \\
+\midrule
+null\_trained & 144 & 19 & 0.132000 & 0.135000 \\
+null\_generic & 2400 & 632 & 0.263000 & 0.238000 \\
+mel\_primary & 48 & 28 & 0.583000 & 0.631000 \\
+mel\_retrain & 72 & 39 & 0.542000 & 0.619000 \\
+mel\_ham & 48 & 18 & 0.375000 & 0.548000 \\
+\bottomrule
+\end{tabular}
+\end{table}

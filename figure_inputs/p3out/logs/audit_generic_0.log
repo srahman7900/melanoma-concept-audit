@@ -1,0 +1,5 @@
+[07:45:58] job generic_0 start | device=cuda | torch 2.11.0+cu128 | CUDA_VISIBLE_DEVICES=0
+[07:45:58] [generic 0/2] cuda: ['resnet50', 'vitb16']
+[07:46:15]   resnet50: 100 random heads on 2048 features in 0.3 min
+[07:47:20]   vitb16: 100 random heads on 768 features in 1.1 min
+[07:47:21] job generic_0 done in 1.4 min

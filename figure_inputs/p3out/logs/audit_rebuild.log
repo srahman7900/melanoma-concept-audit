@@ -1,0 +1,21 @@
+[05:21:47] job rebuild start | device=cuda | torch 2.11.0+cu128 | CUDA_VISIBLE_DEVICES=None
+[05:21:53]   set cfg_sweep: 2304 images
+[05:21:59]   set eval_base_ben: 1000 images
+[05:22:05]   set eval_base_mel: 1000 images
+[05:22:11]   set eval_main_ben: 1000 images
+[05:22:17]   set eval_main_mel: 1000 images
+[05:22:23]   set eval_realc_ben: 1000 images
+[05:22:29]   set eval_realc_mel: 1000 images
+[05:22:34]   set pool_base_ben: 500 images
+[05:22:38]   set pool_base_mel: 500 images
+[05:22:43]   set pool_main_ben: 500 images
+[05:22:48]   set pool_main_mel: 500 images
+[05:22:52]   set pool_realc_ben: 500 images
+[05:22:57]   set pool_realc_mel: 500 images
+[05:23:05]   set rsweep_ben: 2688 images
+[05:23:11]   set rsweep_mel: 2688 images
+[05:23:17]   set sweep_ben: 2464 images
+[05:23:24]   set sweep_mel: 2464 images
+[05:23:24] rebuild: 17 image sets written
+[05:23:37] rebuild: classifier scores present for ['ctrl_bwv_resnet50', 'ctrl_perm_resnet50', 'ctrl_pig_resnet50', 'mel_effb0_s1', 'mel_effb0_s2', 'mel_resnet50_derm7pt', 'mel_resnet50_s1', 'mel_resnet50_s2', 'mel_vitb16_s1', 'mel_vitb16_s2']
+[05:23:37] job rebuild done in 1.8 min

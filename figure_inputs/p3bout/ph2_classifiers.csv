@@ -1,0 +1,9 @@
+classifier,PH2 AUC (melanoma vs nevi)
+mel_resnet50_s1,0.8645312499999999
+mel_resnet50_s2,0.8846875000000001
+mel_effb0_s1,0.9612499999999999
+mel_effb0_s2,0.895
+mel_vitb16_s1,0.7465625
+mel_vitb16_s2,0.90703125
+ctrl_perm_resnet50,0.6137499999999999
+mel_resnet50_derm7pt,0.924375

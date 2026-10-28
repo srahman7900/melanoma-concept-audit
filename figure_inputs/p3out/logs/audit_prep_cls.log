@@ -1,0 +1,3 @@
+[05:23:47] job prep_cls start | device=cuda | torch 2.11.0+cu128 | CUDA_VISIBLE_DEVICES=None
+[05:23:52] prep_cls: 6424 images (584 melanoma); split by patient; train/val/test = 4518/937/969
+[05:31:56] job prep_cls done in 8.1 min

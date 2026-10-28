@@ -1,0 +1,6 @@
+group,cells (model x base x knob),BH p < 0.05 and rising,fraction,"fraction, all 7 knobs"
+null_trained,144,19,0.132,0.135
+null_generic,2400,632,0.263,0.238
+mel_primary,48,28,0.583,0.631
+mel_retrain,72,39,0.542,0.619
+mel_ham,48,18,0.375,0.548

@@ -1,0 +1,5 @@
+knob,primary 6 mean,n matched null groups,null group 95th,null group max,share of null groups >= observed,resnet50: melanoma min,resnet50: null max (n=10),resnet50: melanoma above null max,effb0: melanoma min,effb0: null max (n=5),effb0: melanoma above null max,vitb16: melanoma min,vitb16: null max (n=3),vitb16: melanoma above null max
+PN,0.0279,1350,0.0304,0.1945,0.0533,-0.1696,0.5002,0/5,0.0163,0.1278,1/5,-0.1437,0.0189,2/5
+VS,0.1089,1350,-0.1032,-0.0477,0.0,-0.0163,0.0296,3/5,-0.086,0.1144,4/5,-0.0737,-0.2415,5/5
+Pig,1.0127,1350,0.5129,0.6585,0.0,0.7598,0.8618,4/5,0.8912,0.3447,5/5,1.0009,1.0119,4/5
+Reg,0.7787,1350,-0.043,0.1097,0.0,0.6071,0.5238,5/5,0.8433,-0.0311,5/5,0.4181,0.0347,5/5

@@ -1,0 +1,29 @@
+Frozen on 2026-10-28 (Asia/Dhaka), while the Phase 3 run was in progress and before any Phase 3 result was seen.
+Rules 5 to 8 of the running cell are unchanged (SHA-256 287492fb0ca91d0dbaee3f839345472d28fec594ac208c02e6cdf87dad20e318).
+
+A. PH2 criterion -> CBM-B output (Derm7pt scoring)
+- Pigment network: atypical (AT) vs typical (T) -> CBM-B PN (typical 0.5, atypical 1). Mapped; PH2 has no "absent" class.
+- Dots/globules: present (T or AT) vs absent (A); atypical (AT) vs A or T -> CBM-B D/G (regular 0.5, irregular 1). Mapped; PH2 typical/atypical read as Derm7pt regular/irregular.
+- Streaks: present vs absent -> CBM-B Str. Mapped (presence only).
+- Regression areas: present vs absent -> CBM-B Reg. Mapped.
+- Blue-whitish veil: present vs absent -> CBM-B BWV. Mapped.
+- Vascular structures, pigmentation (blotches): not PH2 criteria -> not testable.
+- PH2 colours: no Derm7pt concept -> not mapped.
+Report for each: n positive, n negative, AUC, full 95% bootstrap CI (2,000 resamples).
+
+B. Reporting added after the run (no change to any rule)
+1. Empirical upper-tail probability per melanoma classifier and knob: p = (1 + #null >= T) / (R + 1), against the trained
+   permuted-label nulls (R = 18, smallest p = 0.053, so no claim of p < 0.05) and against the random heads (R = 300).
+   Rule 5 is reported as a null-percentile robustness check, not a formal 5% test.
+2. Variation reported separately: between architectures, between seeds within an architecture, between trajectories
+   (bootstrap); raw logits and scale-free units.
+3. Preservation filters: n trajectories kept and before filtering, target change, median largest off-target change,
+   mean base value of the target among kept trajectories.
+4. HAM10000 (post-run check cell): exact pixel hashes (128 px) against the ISIC 2020 classifier data; exact duplicates
+   inside HAM10000 with different lesion ids and whether they cross splits; near-duplicate screen with ImageNet ResNet-50
+   features (cosine >= 0.95, 0.98, 0.99; report only; top pairs drawn). Decision fixed now: if any HAM10000 training or
+   validation image is pixel-identical to an ISIC 2020 classifier image, the HAM10000 classifiers are retrained without
+   those images and both results are reported. Near-duplicates are reported, not removed.
+   Name: "cross-dataset classifier transfer under a fixed counterfactual instrument".
+5. Manifest: rule hash, inputs, seeds, software versions, SHA-256 of every new model and score file, warnings, failed
+   optional stages.

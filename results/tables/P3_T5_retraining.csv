@@ -1,0 +1,5 @@
+knob,n classifiers,mean dlogit,SD between classifiers,min,max,n positive,n CI > 0 on both bases,Pig largest of 4 (n)
+PN,15,-0.038,0.376,-0.619,0.48,8,0,0
+VS,15,0.219,0.39,-0.251,1.245,10,2,0
+Pig,15,3.117,0.792,1.904,4.276,15,15,12
+Reg,15,2.299,0.68,0.905,3.542,15,15,3

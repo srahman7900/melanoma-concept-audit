@@ -13,7 +13,7 @@ fig = plt.figure(figsize=(W * MM, H * MM)); ax = fig.add_axes([0, 0, 1, 1]); ax.
 
 def box(x, y, w, h, title, body, ec=C['ink'], fc='white', tc=None, fs=6.3, lw=0.7, out=None, outc=None):
     ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle='round,pad=0,rounding_size=1.2', ec=ec, fc=fc, lw=lw))
-    ax.text(x + 2, y + h - 2.2, title, fontsize=6.8, fontweight='bold', color=tc or ec, va='top', ha='left')
+    ax.text(x + 2, y + h - 2.2, title, fontsize=6.8 if fs > 6 else 5.9, fontweight='bold', color=tc or ec, va='top', ha='left')
     ax.text(x + 2, y + h - 6.6, body, fontsize=fs, color=C['ink'], va='top', ha='left', linespacing=1.25)
     if out:
         ax.text(x + 2, y + 2.0, out, fontsize=fs, color=outc or ec, fontweight='bold', va='bottom', ha='left', linespacing=1.25)
@@ -48,18 +48,20 @@ arrow(xs, ya - 0.4, xs, 69.6, c=C['grey'])
 
 # ---------------------------------------------------------------- b, validity rules in the order they were fixed
 letter(0.5, 58.5, 'b')
-yb, hr = 27, 30; wr = (176 - 2 * 9) / 3
-R = [('Rule 1: before the first audit run', 'Quartile positive controls\n(pigmentation, blue-whitish veil)\nPermuted-label negative control',
-      'Not valid: veil control confounded\n(0 of 4 bases)', C['orange'], C['otext']),
-     ('Rules 2 and 3: after rule 1 failed', 'Controls matched on the other six\nCBM-A labels; 4 controls per concept,\n16 in total',
-      'Recovered for PN, VS, Pig and Reg\n(16 of 16 controls passed)', C['blue'], C['blue']),
-     ('Rule 4: SHA-256 before the run', 'Controls matched on the other six\nCBM-B outputs (a second evaluator,\ntrained separately on Derm7pt)',
-      'Recovered for PN, VS, Pig (12 of 12);\nReg not testable (37 pairs < 50)', C['green'], C['green'])]
+yb, hr = 27, 30; gb = 5; wr = (176 - 3 * gb) / 4
+R = [('Rule 1: before the first run', 'Quartile positive controls\n(pigmentation, blue-whitish veil)\nPermuted-label negative control',
+      'Not valid: veil control\nconfounded (0 of 4 bases)', C['orange'], C['otext']),
+     ('Rules 2, 3: after rule 1 failed', 'Controls matched on the other\nsix CBM-A labels; 4 controls\nper concept, 16 in total',
+      'Recovered for PN, VS, Pig, Reg\n(16 of 16 controls passed)', C['blue'], C['blue']),
+     ('Rule 4: fixed with SHA-256', 'Controls matched on the other\nsix CBM-B outputs (a second\nevaluator, trained on Derm7pt)',
+      'Recovered for PN, VS, Pig\n(12 of 12); Reg not testable', C['green'], C['green']),
+     ('Rules 5-8: fixed with SHA-256', '18 permuted-label classifiers\n(null); 9 retrained and 6\nHAM10000 melanoma classifiers',
+      'Pig above null; stable (15 of 15);\ntransfers to HAM10000 (6 of 6)', '#5B2A86', '#5B2A86')]
 for i, (t, b, o, c, ct) in enumerate(R):
-    x = x0 + i * (wr + 9)
-    box(x, yb, wr, hr, t, b, ec=c, tc=ct, lw=1.0, out=o, outc=ct)
-arrow(x0 + wr + 0.6, yb + hr / 2, x0 + wr + 9 - 0.6, yb + hr / 2)
-arrow(x0 + 2 * wr + 9 + 0.6, yb + hr / 2, x0 + 2 * wr + 18 - 0.6, yb + hr / 2)
+    x = x0 + i * (wr + gb)
+    box(x, yb, wr, hr, t, b, ec=c, tc=ct, lw=1.0, out=o, outc=ct, fs=5.7)
+    if i < len(R) - 1:
+        arrow(x + wr + 0.5, yb + hr / 2, x + wr + gb - 0.5, yb + hr / 2)
 
 # ---------------------------------------------------------------- c, comparison and application
 letter(0.5, 23.5, 'c')
@@ -68,9 +70,9 @@ box(x0, yc, wc1, hc, 'Three other methods, same controls',
     'TCAV, our implementation: target found in 11 of 16 matched controls\n'
     'TCAV, Captum 0.9.0: target found in 0 of 3 matched controls\n'
     'Observational attribution: target found in all matched controls\n'
-    'Permuted-label control: no method below 0.25 after output scaling', ec=C['ink'])
+    'Permuted-label controls: used as a null distribution, not to rank methods', ec=C['ink'])
 box(x0 + wc1 + 9, yc, wc2, hc, 'Melanoma classifiers',
-    'Six ISIC 2020 classifiers (ResNet-50,\nEfficientNet-B0, ViT-B/16; two seeds each)\nand one Derm7pt classifier: responses to\nthe knob sweeps and observational attribution', ec=C['ink'])
+    '15 ISIC 2020 classifiers (3 architectures,\n5 seeds), 6 HAM10000 classifiers, 1 Derm7pt\nclassifier: knob-sweep responses, observational\nattribution and decomposition', ec=C['ink'])
 
 for ext in ('pdf', 'png'):
     fig.savefig(os.path.join(FIG, 'Fig1_study_design.' + ext), dpi=600 if ext == 'png' else None)

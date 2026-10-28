@@ -1,0 +1,19 @@
+[07:29:43] job score32_0 start | device=cuda | torch 2.11.0+cu128 | CUDA_VISIBLE_DEVICES=0
+[07:29:43] [score 0/2] cuda: ['ctrl_perm_vitb16_s1', 'ctrl_perm_vitb16_s3', 'mel_ham_vitb16_s2', 'mel_vitb16_s4', 'aux', 'ctrl_perm_effb0_s3', 'ctrl_perm_effb0_s5', 'ctrl_perm_resnet50_s2', 'ctrl_perm_resnet50_s4', 'ctrl_perm_resnet50_s6', 'ctrl_perm_resnet50_s8', 'mel_effb0_s3', 'mel_effb0_s5', 'mel_ham_effb0_s2', 'mel_ham_resnet50_s2', 'mel_resnet50_s4']; 5 sets
+[07:31:42]   scored ctrl_perm_vitb16_s1 (float32) on 12210 images in 2.0 min; non-finite outputs: 0
+[07:33:51]   scored ctrl_perm_vitb16_s3 (float32) on 12210 images in 2.1 min; non-finite outputs: 0
+[07:36:03]   scored mel_ham_vitb16_s2 (float32) on 12210 images in 2.2 min; non-finite outputs: 0
+[07:38:17]   scored mel_vitb16_s4 (float32) on 12210 images in 2.2 min; non-finite outputs: 0
+[07:38:17]   aux scores: all present, skipped
+[07:38:32]   scored ctrl_perm_effb0_s3 (float32) on 12210 images in 0.2 min; non-finite outputs: 0
+[07:38:47]   scored ctrl_perm_effb0_s5 (float32) on 12210 images in 0.2 min; non-finite outputs: 0
+[07:39:24]   scored ctrl_perm_resnet50_s2 (float32) on 12210 images in 0.6 min; non-finite outputs: 0
+[07:40:01]   scored ctrl_perm_resnet50_s4 (float32) on 12210 images in 0.6 min; non-finite outputs: 0
+[07:40:39]   scored ctrl_perm_resnet50_s6 (float32) on 12210 images in 0.6 min; non-finite outputs: 0
+[07:41:16]   scored ctrl_perm_resnet50_s8 (float32) on 12210 images in 0.6 min; non-finite outputs: 0
+[07:41:31]   scored mel_effb0_s3 (float32) on 12210 images in 0.2 min; non-finite outputs: 0
+[07:41:46]   scored mel_effb0_s5 (float32) on 12210 images in 0.2 min; non-finite outputs: 0
+[07:42:00]   scored mel_ham_effb0_s2 (float32) on 12210 images in 0.2 min; non-finite outputs: 0
+[07:42:37]   scored mel_ham_resnet50_s2 (float32) on 12210 images in 0.6 min; non-finite outputs: 0
+[07:43:15]   scored mel_resnet50_s4 (float32) on 12210 images in 0.6 min; non-finite outputs: 0
+[07:43:15] job score32_0 done in 13.5 min

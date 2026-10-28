@@ -1,0 +1,3 @@
+[05:32:02] job verify_cls start | device=cuda | torch 2.11.0+cu128 | CUDA_VISIBLE_DEVICES=None
+[05:32:03] verify_cls: identical to Phase 2 (6424 images, same order, split and pseudo-labels)
+[05:32:03] job verify_cls done in 0.0 min

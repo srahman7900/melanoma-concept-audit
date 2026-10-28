@@ -1,0 +1,9 @@
+PH2 criterion,comparison,evaluator output,mapping
+Pigment network,AT vs T,"CBM-B PN (Derm7pt: typical 0.5, atypical 1)",mapped; only typical vs atypical (PH2 has no absent class)
+Dots/globules,T or AT vs A; AT vs A or T,"CBM-B D/G (Derm7pt: regular 0.5, irregular 1)",mapped; PH2 typical/atypical taken as Derm7pt regular/irregular
+Streaks,P vs A,CBM-B Str,mapped (presence only; PH2 does not grade regular/irregular)
+Regression areas,P vs A,CBM-B Reg,mapped
+Blue-whitish veil,P vs A,CBM-B BWV,mapped
+Vascular structures,-,CBM-B VS,not testable: not a PH2 criterion
+Pigmentation (blotches),-,CBM-B Pig,not testable: not a PH2 criterion (PH2 colours are not blotches)
+Colours,-,-,not mapped: no Derm7pt concept

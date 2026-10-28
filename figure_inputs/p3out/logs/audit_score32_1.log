@@ -1,0 +1,20 @@
+[07:29:43] job score32_1 start | device=cuda | torch 2.11.0+cu128 | CUDA_VISIBLE_DEVICES=1
+[07:29:43] [score 1/2] cuda: ['ctrl_perm_vitb16_s2', 'mel_ham_vitb16_s1', 'mel_vitb16_s3', 'mel_vitb16_s5', 'ctrl_perm_effb0_s1', 'ctrl_perm_effb0_s2', 'ctrl_perm_effb0_s4', 'ctrl_perm_resnet50_s10', 'ctrl_perm_resnet50_s3', 'ctrl_perm_resnet50_s5', 'ctrl_perm_resnet50_s7', 'ctrl_perm_resnet50_s9', 'mel_effb0_s4', 'mel_ham_effb0_s1', 'mel_ham_resnet50_s1', 'mel_resnet50_s3', 'mel_resnet50_s5']; 5 sets
+[07:32:06]   scored ctrl_perm_vitb16_s2 (float32) on 12210 images in 2.4 min; non-finite outputs: 0
+[07:34:29]   scored mel_ham_vitb16_s1 (float32) on 12210 images in 2.4 min; non-finite outputs: 0
+[07:36:50]   scored mel_vitb16_s3 (float32) on 12210 images in 2.3 min; non-finite outputs: 0
+[07:39:13]   scored mel_vitb16_s5 (float32) on 12210 images in 2.4 min; non-finite outputs: 0
+[07:39:28]   scored ctrl_perm_effb0_s1 (float32) on 12210 images in 0.3 min; non-finite outputs: 0
+[07:39:43]   scored ctrl_perm_effb0_s2 (float32) on 12210 images in 0.3 min; non-finite outputs: 0
+[07:39:59]   scored ctrl_perm_effb0_s4 (float32) on 12210 images in 0.3 min; non-finite outputs: 0
+[07:40:39]   scored ctrl_perm_resnet50_s10 (float32) on 12210 images in 0.7 min; non-finite outputs: 0
+[07:41:18]   scored ctrl_perm_resnet50_s3 (float32) on 12210 images in 0.6 min; non-finite outputs: 0
+[07:41:58]   scored ctrl_perm_resnet50_s5 (float32) on 12210 images in 0.7 min; non-finite outputs: 0
+[07:42:38]   scored ctrl_perm_resnet50_s7 (float32) on 12210 images in 0.6 min; non-finite outputs: 0
+[07:43:17]   scored ctrl_perm_resnet50_s9 (float32) on 12210 images in 0.7 min; non-finite outputs: 0
+[07:43:33]   scored mel_effb0_s4 (float32) on 12210 images in 0.3 min; non-finite outputs: 0
+[07:43:49]   scored mel_ham_effb0_s1 (float32) on 12210 images in 0.3 min; non-finite outputs: 0
+[07:44:28]   scored mel_ham_resnet50_s1 (float32) on 12210 images in 0.6 min; non-finite outputs: 0
+[07:45:07]   scored mel_resnet50_s3 (float32) on 12210 images in 0.7 min; non-finite outputs: 0
+[07:45:47]   scored mel_resnet50_s5 (float32) on 12210 images in 0.7 min; non-finite outputs: 0
+[07:45:47] job score32_1 done in 16.1 min

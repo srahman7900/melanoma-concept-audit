@@ -1,0 +1,8 @@
+knob,target-dominant,n null models,null mean,null SD,null max,null 95th pct,primary melanoma mean,primary melanoma min,all melanoma mean,empirical p (null >= melanoma mean),n primary above null 95th,above null (rule 5)
+PN,True,18,-0.196,0.52,0.5,0.487,0.028,-0.154,-0.001,0.421,0,False
+VS,True,18,-0.147,0.172,0.114,0.047,0.109,-0.048,0.083,0.105,2,True
+Pig,True,18,0.226,0.553,1.012,0.884,1.013,0.76,1.079,0.053,5,True
+Reg,True,18,-0.261,0.414,0.524,0.432,0.779,0.418,0.801,0.053,5,True
+BWV,False,18,-0.089,0.291,0.382,0.368,0.607,0.554,0.596,0.053,6,True
+Str,False,18,-0.012,0.406,0.625,0.498,-0.277,-1.392,-0.222,0.789,0,False
+D/G,False,18,-0.023,0.177,0.266,0.238,0.302,0.276,0.325,0.053,6,True

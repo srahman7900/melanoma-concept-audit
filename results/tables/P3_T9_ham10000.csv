@@ -1,0 +1,5 @@
+knob,n classifiers,mean dlogit,min,max,n CI > 0 on both bases,ISIC 2020 primary mean
+PN,6,-0.048,-0.593,0.552,0,0.053
+VS,6,-1.078,-1.478,-0.688,0,0.287
+Pig,6,4.012,2.928,5.996,6,2.765
+Reg,6,0.527,-0.116,1.123,1,2.172

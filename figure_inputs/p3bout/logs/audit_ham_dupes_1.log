@@ -1,0 +1,2 @@
+[09:36:15] job ham_dupes_1 start | device=cuda | torch 2.11.0+cu128 | CUDA_VISIBLE_DEVICES=1
+[09:36:15] job ham_dupes_1 done in 0.0 min

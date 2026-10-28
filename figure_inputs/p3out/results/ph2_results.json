@@ -1,0 +1,30 @@
+{
+  "status": "parse failed: PH2 header not recognised: ['Name', 'Histological Diagnosis', 'Clinical Diagnosis', 'Asymmetry | Pigment Network | Dots/Globules | Streaks | Regression Areas | Blue-Whitish Veil', 'Colors']",
+  "first_lines": [
+    "||   Name || Histological Diagnosis || Clinical Diagnosis || Asymmetry | Pigment Network | Dots/Globules | Streaks | Regression Areas | Blue-Whitish Veil ||           Colors ||",
+    "|| IMD003 ||                        ||                  0 ||         0 |               T |             A |       A |                A |                 A ||                4 ||",
+    "|| IMD009 ||                        ||                  0 ||         0 |               T |             A |       A |                A |                 A ||                3 ||",
+    "|| IMD016 ||                        ||                  0 ||         0 |               T |             T |       A |                A |                 A ||             3  4 ||",
+    "|| IMD022 ||                        ||                  0 ||         0 |               T |             A |       A |                A |                 A ||                3 ||",
+    "|| IMD024 ||                        ||                  0 ||         0 |               T |             A |       A |                A |                 A ||             3  4 ||",
+    "|| IMD025 ||                        ||                  0 ||         0 |               T |             T |       A |                A |                 A ||                3 ||",
+    "|| IMD035 ||                        ||                  0 ||         2 |               T |             A |       A |                A |                 A ||             2  3 ||",
+    "|| IMD038 ||                        ||                  0 ||         0 |               T |             T |       A |                A |                 A ||             4  6 ||",
+    "|| IMD042 ||                        ||                  0 ||         0 |               T |             T |       A |                A |                 A ||             3  4 ||",
+    "|| IMD044 ||                        ||                  0 ||         0 |               T |             T |       A |                A |                 A ||             4  5 ||",
+    "|| IMD045 ||                        ||                  0 ||         0 |               T |             T |       A |                A |                 A ||                3 ||",
+    "|| IMD050 ||                        ||                  0 ||         0 |               T |             T |       A |                A |                 A ||                3 ||",
+    "|| IMD092 ||                        ||                  0 ||         0 |               T |             T |       A |                A |                 A ||             3  4 ||",
+    "|| IMD101 ||                        ||                  0 ||         0 |               T |             A |       A |                A |                 A ||                3 ||",
+    "|| IMD103 ||                        ||                  0 ||         0 |               T |             T |       A |                A |                 A ||             3  4 ||",
+    "|| IMD112 ||                        ||                  0 ||         0 |               T |             T |       A |                A |                 A ||          2  3  4 ||",
+    "|| IMD118 ||                        ||                  0 ||         0 |               T |             T |       A |                A |                 A ||             3  4 ||",
+    "|| IMD125 ||                        ||                  0 ||         0 |               T |             T |       A |                A |                 A ||             3  4 ||",
+    "|| IMD132 ||                        ||                  0 ||         0 |               T |             T |       A |                A |                 A ||             3  4 ||",
+    "|| IMD134 ||                        ||                  0 ||         0 |               T |             T |       A |                A |                 A ||          2  3  4 ||",
+    "|| IMD135 ||                        ||                  0 ||         0 |               T |             T |       A |                A |                 A ||             3  4 ||",
+    "|| IMD144 ||                        ||                  0 ||         0 |               T |             T |       A |                A |                 A ||             3  4 ||",
+    "|| IMD146 ||                        ||                  0 ||         1 |               T |             A |       P |                A |                 A ||          2  3  4 ||",
+    "|| IMD147 ||                        ||                  0 ||         0 |               T |             T |       A |                A |                 A ||                3 ||"
+  ]
+}

@@ -1,0 +1,9 @@
+knob,unit,mean over classifiers,SD between architectures (of architecture means),mean SD between seeds within architecture,mean half-width of trajectory 95% CI,mean EfficientNet-B0,mean ResNet-50,mean ViT-B/16,n seeds EfficientNet-B0,n seeds ResNet-50,n seeds ViT-B/16
+PN,logit,-0.038,0.237,0.323,0.746,0.202,-0.273,-0.043,5,5,5
+PN,scale-free,-0.001,0.076,0.108,0.256,0.075,-0.077,-0.003,5,5,5
+VS,logit,0.219,0.216,0.347,0.662,0.433,0.223,0.001,5,5,5
+VS,scale-free,0.083,0.088,0.125,0.225,0.174,0.078,-0.002,5,5,5
+Pig,logit,3.117,0.464,0.728,0.717,2.588,3.304,3.458,5,5,5
+Pig,scale-free,1.079,0.129,0.141,0.244,1.015,0.994,1.227,5,5,5
+Reg,logit,2.299,0.539,0.536,0.689,2.407,2.777,1.715,5,5,5
+Reg,scale-free,0.801,0.175,0.147,0.236,0.946,0.848,0.607,5,5,5

@@ -1,0 +1,6 @@
+{
+  "status": "ok",
+  "n_images": 200,
+  "n_melanoma": 40,
+  "n_classifiers": 8
+}

@@ -1,0 +1,4 @@
+[07:45:58] job generic_1 start | device=cuda | torch 2.11.0+cu128 | CUDA_VISIBLE_DEVICES=1
+[07:45:58] [generic 1/2] cuda: ['effb0']
+[07:46:06]   effb0: 100 random heads on 1280 features in 0.1 min
+[07:46:06] job generic_1 done in 0.1 min

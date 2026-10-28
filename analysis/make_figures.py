@@ -447,10 +447,114 @@ def fig5():
          [Line2D([], [], marker='o', ls='', color=C['grey'], ms=4), Line2D([], [], color=C['grey'], ls='--', lw=0.6)]
     fig.legend(hs, ['ResNet-50', 'EfficientNet-B0', 'ViT-B/16', 'ResNet-50 (Derm7pt)', 'Expected = measured'], loc='upper center', ncol=5,
                bbox_to_anchor=(0.5, 1.08), fontsize=6)
-    save(fig, 'Fig6_observational_vs_intervention')
+    save(fig, 'FigS16_observational_calibration')
+
+
+# ================================================================= Fig 6: decomposition of the sweep effects (post hoc)
+def fig6_decomp():
+    dd = pd.read_csv(os.path.join(OUT, 'tables/T_decomposition_all.csv')); dd = dd[dd.bases == 'realistic']
+    kp = pd.read_csv(os.path.join(OUT, 'tables/T_decomposition_knob_parts.csv'))
+    fig = plt.figure(figsize=(W2, 70 * MM))
+    gs = GridSpec(1, 3, figure=fig, width_ratios=[1.35, 1.0, 0.85], wspace=0.75)
+    # (a) control validation: mean CBM-B coefficient per control group, scaled by the largest absolute value of each row
+    ax = fig.add_subplot(gs[0]); letter(ax, 'a', x=-0.42, y=1.1)
+    groups = [('ctrlA', 'PN'), ('ctrlA', 'VS'), ('ctrlA', 'Pig'), ('ctrlA', 'Reg'), ('ctrlB', 'PN'), ('ctrlB', 'VS'), ('ctrlB', 'Pig')]
+    M, rows, outl = [], [], []
+    for gi, (k, t) in enumerate(groups):
+        g = dd[(dd.kind == k) & (dd.target == t)]
+        v = g[[f'CBM-B {s}' for s in SH]].values; v = v / np.abs(v).max(1, keepdims=True)
+        M.append(v.mean(0)); rows.append(f"{'CBM-A' if k == 'ctrlA' else 'CBM-B'} {t}  {int(g['pass'].sum())}/{len(g)}")
+        outl.append((gi, SH.index(t)))
+    heat(ax, np.array(M), 1.0, rows, SH, fmt='{:+.1f}', outline=outl, fs=5.0)
+    ax.xaxis.tick_top(); ax.tick_params(axis='x', labelsize=5.8); ax.axhline(3.5, color='white', lw=1.6)
+    ax.set_title('Matched controls', fontsize=6.6, pad=14)
+    # (b, c) parts of the pigmentation and vascular sweep effects in the six ISIC 2020 classifiers
+    mel = kp[(kp.kind == 'mel') & ~kp.classifier.str.contains('derm')].copy()
+    order = ['mel_resnet50_s1', 'mel_resnet50_s2', 'mel_effb0_s1', 'mel_effb0_s2', 'mel_vitb16_s1', 'mel_vitb16_s2']
+    lab = {n: f"{ANAME[n.split('_')[1]]} s{n[-1]}" for n in order}
+    for pi, (knob, own, extra) in enumerate([('Pig', 'CBM-B Pig', 'CBM-B BWV'), ('VS', 'CBM-B VS', None)]):
+        ax = fig.add_subplot(gs[1 + pi]); letter(ax, 'bc'[pi], x=-0.42 if pi == 0 else -0.1, y=1.1)
+        parts = [(own, LONG[knob] + ' (own)', C['blue'])]
+        if extra: parts.append((extra, 'Blue-whitish veil', C['sky']))
+        for yi, n in enumerate(order):
+            r = mel[(mel.classifier == n) & (mel.knob == knob)].iloc[0]
+            other = sum(r[f'CBM-B {s}'] for s in SH if f'CBM-B {s}' not in [p[0] for p in parts])
+            vals = [(r[p[0]], p[2]) for p in parts] + [(other, C['purple']), (r['colour'], C['orange']), (r['rest'], C['lgrey'])]
+            pos, neg = 0.0, 0.0
+            for v, col in vals:
+                if v >= 0: ax.barh(yi, v, left=pos, height=0.62, color=col, lw=0); pos += v
+                else: ax.barh(yi, v, left=neg, height=0.62, color=col, lw=0); neg += v
+            ax.plot(r['measured'], yi, marker='D', ms=3.2, color='black', zorder=4)
+        ax.axvline(0, color='black', lw=0.5); ax.set_ylim(len(order) - 0.5, -0.5)
+        ax.set_yticks(range(len(order))); ax.set_yticklabels([lab[n] for n in order] if pi == 0 else [])
+        ax.set_xlabel('Change in melanoma logit, level 0 to 1')
+        ax.set_title(f"{LONG[knob]} sweep", fontsize=6.6, pad=3)
+    hs = [Rectangle((0, 0), 1, 1, color=C['blue'], lw=0), Rectangle((0, 0), 1, 1, color=C['sky'], lw=0),
+          Rectangle((0, 0), 1, 1, color=C['purple'], lw=0), Rectangle((0, 0), 1, 1, color=C['orange'], lw=0),
+          Rectangle((0, 0), 1, 1, color=C['lgrey'], lw=0), Line2D([], [], marker='D', ls='', color='black', ms=3.2)]
+    fig.legend(hs, ["Swept concept's own CBM-B change", 'Blue-whitish veil change', 'Other CBM-B concept changes',
+                    'Colour (mean CIELAB) change', 'Not explained by measured changes', 'Measured sweep effect'],
+               loc='upper center', ncol=3, bbox_to_anchor=(0.66, 0.0), fontsize=5.8, columnspacing=1.0, handlelength=1.2)
+    save(fig, 'Fig7_decomposition')
+
+
+# ================================================================= Fig: robustness (Phase 3: null, retraining, HAM10000)
+def fig_robust():
+    E3 = pd.read_csv(os.path.join(OUT, 'tables/P3_T2_effects_all.csv'))
+    per = E3.groupby(['classifier', 'group', 'arch', 'knob'])[['scale_free', 'dlogit']].mean().reset_index()
+    nul = pd.read_csv(os.path.join(OUT, 'tables/P3_T3_null_distribution.csv')).set_index('knob')
+    mg = pd.read_csv(os.path.join(OUT, 'tables/T_margins_controls_vs_null.csv'))
+    ks = ['PN', 'VS', 'Pig', 'Reg']; KL = ['PN', 'VS', 'Pig', 'Reg']
+    GC = {'null_generic': '#D9D9D9', 'null_trained': C['grey'], 'mel_primary': C['blue'], 'mel_retrain': C['sky'], 'mel_ham': C['green']}
+    GL = {'null_generic': 'Random heads on ImageNet features (300)', 'null_trained': 'Permuted-label classifiers (18)',
+          'mel_primary': 'ISIC 2020 melanoma, seeds 1-2 (6)', 'mel_retrain': 'ISIC 2020 melanoma, seeds 3-5 (9)', 'mel_ham': 'HAM10000 melanoma (6)'}
+    fig = plt.figure(figsize=(W2, 66 * MM))
+    gs = GridSpec(1, 3, figure=fig, width_ratios=[1.25, 1.15, 0.9], wspace=0.42)
+    # (a) scale-free effects against the null
+    ax = fig.add_subplot(gs[0]); letter(ax, 'a', x=-0.16, y=1.04); rng = np.random.default_rng(3)
+    off = {'null_generic': -0.32, 'null_trained': -0.16, 'mel_primary': 0.0, 'mel_retrain': 0.16, 'mel_ham': 0.32}
+    for xi, k in enumerate(ks):
+        for g in off:
+            v = per[(per.knob == k) & (per.group == g)]['scale_free'].values; v = v[np.isfinite(v)]
+            ax.scatter(xi + off[g] + rng.uniform(-0.05, 0.05, len(v)), v, s=3 if g == 'null_generic' else 9, color=GC[g],
+                       lw=0, alpha=0.6 if g == 'null_generic' else 1, zorder=2 if g == 'null_generic' else 3, label=GL[g] if xi == 0 else None)
+        q = nul.loc[k, 'null 95th pct']; ax.plot([xi - 0.42, xi + 0.42], [q, q], color='black', lw=0.7, ls='--', zorder=4)
+    ax.axhline(0, color='black', lw=0.4); ax.set_xticks(range(4)); ax.set_xticklabels(KL)
+    ax.set_ylabel('Scale-free sweep effect\n(Δ logit / SD of real-test logits)'); ax.set_ylim(-2.6, 3.0)
+    hh, ll = ax.get_legend_handles_labels()
+    fig.legend(hh + [Line2D([], [], color='black', lw=0.7, ls='--')], ll + ['95th percentile of the permuted-label classifiers'],
+               fontsize=5.6, loc='upper center', ncol=3, bbox_to_anchor=(0.5, 0.0), handletextpad=0.2, columnspacing=1.0, markerscale=1.3)
+    # (b) logit effects of all melanoma classifiers
+    ax = fig.add_subplot(gs[1]); letter(ax, 'b', x=-0.13, y=1.04); rng = np.random.default_rng(4)
+    M = per[per.group.isin(['mel_primary', 'mel_retrain', 'mel_ham'])]
+    for xi, k in enumerate(ks):
+        for g, o in [('mel_primary', -0.22), ('mel_retrain', 0.0), ('mel_ham', 0.22)]:
+            d = M[(M.knob == k) & (M.group == g)]
+            for _, r in d.iterrows():
+                ax.scatter(xi + o + rng.uniform(-0.06, 0.06), r['dlogit'], s=10, marker=ARCH[r['arch']][2], color=GC[g], lw=0, zorder=3)
+            ax.plot([xi + o - 0.09, xi + o + 0.09], [d['dlogit'].mean()] * 2, color='black', lw=0.9, zorder=4)
+    ax.axhline(0, color='black', lw=0.4); ax.set_xticks(range(4)); ax.set_xticklabels(KL)
+    ax.set_ylabel('Change in melanoma logit, level 0 to 1\n(mean of the two realistic bases)')
+    hs = [Line2D([], [], marker=ARCH[a][2], ls='', color='black', ms=3.5) for a in ['resnet50', 'effb0', 'vitb16']] + [Line2D([], [], color='black', lw=0.9)]
+    ax.legend(hs, ['ResNet-50', 'EfficientNet-B0', 'ViT-B/16', 'Group mean'], fontsize=5.2, loc='upper left', handletextpad=0.2)
+    # (c) standardised target margin: controls against null classifiers
+    ax = fig.add_subplot(gs[2]); letter(ax, 'c', x=-0.2, y=1.04); rng = np.random.default_rng(5)
+    for xi, k in enumerate(ks):
+        n = mg[(mg.kind == 'perm') & (mg.target == k)]['min_margin_std'].values
+        ax.scatter(xi - 0.2 + rng.uniform(-0.06, 0.06, len(n)), n, s=7, color=C['grey'], lw=0, zorder=2)
+        a = mg[(mg.kind == 'ctrlA') & (mg.target == k)]['min_margin_std'].values
+        ax.scatter(xi + 0.05 + rng.uniform(-0.04, 0.04, len(a)), a, s=12, color=C['blue'], lw=0, zorder=3)
+        b = mg[(mg.kind == 'ctrlB') & (mg.target == k)]['min_margin_std'].values
+        if len(b): ax.scatter(xi + 0.25 + rng.uniform(-0.04, 0.04, len(b)), b, s=12, color=C['green'], lw=0, zorder=3)
+        ax.plot([xi - 0.3, xi - 0.1], [n.max()] * 2, color='black', lw=0.7, ls='--')
+    ax.axhline(0, color='black', lw=0.4); ax.set_xticks(range(4)); ax.set_xticklabels(['PN', 'VS', 'Pig', 'Reg'])
+    ax.set_ylabel('Standardised target margin\n(target − largest other) / logit SD')
+    hs = [Line2D([], [], marker='o', ls='', color=c, ms=3.5) for c in [C['grey'], C['blue'], C['green']]] + [Line2D([], [], color='black', lw=0.7, ls='--')]
+    ax.legend(hs, ['Permuted-label', 'Matched, CBM-A labels', 'Matched, CBM-B labels', 'Largest null value'], fontsize=5.2, loc='lower left', handletextpad=0.2)
+    save(fig, 'Fig6_robustness')
 
 
 if __name__ == '__main__':
     os.makedirs(FIG, exist_ok=True)
-    for f in [fig1, fig2_2e if HAVE2E else fig2, fig3, fig4, fig5]:
+    for f in [fig1, fig2_2e if HAVE2E else fig2, fig3, fig4, fig5, fig6_decomp, fig_robust]:
         f(); print(f.__name__, 'ok')

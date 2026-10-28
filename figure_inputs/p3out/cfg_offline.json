@@ -1,0 +1,401 @@
+{
+ "models": [
+  {
+   "name": "mel_resnet50_s1",
+   "arch": "resnet50",
+   "label": "mel",
+   "seed": 1,
+   "data": "isic2020",
+   "gpu": 0,
+   "group": "mel_primary"
+  },
+  {
+   "name": "mel_resnet50_s2",
+   "arch": "resnet50",
+   "label": "mel",
+   "seed": 2,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "mel_primary"
+  },
+  {
+   "name": "mel_effb0_s1",
+   "arch": "effb0",
+   "label": "mel",
+   "seed": 1,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "mel_primary"
+  },
+  {
+   "name": "mel_effb0_s2",
+   "arch": "effb0",
+   "label": "mel",
+   "seed": 2,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "mel_primary"
+  },
+  {
+   "name": "mel_vitb16_s1",
+   "arch": "vitb16",
+   "label": "mel",
+   "seed": 1,
+   "data": "isic2020",
+   "gpu": 0,
+   "group": "mel_primary"
+  },
+  {
+   "name": "mel_vitb16_s2",
+   "arch": "vitb16",
+   "label": "mel",
+   "seed": 2,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "mel_primary"
+  },
+  {
+   "name": "ctrl_pig_resnet50",
+   "arch": "resnet50",
+   "label": "pig",
+   "seed": 1,
+   "data": "isic2020",
+   "gpu": 0,
+   "group": "other"
+  },
+  {
+   "name": "ctrl_bwv_resnet50",
+   "arch": "resnet50",
+   "label": "bwv",
+   "seed": 1,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "other"
+  },
+  {
+   "name": "ctrl_perm_resnet50",
+   "arch": "resnet50",
+   "label": "perm",
+   "seed": 1,
+   "data": "isic2020",
+   "gpu": 0,
+   "group": "null_trained"
+  },
+  {
+   "name": "mel_resnet50_derm7pt",
+   "arch": "resnet50",
+   "label": "mel",
+   "seed": 1,
+   "data": "derm7pt",
+   "gpu": 0,
+   "group": "other"
+  },
+  {
+   "name": "ctrl_perm_resnet50_s2",
+   "arch": "resnet50",
+   "label": "perm",
+   "seed": 2,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "null_trained"
+  },
+  {
+   "name": "ctrl_perm_resnet50_s3",
+   "arch": "resnet50",
+   "label": "perm",
+   "seed": 3,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "null_trained"
+  },
+  {
+   "name": "ctrl_perm_resnet50_s4",
+   "arch": "resnet50",
+   "label": "perm",
+   "seed": 4,
+   "data": "isic2020",
+   "gpu": 0,
+   "group": "null_trained"
+  },
+  {
+   "name": "ctrl_perm_resnet50_s5",
+   "arch": "resnet50",
+   "label": "perm",
+   "seed": 5,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "null_trained"
+  },
+  {
+   "name": "ctrl_perm_resnet50_s6",
+   "arch": "resnet50",
+   "label": "perm",
+   "seed": 6,
+   "data": "isic2020",
+   "gpu": 0,
+   "group": "null_trained"
+  },
+  {
+   "name": "ctrl_perm_resnet50_s7",
+   "arch": "resnet50",
+   "label": "perm",
+   "seed": 7,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "null_trained"
+  },
+  {
+   "name": "ctrl_perm_resnet50_s8",
+   "arch": "resnet50",
+   "label": "perm",
+   "seed": 8,
+   "data": "isic2020",
+   "gpu": 0,
+   "group": "null_trained"
+  },
+  {
+   "name": "ctrl_perm_resnet50_s9",
+   "arch": "resnet50",
+   "label": "perm",
+   "seed": 9,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "null_trained"
+  },
+  {
+   "name": "ctrl_perm_resnet50_s10",
+   "arch": "resnet50",
+   "label": "perm",
+   "seed": 10,
+   "data": "isic2020",
+   "gpu": 0,
+   "group": "null_trained"
+  },
+  {
+   "name": "ctrl_perm_effb0_s1",
+   "arch": "effb0",
+   "label": "perm",
+   "seed": 1,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "null_trained"
+  },
+  {
+   "name": "ctrl_perm_effb0_s2",
+   "arch": "effb0",
+   "label": "perm",
+   "seed": 2,
+   "data": "isic2020",
+   "gpu": 0,
+   "group": "null_trained"
+  },
+  {
+   "name": "ctrl_perm_effb0_s3",
+   "arch": "effb0",
+   "label": "perm",
+   "seed": 3,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "null_trained"
+  },
+  {
+   "name": "ctrl_perm_effb0_s4",
+   "arch": "effb0",
+   "label": "perm",
+   "seed": 4,
+   "data": "isic2020",
+   "gpu": 0,
+   "group": "null_trained"
+  },
+  {
+   "name": "ctrl_perm_effb0_s5",
+   "arch": "effb0",
+   "label": "perm",
+   "seed": 5,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "null_trained"
+  },
+  {
+   "name": "ctrl_perm_vitb16_s1",
+   "arch": "vitb16",
+   "label": "perm",
+   "seed": 1,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "null_trained"
+  },
+  {
+   "name": "ctrl_perm_vitb16_s2",
+   "arch": "vitb16",
+   "label": "perm",
+   "seed": 2,
+   "data": "isic2020",
+   "gpu": 0,
+   "group": "null_trained"
+  },
+  {
+   "name": "ctrl_perm_vitb16_s3",
+   "arch": "vitb16",
+   "label": "perm",
+   "seed": 3,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "null_trained"
+  },
+  {
+   "name": "mel_resnet50_s3",
+   "arch": "resnet50",
+   "label": "mel",
+   "seed": 3,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "mel_retrain"
+  },
+  {
+   "name": "mel_resnet50_s4",
+   "arch": "resnet50",
+   "label": "mel",
+   "seed": 4,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "mel_retrain"
+  },
+  {
+   "name": "mel_resnet50_s5",
+   "arch": "resnet50",
+   "label": "mel",
+   "seed": 5,
+   "data": "isic2020",
+   "gpu": 0,
+   "group": "mel_retrain"
+  },
+  {
+   "name": "mel_effb0_s3",
+   "arch": "effb0",
+   "label": "mel",
+   "seed": 3,
+   "data": "isic2020",
+   "gpu": 0,
+   "group": "mel_retrain"
+  },
+  {
+   "name": "mel_effb0_s4",
+   "arch": "effb0",
+   "label": "mel",
+   "seed": 4,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "mel_retrain"
+  },
+  {
+   "name": "mel_effb0_s5",
+   "arch": "effb0",
+   "label": "mel",
+   "seed": 5,
+   "data": "isic2020",
+   "gpu": 0,
+   "group": "mel_retrain"
+  },
+  {
+   "name": "mel_vitb16_s3",
+   "arch": "vitb16",
+   "label": "mel",
+   "seed": 3,
+   "data": "isic2020",
+   "gpu": 0,
+   "group": "mel_retrain"
+  },
+  {
+   "name": "mel_vitb16_s4",
+   "arch": "vitb16",
+   "label": "mel",
+   "seed": 4,
+   "data": "isic2020",
+   "gpu": 1,
+   "group": "mel_retrain"
+  },
+  {
+   "name": "mel_vitb16_s5",
+   "arch": "vitb16",
+   "label": "mel",
+   "seed": 5,
+   "data": "isic2020",
+   "gpu": 0,
+   "group": "mel_retrain"
+  },
+  {
+   "name": "mel_ham_resnet50_s1",
+   "arch": "resnet50",
+   "label": "mel",
+   "seed": 1,
+   "data": "ham10000",
+   "gpu": 0,
+   "group": "mel_ham"
+  },
+  {
+   "name": "mel_ham_resnet50_s2",
+   "arch": "resnet50",
+   "label": "mel",
+   "seed": 2,
+   "data": "ham10000",
+   "gpu": 1,
+   "group": "mel_ham"
+  },
+  {
+   "name": "mel_ham_effb0_s1",
+   "arch": "effb0",
+   "label": "mel",
+   "seed": 1,
+   "data": "ham10000",
+   "gpu": 0,
+   "group": "mel_ham"
+  },
+  {
+   "name": "mel_ham_effb0_s2",
+   "arch": "effb0",
+   "label": "mel",
+   "seed": 2,
+   "data": "ham10000",
+   "gpu": 1,
+   "group": "mel_ham"
+  },
+  {
+   "name": "mel_ham_vitb16_s1",
+   "arch": "vitb16",
+   "label": "mel",
+   "seed": 1,
+   "data": "ham10000",
+   "gpu": 0,
+   "group": "mel_ham"
+  },
+  {
+   "name": "mel_ham_vitb16_s2",
+   "arch": "vitb16",
+   "label": "mel",
+   "seed": 2,
+   "data": "ham10000",
+   "gpu": 1,
+   "group": "mel_ham"
+  }
+ ],
+ "scores_dir": "/home/claude/p3out/merged/scores",
+ "results_dir": "/home/claude/p3out/merged/results",
+ "meta_dir": "/home/claude/p2ainp/phase2/sets_meta",
+ "eval_dirs": [
+  "/home/claude/p2ainp/phase2/scores"
+ ],
+ "cls_labels": "/home/claude/p2ainp/phase2/cls/cls_labels.npz",
+ "generic_dir": "/home/claude/p3out/merged/generic",
+ "out": "/home/claude/p3out/offline3",
+ "rule_text": "Phase 3 rules, fixed before the run. Data: the two realistic bases (64 benign and 64 melanoma base vectors), the four target-dominant knobs (pigment network, vascular structures, pigmentation, regression structures), logits clipped at +/-15, effect = mean logit change from knob level 0 to 1 over trajectories. Scale-free effect = effect divided by the SD of the classifier logits on the 969 real test images, mean of the two bases per classifier. Rule 5 (trained null): null classifiers are the Phase 2 permuted-label ResNet-50 and 17 new permuted-label classifiers (ResNet-50 seeds 2 to 10, EfficientNet-B0 seeds 1 to 5, ViT-B/16 seeds 1 to 3), trained with the Phase 2 recipe. For each knob, a melanoma finding is above null when the mean scale-free effect of the six primary melanoma classifiers is above the 95th percentile of the null classifiers. Reported for all four knobs; the same comparison is reported for the observational coefficients. Rule 6 (retraining): nine new melanoma classifiers (ResNet-50, EfficientNet-B0 and ViT-B/16, seeds 3 to 5) are added to the six primary ones. The pigmentation-sweep finding is stable if (a) its bootstrap 95% CI is above 0 on both realistic bases for at least 12 of the 15 classifiers and (b) pigmentation has the largest mean effect of the four knobs averaged over the 15 classifiers. Rule 7 (second training dataset): six melanoma classifiers trained on HAM10000 (melanoma against all other diagnoses; split by lesion; images whose names occur in ISIC 2020 removed; ResNet-50, EfficientNet-B0 and ViT-B/16, seeds 1 and 2; Phase 2 recipe). The pigmentation-sweep finding transfers if its bootstrap 95% CI is above 0 on both realistic bases in at least 5 of the 6 and pigmentation has the largest mean effect of the four knobs averaged over the 6. Rule 8 (independent expert criteria, descriptive): CBM-B and the ISIC 2018 detector are compared with the PH2 expert criteria (pigment network atypical against typical; dots and globules; streaks; regression areas; blue-whitish veil) by AUC with a 95% bootstrap CI; a criterion is confirmed on PH2 when the lower bound is above 0.5. If PH2 is not attached, rule 8 is not run. Descriptive only: the false-positive rate of the per-classifier Wilcoxon test in the null classifiers; 100 random linear heads per architecture on ImageNet features; off-target preservation filters for all melanoma classifiers. Earlier verdicts are not changed.",
+ "primary": [
+  "mel_resnet50_s1",
+  "mel_resnet50_s2",
+  "mel_effb0_s1",
+  "mel_effb0_s2",
+  "mel_vitb16_s1",
+  "mel_vitb16_s2"
+ ],
+ "n_boot": 2000
+}

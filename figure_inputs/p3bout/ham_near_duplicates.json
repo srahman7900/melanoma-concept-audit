@@ -1,0 +1,11 @@
+{
+  "HAM-ISIC >= 0.95": 191,
+  "HAM-ISIC >= 0.98": 0,
+  "HAM-ISIC >= 0.99": 0,
+  "HAM-HAM (other lesion, other split) >= 0.95": 290,
+  "HAM-HAM (other lesion, other split) >= 0.98": 2,
+  "HAM-HAM (other lesion, other split) >= 0.99": 0,
+  "n_ham": 10015,
+  "n_isic": 6424,
+  "note": "report only; no image was removed by this screen"
+}

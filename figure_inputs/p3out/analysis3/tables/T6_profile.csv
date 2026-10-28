@@ -1,0 +1,6 @@
+group,n,PN largest,BWV largest,VS largest,Pig largest,Str largest,D/G largest,Reg largest,mean |effect| over 7 knobs
+null_trained,18,0.278,0.0,0.0,0.611,0.056,0.056,0.0,0.305
+null_generic,300,0.217,0.02,0.143,0.31,0.11,0.05,0.15,0.344
+mel_primary,6,0.0,0.0,0.0,0.833,0.0,0.0,0.167,0.471
+mel_retrain,9,0.0,0.0,0.0,0.778,0.0,0.0,0.222,0.489
+mel_ham,6,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.623

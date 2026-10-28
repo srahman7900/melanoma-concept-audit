@@ -1,0 +1,62 @@
+{
+  "spec": {
+    "name": "mel_ham_resnet50_s1",
+    "arch": "resnet50",
+    "label": "mel",
+    "seed": 1,
+    "data": "ham10000",
+    "gpu": 0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 1.095275982672518,
+      "val_auc": 0.8780970599433916
+    },
+    {
+      "epoch": 2,
+      "loss": 0.8209732013669881,
+      "val_auc": 0.9069953071026521
+    },
+    {
+      "epoch": 3,
+      "loss": 0.7832380082119595,
+      "val_auc": 0.9211061108588048
+    },
+    {
+      "epoch": 4,
+      "loss": 0.684012918072668,
+      "val_auc": 0.9030730908440334
+    },
+    {
+      "epoch": 5,
+      "loss": 0.6530708787116137,
+      "val_auc": 0.9002587286514456
+    },
+    {
+      "epoch": 6,
+      "loss": 0.5813019309192896,
+      "val_auc": 0.9105505323663121
+    },
+    {
+      "epoch": 7,
+      "loss": 0.531792552633719,
+      "val_auc": 0.9178765901031704
+    },
+    {
+      "epoch": 8,
+      "loss": 0.4605601200664585,
+      "val_auc": 0.9152801288138394
+    }
+  ],
+  "best_val_auc": 0.9211061108588048,
+  "n_train": 7040,
+  "n_train_pos": 782,
+  "minutes": 4.691294479370117,
+  "tau90_logit": -0.1763916015625,
+  "test_auc_melanoma": 0.9111442481594475,
+  "val_auc_melanoma": 0.9211061108588048,
+  "test_sens_at_tau": 0.8604651162790697,
+  "test_spec_at_tau": 0.7761194029850746,
+  "note": "test_auc_melanoma, val_auc_melanoma and tau90 refer to the HAM10000 split"
+}

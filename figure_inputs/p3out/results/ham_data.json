@@ -1,0 +1,25 @@
+{
+  "n": 10015,
+  "n_mel": 1113,
+  "n_removed_isic2020_overlap": 0,
+  "split_counts": {
+    "train": 7040,
+    "val": 1530,
+    "test": 1445
+  },
+  "split_mel": {
+    "train": 782,
+    "val": 159,
+    "test": 172
+  },
+  "dx_counts": {
+    "nv": 6705,
+    "mel": 1113,
+    "bkl": 1099,
+    "bcc": 514,
+    "akiec": 327,
+    "vasc": 142,
+    "df": 115
+  },
+  "lesions": 7470
+}

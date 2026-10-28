@@ -1,0 +1,3 @@
+[09:36:15] job ham_dupes_0 start | device=cuda | torch 2.11.0+cu128 | CUDA_VISIBLE_DEVICES=0
+[09:37:08] ham_dupes: {'HAM-ISIC >= 0.95': 191, 'HAM-ISIC >= 0.98': 0, 'HAM-ISIC >= 0.99': 0, 'HAM-HAM (other lesion, other split) >= 0.95': 290, 'HAM-HAM (other lesion, other split) >= 0.98': 2, 'HAM-HAM (other lesion, other split) >= 0.99': 0, 'n_ham': 10015, 'n_isic': 6424, 'note': 'report only; no image was removed by this screen'}
+[09:37:08] job ham_dupes_0 done in 0.9 min

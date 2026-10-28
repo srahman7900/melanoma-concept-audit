@@ -1,0 +1,52 @@
+\begin{table}
+\caption{Classifiers. Test AUC for the melanoma label on the 969 real ISIC 2020 test images (bootstrap 95% CI, 500 resamples; for HAM10000 classifiers this is a cross-dataset test); own-split test AUC is on the test split of the training dataset; test logit SD (ISIC 2020) is the scale of the scale-free effects.}
+\label{tab:T1_classifiers}
+\begin{tabular}{lllrlrrrrrrrr}
+\toprule
+classifier & group & arch & seed & label & test AUC (melanoma) & AUC lo & AUC hi & test logit SD & best val AUC (own label) & own-split test AUC (melanoma) & epochs & minutes \\
+\midrule
+mel\_resnet50\_s1 & mel\_primary & ResNet-50 & 1 & mel & 0.889000 & 0.855000 & 0.916000 & 3.346000 & 0.906000 & 0.889000 & 14 & 5.428000 \\
+mel\_resnet50\_s2 & mel\_primary & ResNet-50 & 2 & mel & 0.876000 & 0.835000 & 0.910000 & 3.391000 & 0.903000 & 0.876000 & 15 & 5.593000 \\
+mel\_effb0\_s1 & mel\_primary & EfficientNet-B0 & 1 & mel & 0.884000 & 0.851000 & 0.912000 & 2.136000 & 0.907000 & 0.884000 & 9 & 3.256000 \\
+mel\_effb0\_s2 & mel\_primary & EfficientNet-B0 & 2 & mel & 0.870000 & 0.838000 & 0.903000 & 2.809000 & 0.908000 & 0.870000 & 14 & 3.250000 \\
+mel\_vitb16\_s1 & mel\_primary & ViT-B/16 & 1 & mel & 0.913000 & 0.884000 & 0.939000 & 2.165000 & 0.916000 & 0.913000 & 7 & 6.310000 \\
+mel\_vitb16\_s2 & mel\_primary & ViT-B/16 & 2 & mel & 0.903000 & 0.874000 & 0.931000 & 2.524000 & 0.921000 & 0.903000 & 10 & 8.599000 \\
+ctrl\_pig\_resnet50 & other & ResNet-50 & 1 & pig & 0.599000 & 0.529000 & 0.662000 & 3.468000 & 0.954000 & 0.599000 & 9 & 1.661000 \\
+ctrl\_bwv\_resnet50 & other & ResNet-50 & 1 & bwv & 0.605000 & 0.538000 & 0.672000 & 4.341000 & 0.959000 & 0.604000 & 13 & 2.297000 \\
+ctrl\_perm\_resnet50 & null\_trained & ResNet-50 & 1 & perm & 0.425000 & 0.367000 & 0.493000 & 0.123000 & 0.530000 & 0.423000 & 6 & 2.166000 \\
+mel\_resnet50\_derm7pt & other & ResNet-50 & 1 & mel & 0.673000 & 0.612000 & 0.734000 & 0.946000 & 0.812000 & 0.672000 & 11 & 0.382000 \\
+ctrl\_perm\_resnet50\_s2 & null\_trained & ResNet-50 & 2 & perm & 0.439000 & 0.370000 & 0.507000 & 1.584000 & 0.518000 & 0.437000 & 15 & 5.676000 \\
+ctrl\_perm\_resnet50\_s3 & null\_trained & ResNet-50 & 3 & perm & 0.445000 & 0.371000 & 0.516000 & 1.816000 & 0.547000 & 0.445000 & 15 & 5.424000 \\
+ctrl\_perm\_resnet50\_s4 & null\_trained & ResNet-50 & 4 & perm & 0.440000 & 0.376000 & 0.502000 & 0.553000 & 0.523000 & 0.439000 & 8 & 3.134000 \\
+ctrl\_perm\_resnet50\_s5 & null\_trained & ResNet-50 & 5 & perm & 0.451000 & 0.398000 & 0.509000 & 1.300000 & 0.538000 & 0.452000 & 14 & 5.052000 \\
+ctrl\_perm\_resnet50\_s6 & null\_trained & ResNet-50 & 6 & perm & 0.473000 & 0.412000 & 0.533000 & 1.968000 & 0.537000 & 0.472000 & 15 & 5.340000 \\
+ctrl\_perm\_resnet50\_s7 & null\_trained & ResNet-50 & 7 & perm & 0.454000 & 0.398000 & 0.522000 & 0.676000 & 0.547000 & 0.453000 & 10 & 3.623000 \\
+ctrl\_perm\_resnet50\_s8 & null\_trained & ResNet-50 & 8 & perm & 0.419000 & 0.345000 & 0.485000 & 0.482000 & 0.530000 & 0.420000 & 9 & 3.162000 \\
+ctrl\_perm\_resnet50\_s9 & null\_trained & ResNet-50 & 9 & perm & 0.559000 & 0.498000 & 0.623000 & 0.707000 & 0.552000 & 0.560000 & 9 & 3.257000 \\
+ctrl\_perm\_resnet50\_s10 & null\_trained & ResNet-50 & 10 & perm & 0.405000 & 0.337000 & 0.474000 & 0.610000 & 0.488000 & 0.405000 & 7 & 2.486000 \\
+ctrl\_perm\_effb0\_s1 & null\_trained & EfficientNet-B0 & 1 & perm & 0.369000 & 0.305000 & 0.426000 & 1.427000 & 0.538000 & 0.369000 & 14 & 4.610000 \\
+ctrl\_perm\_effb0\_s2 & null\_trained & EfficientNet-B0 & 2 & perm & 0.431000 & 0.365000 & 0.494000 & 1.371000 & 0.508000 & 0.431000 & 15 & 4.878000 \\
+ctrl\_perm\_effb0\_s3 & null\_trained & EfficientNet-B0 & 3 & perm & 0.466000 & 0.395000 & 0.526000 & 0.196000 & 0.546000 & 0.467000 & 6 & 1.405000 \\
+ctrl\_perm\_effb0\_s4 & null\_trained & EfficientNet-B0 & 4 & perm & 0.499000 & 0.431000 & 0.565000 & 0.230000 & 0.560000 & 0.500000 & 6 & 1.374000 \\
+ctrl\_perm\_effb0\_s5 & null\_trained & EfficientNet-B0 & 5 & perm & 0.480000 & 0.416000 & 0.544000 & 0.568000 & 0.560000 & 0.480000 & 9 & 2.104000 \\
+ctrl\_perm\_vitb16\_s1 & null\_trained & ViT-B/16 & 1 & perm & 0.303000 & 0.235000 & 0.377000 & 0.916000 & 0.591000 & 0.303000 & 15 & 13.183000 \\
+ctrl\_perm\_vitb16\_s2 & null\_trained & ViT-B/16 & 2 & perm & 0.593000 & 0.512000 & 0.668000 & 0.051000 & 0.540000 & 0.593000 & 9 & 7.604000 \\
+ctrl\_perm\_vitb16\_s3 & null\_trained & ViT-B/16 & 3 & perm & 0.617000 & 0.550000 & 0.682000 & 0.111000 & 0.519000 & 0.617000 & 6 & 5.217000 \\
+mel\_resnet50\_s3 & mel\_retrain & ResNet-50 & 3 & mel & 0.892000 & 0.858000 & 0.920000 & 2.554000 & 0.901000 & 0.892000 & 9 & 3.277000 \\
+mel\_resnet50\_s4 & mel\_retrain & ResNet-50 & 4 & mel & 0.911000 & 0.878000 & 0.943000 & 3.652000 & 0.890000 & 0.911000 & 15 & 5.439000 \\
+mel\_resnet50\_s5 & mel\_retrain & ResNet-50 & 5 & mel & 0.889000 & 0.849000 & 0.924000 & 3.651000 & 0.904000 & 0.890000 & 14 & 4.938000 \\
+mel\_effb0\_s3 & mel\_retrain & EfficientNet-B0 & 3 & mel & 0.869000 & 0.833000 & 0.903000 & 2.359000 & 0.900000 & 0.868000 & 11 & 2.512000 \\
+mel\_effb0\_s4 & mel\_retrain & EfficientNet-B0 & 4 & mel & 0.868000 & 0.823000 & 0.906000 & 2.454000 & 0.908000 & 0.869000 & 12 & 2.879000 \\
+mel\_effb0\_s5 & mel\_retrain & EfficientNet-B0 & 5 & mel & 0.862000 & 0.812000 & 0.900000 & 2.920000 & 0.909000 & 0.862000 & 15 & 3.394000 \\
+mel\_vitb16\_s3 & mel\_retrain & ViT-B/16 & 3 & mel & 0.913000 & 0.887000 & 0.939000 & 3.096000 & 0.917000 & 0.913000 & 15 & 12.316000 \\
+mel\_vitb16\_s4 & mel\_retrain & ViT-B/16 & 4 & mel & 0.909000 & 0.881000 & 0.935000 & 3.187000 & 0.928000 & 0.909000 & 15 & 12.966000 \\
+mel\_vitb16\_s5 & mel\_retrain & ViT-B/16 & 5 & mel & 0.892000 & 0.859000 & 0.920000 & 2.948000 & 0.922000 & 0.892000 & 14 & 11.617000 \\
+mel\_ham\_resnet50\_s1 & mel\_ham & ResNet-50 & 1 & mel & 0.776000 & 0.719000 & 0.825000 & 1.925000 & 0.921000 & 0.911000 & 8 & 4.691000 \\
+mel\_ham\_resnet50\_s2 & mel\_ham & ResNet-50 & 2 & mel & 0.669000 & 0.597000 & 0.733000 & 2.371000 & 0.927000 & 0.918000 & 10 & 5.917000 \\
+mel\_ham\_effb0\_s1 & mel\_ham & EfficientNet-B0 & 1 & mel & 0.659000 & 0.585000 & 0.723000 & 1.964000 & 0.919000 & 0.929000 & 12 & 5.913000 \\
+mel\_ham\_effb0\_s2 & mel\_ham & EfficientNet-B0 & 2 & mel & 0.652000 & 0.570000 & 0.721000 & 1.889000 & 0.935000 & 0.920000 & 11 & 5.640000 \\
+mel\_ham\_vitb16\_s1 & mel\_ham & ViT-B/16 & 1 & mel & 0.757000 & 0.699000 & 0.808000 & 2.018000 & 0.927000 & 0.928000 & 11 & 14.236000 \\
+mel\_ham\_vitb16\_s2 & mel\_ham & ViT-B/16 & 2 & mel & 0.672000 & 0.604000 & 0.745000 & 2.245000 & 0.922000 & 0.923000 & 14 & 18.970000 \\
+\bottomrule
+\end{tabular}
+\end{table}

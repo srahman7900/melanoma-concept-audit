@@ -1,0 +1,3 @@
+[07:45:52] job ph2 start | device=cuda | torch 2.11.0+cu128 | CUDA_VISIBLE_DEVICES=None
+[07:45:54] ph2: could not parse /kaggle/input/datasets/spacesurfer/ph2-dataset/PH2Dataset/PH2_dataset.txt: PH2 header not recognised: ['Name', 'Histological Diagnosis', 'Clinical Diagnosis', 'Asymmetry | Pigment Network | Dots/Globules | Streaks | Regression Areas | Blue-Whitish Veil', 'Colors']
+[07:45:54] job ph2 done in 0.0 min

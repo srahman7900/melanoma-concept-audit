@@ -1,0 +1,14 @@
+\begin{table}
+\caption{Rule 6. Sweep effects of all ISIC 2020 melanoma classifiers (six primary and the retrained seeds), mean of the two realistic bases. The pigmentation finding is stable if its bootstrap CI is above 0 on both bases for at least 80% of the classifiers and pigmentation has the largest mean effect of the four target-dominant knobs over all classifiers. Last column: number of classifiers in which each knob has the largest effect (descriptive).}
+\label{tab:T5_retraining}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+knob & n classifiers & mean dlogit & SD between classifiers & min & max & n positive & n CI > 0 on both bases & Pig largest of 4 (n) \\
+\midrule
+PN & 15 & -0.038000 & 0.376000 & -0.619000 & 0.480000 & 8 & 0 & 0 \\
+VS & 15 & 0.219000 & 0.390000 & -0.251000 & 1.245000 & 10 & 2 & 0 \\
+Pig & 15 & 3.117000 & 0.792000 & 1.904000 & 4.276000 & 15 & 15 & 12 \\
+Reg & 15 & 2.299000 & 0.680000 & 0.905000 & 3.542000 & 15 & 15 & 3 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,37 @@
+[06:58:37] job train_ham_0 start | device=cuda | torch 2.11.0+cu128 | CUDA_VISIBLE_DEVICES=0
+[06:58:38] [train_ham 0/2] cuda: ['mel_ham_resnet50_s1', 'mel_ham_effb0_s1', 'mel_ham_vitb16_s1']
+[06:59:28]   [mel_ham_resnet50_s1] epoch 1/15 loss 1.095275982672518 val AUC 0.8781 (0.8 min)
+[07:00:04]   [mel_ham_resnet50_s1] epoch 2/15 loss 0.8209732013669881 val AUC 0.9070 (1.4 min)
+[07:00:37]   [mel_ham_resnet50_s1] epoch 3/15 loss 0.7832380082119595 val AUC 0.9211 (2.0 min)
+[07:01:10]   [mel_ham_resnet50_s1] epoch 4/15 loss 0.684012918072668 val AUC 0.9031 (2.5 min)
+[07:01:42]   [mel_ham_resnet50_s1] epoch 5/15 loss 0.6530708787116137 val AUC 0.9003 (3.1 min)
+[07:02:15]   [mel_ham_resnet50_s1] epoch 6/15 loss 0.5813019309192896 val AUC 0.9106 (3.6 min)
+[07:02:48]   [mel_ham_resnet50_s1] epoch 7/15 loss 0.531792552633719 val AUC 0.9179 (4.1 min)
+[07:03:21]   [mel_ham_resnet50_s1] epoch 8/15 loss 0.4605601200664585 val AUC 0.9153 (4.7 min)
+[07:03:25]   [mel_ham_resnet50_s1] done: val AUC 0.9211, test AUC (melanoma) 0.9111, tau90 -0.176
+[07:04:51]   [mel_ham_effb0_s1] epoch 1/15 loss 1.1070621839978478 val AUC 0.8843 (1.4 min)
+[07:05:14]   [mel_ham_effb0_s1] epoch 2/15 loss 0.8152932035652074 val AUC 0.9096 (1.8 min)
+[07:05:39]   [mel_ham_effb0_s1] epoch 3/15 loss 0.7229787096381187 val AUC 0.9065 (2.2 min)
+[07:06:04]   [mel_ham_effb0_s1] epoch 4/15 loss 0.6525313714688474 val AUC 0.9056 (2.6 min)
+[07:06:29]   [mel_ham_effb0_s1] epoch 5/15 loss 0.5943429016931491 val AUC 0.9192 (3.1 min)
+[07:06:53]   [mel_ham_effb0_s1] epoch 6/15 loss 0.5370832187546926 val AUC 0.8993 (3.5 min)
+[07:07:17]   [mel_ham_effb0_s1] epoch 7/15 loss 0.5116662309928374 val AUC 0.9194 (3.9 min)
+[07:07:42]   [mel_ham_effb0_s1] epoch 8/15 loss 0.45934984893961384 val AUC 0.9135 (4.3 min)
+[07:08:07]   [mel_ham_effb0_s1] epoch 9/15 loss 0.43277065520259467 val AUC 0.9115 (4.7 min)
+[07:08:31]   [mel_ham_effb0_s1] epoch 10/15 loss 0.3760480203073133 val AUC 0.9158 (5.1 min)
+[07:08:56]   [mel_ham_effb0_s1] epoch 11/15 loss 0.39195441822944715 val AUC 0.9100 (5.5 min)
+[07:09:21]   [mel_ham_effb0_s1] epoch 12/15 loss 0.3889667036011815 val AUC 0.9120 (5.9 min)
+[07:09:28]   [mel_ham_effb0_s1] done: val AUC 0.9194, test AUC (melanoma) 0.9289, tau90 -2.148
+[07:10:54]   [mel_ham_vitb16_s1] epoch 1/15 loss 0.978566497835246 val AUC 0.8971 (1.4 min)
+[07:12:12]   [mel_ham_vitb16_s1] epoch 2/15 loss 0.80327039625157 val AUC 0.9260 (2.7 min)
+[07:13:29]   [mel_ham_vitb16_s1] epoch 3/15 loss 0.7712812191044742 val AUC 0.9162 (4.0 min)
+[07:14:47]   [mel_ham_vitb16_s1] epoch 4/15 loss 0.6308764721859585 val AUC 0.9176 (5.3 min)
+[07:16:04]   [mel_ham_vitb16_s1] epoch 5/15 loss 0.5598611263219606 val AUC 0.9141 (6.6 min)
+[07:17:21]   [mel_ham_vitb16_s1] epoch 6/15 loss 0.4739872554486448 val AUC 0.9266 (7.8 min)
+[07:18:38]   [mel_ham_vitb16_s1] epoch 7/15 loss 0.4177803335457363 val AUC 0.9201 (9.1 min)
+[07:19:55]   [mel_ham_vitb16_s1] epoch 8/15 loss 0.35516711500134657 val AUC 0.9158 (10.4 min)
+[07:21:12]   [mel_ham_vitb16_s1] epoch 9/15 loss 0.30815912919245997 val AUC 0.9125 (11.7 min)
+[07:22:28]   [mel_ham_vitb16_s1] epoch 10/15 loss 0.23629822826372798 val AUC 0.9129 (13.0 min)
+[07:23:44]   [mel_ham_vitb16_s1] epoch 11/15 loss 0.18252257233967115 val AUC 0.9160 (14.2 min)
+[07:23:54]   [mel_ham_vitb16_s1] done: val AUC 0.9266, test AUC (melanoma) 0.9280, tau90 -2.203
+[07:23:55] job train_ham_0 done in 25.3 min

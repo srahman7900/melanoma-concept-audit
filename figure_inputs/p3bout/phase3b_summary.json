@@ -1,0 +1,13 @@
+{
+  "ham_split_equal_to_phase3": true,
+  "stages": {
+    "audit:prep_cls": "ok",
+    "audit:verify_cls": "ok",
+    "audit:prep_ham": "ok",
+    "audit:ham_dupes": "ok",
+    "audit:ph2": "ok"
+  },
+  "failed_optional_stages": [],
+  "minutes": 7.250954806804657,
+  "hardware": "Tesla T4 x2"
+}

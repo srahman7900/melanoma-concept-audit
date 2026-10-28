@@ -1,0 +1,18 @@
+[07:48:01] 42 classifiers, 300 random heads
+/kaggle/working/phase3/code/analysis3.py:212: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  pos_ci = d.groupby('classifier').apply(lambda x: bool((x['lo'] > 0).all()))
+/kaggle/working/phase3/code/analysis3.py:212: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  pos_ci = d.groupby('classifier').apply(lambda x: bool((x['lo'] > 0).all()))
+/kaggle/working/phase3/code/analysis3.py:212: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  pos_ci = d.groupby('classifier').apply(lambda x: bool((x['lo'] > 0).all()))
+/kaggle/working/phase3/code/analysis3.py:212: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  pos_ci = d.groupby('classifier').apply(lambda x: bool((x['lo'] > 0).all()))
+/kaggle/working/phase3/code/analysis3.py:312: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  pos_ci = d.groupby('classifier').apply(lambda x: bool((x['lo'] > 0).all()))
+/kaggle/working/phase3/code/analysis3.py:312: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  pos_ci = d.groupby('classifier').apply(lambda x: bool((x['lo'] > 0).all()))
+/kaggle/working/phase3/code/analysis3.py:312: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  pos_ci = d.groupby('classifier').apply(lambda x: bool((x['lo'] > 0).all()))
+/kaggle/working/phase3/code/analysis3.py:312: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  pos_ci = d.groupby('classifier').apply(lambda x: bool((x['lo'] > 0).all()))
+[07:48:14] analysis3 finished
