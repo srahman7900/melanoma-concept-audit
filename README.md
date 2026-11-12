@@ -83,7 +83,7 @@ Each validity rule was written into the code before the run that tested it (see 
 
 ## Data
 
-ISIC 2020, Derm7pt, ISIC 2018 Task 2 and HAM10000 are public and are not redistributed here. PH2 is available from its providers after registration and may not be redistributed; this repository holds only our derived scores and results. The trained checkpoints, the CBM-A pseudo-labels, all generated images and the per-image scores are available from the corresponding author on request, including to reviewers.
+ISIC 2020, Derm7pt, ISIC 2018 Task 2 and HAM10000 are public and are not redistributed here. PH2 is distributed by its providers and may not be redistributed, so this repository holds only our derived scores and results; we used a Kaggle copy (`spacesurfer/ph2-dataset`) whose 200 images are byte-identical to the files the providers sent us, and `results/PH2_image_sha256_manifest.csv` lists the SHA-256 hash of each image so that you can check your own copy. The trained checkpoints, the CBM-A pseudo-labels, all generated images and the per-image scores are available from the corresponding author on request, including to reviewers.
 
 ## Contact
 
