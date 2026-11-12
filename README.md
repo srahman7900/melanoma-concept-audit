@@ -73,6 +73,7 @@ The generator was trained on all 584 ISIC 2020 melanomas (each repeated five tim
 | Every number in the manuscript with its source file | `results/numbers/` |
 | Null distribution, retraining, HAM10000 (rules 5 to 7; Fig. 6) | `results/tables/P3_*.csv`, `figure_inputs/p3out/` |
 | PH2 evaluator check (rule 8) and HAM10000 overlap checks | `results/tables/P3b_*.csv`, `figure_inputs/p3bout/` |
+| PH2 image hashes (copy check) | `results/PH2_image_sha256_manifest.csv` |
 | Decomposition, trajectory filter, margins, known-function controls (post hoc) | `results/tables/T_decomposition_*`, `T_preservation_*`, `T_margins_*`, `T_control_margins_*`, `T_known_function_*`, `T_null_*` |
 | Supplementary Figures and Tables | `results/Supplementary_Information.pdf`, `results/Supplementary_Data_1.xlsx` |
 
